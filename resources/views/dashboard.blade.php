@@ -1,19 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 @section('title')
-    {{ trans('main_trans.Main_title') }}
+{{ trans('main_trans.Main_title') }}
 @stop
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="keywords" content="HTML5 Template" />
-    <meta name="description" content="Webmin - Bootstrap 4 & Angular 5 Admin Dashboard Template" />
-    <meta name="author" content="potenzaglobalsolutions.com" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    @include('layouts.partials.head')
+    @stack('css')
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600&display=swap" rel="stylesheet">
-    @include('layouts.head')
 </head>
 
 <body style="font-family: 'Cairo', sans-serif">
@@ -23,18 +18,14 @@
         <!--=================================
  preloader -->
 
-        {{-- <div id="pre-loader">
-     <img src="{{ URL::asset('assets/images/pre-loader/loader-01.svg') }}" alt="">
- </div> --}}
-
         <x-preloader />
 
         <!--=================================
  preloader -->
 
-        @include('layouts.main-header')
+        @include('layouts.partials.main-header')
 
-        @include('layouts.main-sidebar')
+        @include('layouts.partials.main-sidebar')
 
         <!--=================================
  Main content -->
@@ -145,8 +136,7 @@
                             <button type="button" class="dropdown-toggle-split text-muted" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false"><i class="ti-more"></i></button>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#"><i
-                                        class="text-primary ti-reload"></i>Refresh</a>
+                                <a class="dropdown-item" href="#"><i class="text-primary ti-reload"></i>Refresh</a>
                                 <a class="dropdown-item" href="#"><i class="text-secondary ti-eye"></i>View
                                     all</a>
                             </div>
@@ -178,8 +168,7 @@
                             <button type="button" class="dropdown-toggle-split text-muted" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false"><i class="ti-more"></i></button>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#"><i
-                                        class="text-primary ti-reload"></i>Refresh</a>
+                                <a class="dropdown-item" href="#"><i class="text-primary ti-reload"></i>Refresh</a>
                                 <a class="dropdown-item" href="#"><i class="text-secondary ti-eye"></i>View
                                     all</a>
                             </div>
@@ -348,8 +337,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="tab-pane fade" id="year" role="tabpanel"
-                                        aria-labelledby="year-tab">
+                                    <div class="tab-pane fade" id="year" role="tabpanel" aria-labelledby="year-tab">
                                         <div class="row mb-30">
                                             <div class="col-md-2 col-sm-6">
                                                 <img class="img-fluid" src="images/blog/09.jpg" alt="">
@@ -446,8 +434,7 @@
                                 <li class="mb-20">
                                     <div class="media">
                                         <div class="position-relative">
-                                            <img class="img-fluid mr-15 avatar-small" src="images/item/01.png"
-                                                alt="">
+                                            <img class="img-fluid mr-15 avatar-small" src="images/item/01.png" alt="">
                                         </div>
                                         <div class="media-body">
                                             <h6 class="mt-0 mb-0">Car dealer <span class="float-right text-danger">
@@ -460,8 +447,7 @@
                                 <li class="mb-20">
                                     <div class="media">
                                         <div class="position-relative clearfix">
-                                            <img class="img-fluid mr-15 avatar-small" src="images/item/02.png"
-                                                alt="">
+                                            <img class="img-fluid mr-15 avatar-small" src="images/item/02.png" alt="">
                                         </div>
                                         <div class="media-body">
                                             <h6 class="mt-0 mb-0">Webster <span class="float-right text-warning">
@@ -474,8 +460,7 @@
                                 <li class="mb-20">
                                     <div class="media">
                                         <div class="position-relative">
-                                            <img class="img-fluid mr-15 avatar-small" src="images/item/03.png"
-                                                alt="">
+                                            <img class="img-fluid mr-15 avatar-small" src="images/item/03.png" alt="">
                                         </div>
                                         <div class="media-body">
                                             <h6 class="mt-0 mb-0">The corps <span class="float-right text-success">
@@ -488,8 +473,7 @@
                                 <li>
                                     <div class="media">
                                         <div class="position-relative clearfix">
-                                            <img class="img-fluid mr-15 avatar-small" src="images/item/04.png"
-                                                alt="">
+                                            <img class="img-fluid mr-15 avatar-small" src="images/item/04.png" alt="">
                                         </div>
                                         <div class="media-body">
                                             <h6 class="mt-0 mb-0">Sam martin <span
@@ -508,8 +492,7 @@
                             <button type="button" class="dropdown-toggle-split text-muted" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false"><i class="ti-more"></i></button>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#"><i
-                                        class="text-primary ti-reload"></i>Refresh</a>
+                                <a class="dropdown-item" href="#"><i class="text-primary ti-reload"></i>Refresh</a>
                                 <a class="dropdown-item" href="#"><i class="text-secondary ti-eye"></i>View
                                     all</a>
                             </div>
@@ -535,9 +518,8 @@
                         <div class="p-4 text-center bg" style="background: url(images/bg/01.jpg);">
                             <h5 class="mb-70 text-white position-relative">Michael Bean </h5>
                             <div class="btn-group info-drop">
-                                <button type="button" class="dropdown-toggle-split text-white"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
-                                        class="ti-more"></i></button>
+                                <button type="button" class="dropdown-toggle-split text-white" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false"><i class="ti-more"></i></button>
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" href="#"><i class="text-primary ti-files"></i> Add
                                         task</a>
@@ -581,8 +563,7 @@
                                     <li class="social-github"><a href="#"><i class="fa fa-github"></i></a></li>
                                     <li class="social-youtube"><a href="#"><i class="fa fa-youtube"></i></a>
                                     </li>
-                                    <li class="social-instagram"><a href="#"><i
-                                                class="fa fa-instagram"></i></a>
+                                    <li class="social-instagram"><a href="#"><i class="fa fa-instagram"></i></a>
                                     </li>
                                 </ul>
                             </div>
@@ -626,14 +607,12 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title">Add New Event</h5>
-                                        <button type="button" class="close" data-dismiss="modal"
-                                            aria-label="Close">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span></button>
                                     </div>
                                     <div class="modal-body p-20"></div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger"
-                                            data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                                         <button type="button" class="btn btn-success save-event">Create
                                             event</button>
                                         <button type="button" class="btn btn-danger delete-event"
@@ -674,8 +653,7 @@
                                         </form>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger"
-                                            data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                                         <button type="button" class="btn btn-success save-category"
                                             data-dismiss="modal">Save</button>
                                     </div>
@@ -691,7 +669,7 @@
             <!--=================================
  footer -->
 
-            @include('layouts.footer')
+            @include('layouts.partials.footer')
         </div><!-- main content wrapper end-->
     </div>
     </div>
@@ -700,7 +678,8 @@
     <!--=================================
  footer -->
 
-    @include('layouts.footer-scripts')
+    @include('layouts.partials.footer-scripts')
+    @stack('scripts')
 
 </body>
 
