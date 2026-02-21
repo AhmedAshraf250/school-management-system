@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Classrooms\ClassroomController;
 use App\Http\Controllers\Grades\GradeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
@@ -15,12 +16,11 @@ Route::group(['middleware' => ['guest']], function () {
     });
 });
 
-
 // ==============================[Translated Pages]============================ //
 Route::group(
     [
         'prefix' => LaravelLocalization::setLocale(),
-        'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath', 'auth']
+        'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath', 'auth'],
     ],
     function () {
 
@@ -28,7 +28,12 @@ Route::group(
         Route::get('/dashboard', [HomeController::class, 'index'])->middleware('auth')->name('dashboard');
 
         // ==============================[Grades]============================ //
-        Route::resource('Grades', GradeController::class);
+        Route::resource('grades', GradeController::class);
+
+        // ==============================[Classrooms]============================ //
+        Route::post('classrooms/delete_all', [ClassroomController::class, 'delete_all'])->name('classrooms.delete_all');
+        Route::get('classrooms/filter_classes', [ClassroomController::class, 'filter_classes'])->name('classrooms.filter_classes');
+        Route::resource('classrooms', ClassroomController::class);
     }
 
     // // ==============================[profile]============================ //

@@ -37,11 +37,21 @@ class GradesRequest extends FormRequest
         ];
     }
 
+    public function attributes()
+    {
+        return [
+            'Name' => trans('Grades_trans.Name'),
+            'Name_en' => trans('Grades_trans.Name_en'),
+        ];
+    }
+
     public function messages()
     {
         return [
             'Name.required' => trans('validation.required'),
             'Name.string' => trans('validation.string'),
+            'Name.unique' => trans('Grades_trans.exists'),
+            'Name_en.unique' => trans('Grades_trans.exists'),
             'Notes.string' => trans('validation.string'),
         ];
     }

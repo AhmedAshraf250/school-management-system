@@ -31,9 +31,9 @@ return [
     'library' => 'Library',
     'Onlineclasses' => 'Online classes',
     'Settings' => 'Settings',
+    'Error' => 'Error',
     'Users' => 'Users',
     'Copyright' => 'Copyright',
-    'Name_Programer' => 'All Rights Reserved'
-
+    'Name_Programer' => 'All Rights Reserved',
 
 ];

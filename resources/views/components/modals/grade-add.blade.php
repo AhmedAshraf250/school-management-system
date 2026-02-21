@@ -11,7 +11,7 @@
             </div>
 
             <div class="modal-body">
-                <form action="{{ route('Grades.store') }}" method="POST">
+                <form action="{{ route('grades.store') }}" method="POST">
                     @csrf
                     <div class="row">
                         <div class="col">

@@ -8,10 +8,6 @@
 {{ trans('Grades_trans.title_page') }}
 @stop
 
-{{-- @section('page-header')
-{{ trans('main_trans.Grades') }}
-@stop --}}
-
 @section('PageTitle')
 {{ trans('main_trans.Grades') }}
 @stop
@@ -24,14 +20,13 @@
 
                 @if ($errors->any())
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <strong>{{ trans('main_trans.Error') }}:</strong>
                     <ul class="mb-0">
                         @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
                         @endforeach
                     </ul>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                    <button type="button" class="close" data-dismiss="alert">
+                        <span>&times;</span>
                     </button>
                 </div>
                 @endif
@@ -54,27 +49,27 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($Grades as $Grade)
+                            @foreach ($grades as $grade)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $Grade->Name }}</td>
-                                <td>{{ $Grade->Notes }}</td>
+                                <td>{{ $grade->Name }}</td>
+                                <td>{{ $grade->Notes }}</td>
                                 <td>
-                                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
-                                        data-target="#edit{{ $Grade->id }}" title="{{ trans('Grades_trans.Edit') }}">
+                                    <button type="button" class="btn btn-info btn-sm edit-btn"
+                                        data-id="{{ $grade->id }}"
+                                        data-name-ar="{{ $grade->getTranslation('Name', 'ar') }}"
+                                        data-name-en="{{ $grade->getTranslation('Name', 'en') }}"
+                                        data-notes="{{ $grade->Notes }}" title="{{ trans('Grades_trans.Edit') }}">
                                         <i class="fa fa-edit"></i>
                                     </button>
-                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
-                                        data-target="#delete{{ $Grade->id }}"
+
+                                    <button type="button" class="btn btn-danger btn-sm delete-btn"
+                                        data-id="{{ $grade->id }}" data-name="{{ $grade->Name }}"
                                         title="{{ trans('Grades_trans.Delete') }}">
                                         <i class="fa fa-trash"></i>
                                     </button>
                                 </td>
                             </tr>
-
-                            {{-- Edit & Delete Modals --}}
-                            <x-modals.grade-edit :grade="$Grade" />
-                            <x-modals.grade-delete :grade="$Grade" />
                             @endforeach
                         </tbody>
                     </table>
@@ -83,12 +78,43 @@
         </div>
     </div>
 
-    {{-- Add Modal --}}
     <x-modals.grade-add />
+
+    <x-modals.grade-edit />
+
+    <x-modals.grade-delete />
 </div>
 @endsection
 
 @section('js')
 @toastr_js
 @toastr_render
+
+<script>
+    $(document).on('click', '.edit-btn', function() {
+            let id = $(this).data('id');
+            let nameAr = $(this).data('name-ar');
+            let nameEn = $(this).data('name-en');
+            let notes = $(this).data('notes');
+            
+            $('#edit-modal-id').val(id);
+            $('#edit-modal-name-ar').val(nameAr);
+            $('#edit-modal-name-en').val(nameEn);
+            $('#edit-modal-notes').val(notes);
+            $('#edit-modal-form').attr('action', '/grades/' + id);
+            
+            $('#edit-grade-modal').modal('show');
+        });
+        
+        $(document).on('click', '.delete-btn', function() {
+            let id = $(this).data('id');
+            let name = $(this).data('name');
+            
+            $('#delete-modal-id').val(id);
+            $('#delete-modal-name').text(name);
+            $('#delete-modal-form').attr('action', '/grades/' + id);
+            
+            $('#delete-grade-modal').modal('show');
+        });
+</script>
 @endsection

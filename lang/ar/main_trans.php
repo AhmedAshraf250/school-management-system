@@ -34,9 +34,9 @@ return [
     'library' => 'المكتبة',
     'Onlineclasses' => 'حصص اونلاين',
     'Settings' => 'الاعدادات',
+    'Error' => 'خطأ',
     'Users' => 'المستخدمين',
     'Copyright' => 'جميع الحقوق محفوظة ',
-    'Name_Programer' => 'أحمد أشرف - كروكو-إت'
-
+    'Name_Programer' => 'أحمد أشرف - كروكو-إت',
 
 ];

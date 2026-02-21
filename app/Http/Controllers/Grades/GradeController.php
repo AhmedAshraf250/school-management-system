@@ -14,8 +14,9 @@ class GradeController extends Controller
      */
     public function index()
     {
-        $Grades = Grade::all();
-        return view('pages.Grades.Grades', compact('Grades'));
+        $grades = Grade::all();
+
+        return view('pages.grades.grades', compact('grades'));
     }
 
     /**
@@ -34,7 +35,7 @@ class GradeController extends Controller
         try {
             $validated = $request->validated();
 
-            $Grade = new Grade();
+            $Grade = new Grade;
             /*
                 $translations = [
                     'en' => $request->Name_en,
@@ -44,13 +45,14 @@ class GradeController extends Controller
              */
             $Grade->Name = [
                 'en' => $validated['Name_en'],
-                'ar' => $validated['Name']
+                'ar' => $validated['Name'],
             ];
             $Grade->Notes = $validated['Notes'];
             $Grade->save();
 
             toastr()->success(trans('messages.success'));
-            return redirect()->route('Grades.index');
+
+            return redirect()->route('grades.index');
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
@@ -95,7 +97,8 @@ class GradeController extends Controller
             $grade->save();
 
             toastr()->success(trans('messages.Update'));
-            return redirect()->route('Grades.index');
+
+            return redirect()->route('grades.index');
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
@@ -104,10 +107,16 @@ class GradeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request)
+    public function destroy(Request $request, Grade $grade)
     {
-        Grade::findOrFail($request->id)->delete();
-        toastr()->error(trans('messages.Delete'));
-        return redirect()->route('Grades.index');
+
+        if ($grade->classrooms()->count() > 0) {
+            toastr()->error(trans('Grades_trans.delete_Grade_Error'));
+            return redirect()->route('grades.index');
+        } else {
+            $grade->delete();
+            toastr()->success(trans('messages.Delete'));
+            return redirect()->route('grades.index');
+        }
     }
 }

@@ -1,6 +1,4 @@
-@props(['grade'])
-
-<div class="modal fade" id="delete{{ $grade->id }}" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="delete-grade-modal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -13,14 +11,16 @@
             </div>
 
             <div class="modal-body">
-                <form action="{{ route('Grades.destroy', $grade->id) }}" method="post">
+                <form id="delete-modal-form" method="post">
                     @method('DELETE')
                     @csrf
+
+                    <input type="hidden" id="delete-modal-id" name="id">
 
                     <div class="alert alert-warning" role="alert">
                         {{ trans('Grades_trans.Warning_Grade') }}
                         <br>
-                        <strong>{{ $grade->Name }}</strong>
+                        <strong id="delete-modal-name"></strong>
                     </div>
 
                     <div class="modal-footer">
@@ -28,7 +28,7 @@
                             {{ trans('Grades_trans.Close') }}
                         </button>
                         <button type="submit" class="btn btn-danger">
-                            {{ trans('Grades_trans.submit') }}
+                            {{ trans('Grades_trans.Delete') }}
                         </button>
                     </div>
                 </form>
