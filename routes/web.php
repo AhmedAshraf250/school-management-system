@@ -4,10 +4,11 @@ use App\Http\Controllers\Classrooms\ClassroomController;
 use App\Http\Controllers\Grades\GradeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Sections\SectionController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';
 
 Route::group(['middleware' => ['guest']], function () {
 
@@ -34,6 +35,10 @@ Route::group(
         Route::post('classrooms/delete_all', [ClassroomController::class, 'delete_all'])->name('classrooms.delete_all');
         Route::get('classrooms/filter_classes', [ClassroomController::class, 'filter_classes'])->name('classrooms.filter_classes');
         Route::resource('classrooms', ClassroomController::class);
+
+        // ==============================[Sections]============================ //
+        Route::get('sections/classes/{id}', [SectionController::class, 'getclasses'])->name('sections.getclasses');
+        Route::resource('sections', SectionController::class);
     }
 
     // // ==============================[profile]============================ //

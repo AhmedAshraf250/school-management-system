@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Grade;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class GradesRequest extends FormRequest
+class GradeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

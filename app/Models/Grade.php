@@ -17,8 +17,14 @@ class Grade extends Model
 
     public $timestamps = true;
 
+    /* RELATIONS */
     public function classrooms()
     {
         return $this->hasMany(Classroom::class, 'grade_id');
+    }
+
+    public function sections()
+    {
+        return $this->hasMany(Section::class, 'grade_id');
     }
 }

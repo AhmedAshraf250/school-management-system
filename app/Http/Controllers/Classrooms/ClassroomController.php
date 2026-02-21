@@ -3,14 +3,12 @@
 namespace App\Http\Controllers\Classrooms;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreClassroomRequest;
-use App\Http\Requests\UpdateClassroomRequest;
+use App\Http\Requests\Classroom\StoreClassroomRequest;
+use App\Http\Requests\Classroom\UpdateClassroomRequest;
 use App\Models\Classroom;
 use App\Models\Grade;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Validation\Rule;
-use Symfony\Component\HttpKernel\HttpCache\Store;
 
 class ClassroomController extends Controller
 {
@@ -39,7 +37,7 @@ class ClassroomController extends Controller
                 Classroom::create([
                     'name' => [
                         'ar' => $class['Name'],
-                        'en' => $class['Name_class_en']
+                        'en' => $class['Name_class_en'],
                     ],
                     'grade_id' => $class['grade_id'],
                 ]);
@@ -51,7 +49,7 @@ class ClassroomController extends Controller
             return redirect()->route('classrooms.index');
         } catch (\Exception $e) {
             DB::rollback();
-            toastr()->error(trans('messages.error') . ': ' . $e->getMessage());
+            toastr()->error(trans('messages.error').': '.$e->getMessage());
 
             return redirect()->back()->withInput();
         }
@@ -85,7 +83,7 @@ class ClassroomController extends Controller
 
             return redirect()->route('classrooms.index');
         } catch (\Exception $e) {
-            toastr()->error(trans('messages.error') . ': ' . $e->getMessage());
+            toastr()->error(trans('messages.error').': '.$e->getMessage());
 
             return redirect()->back();
         }
@@ -104,33 +102,33 @@ class ClassroomController extends Controller
 
             return redirect()->route('classrooms.index');
         } catch (\Exception $e) {
-            toastr()->error(trans('messages.error') . ': ' . $e->getMessage());
+            toastr()->error(trans('messages.error').': '.$e->getMessage());
 
             return redirect()->back();
         }
     }
-
 
     public function delete_all(Request $request)
     {
 
         $ids = array_filter(
             explode(',', $request->delete_all_id),
-            fn($id) => is_numeric(trim($id))
+            fn ($id) => is_numeric(trim($id))
         );
 
         // $ids = explode(',', $request->delete_all_id);`
         if (empty($ids)) {
             toastr()->error(trans('messages.error'));
+
             return redirect()->back();
         }
 
         Classroom::whereIn('id', $ids)->delete();
 
         toastr()->success(trans('messages.Delete'));
+
         return redirect()->route('classrooms.index');
     }
-
 
     public function filter_classes(Request $request)
     {

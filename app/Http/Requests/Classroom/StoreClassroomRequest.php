@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Classroom;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\DB;
@@ -18,6 +18,7 @@ class StoreClassroomRequest extends FormRequest
 
     /**
      * Get the validation rules that apply to the request.
+     *
      * * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
@@ -76,9 +77,10 @@ class StoreClassroomRequest extends FormRequest
             // 'Name' => trans('classroom_trans.Name_class'),
             // 'Name_class_en' => trans('classroom_trans.Name_class_en'),
             'List_Classes.*.Name' => trans('classroom_trans.Name_class'),
-            'List_Classes.*.Name_class_en' => trans('classroom_trans.Name_class_en')
+            'List_Classes.*.Name_class_en' => trans('classroom_trans.Name_class_en'),
         ];
     }
+
     /**
      * Custom error messages for translation.
      */

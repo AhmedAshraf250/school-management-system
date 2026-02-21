@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Grades;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\GradesRequest;
+use App\Http\Requests\Grade\GradeRequest;
 use App\Models\Grade;
 use Illuminate\Http\Request;
 
@@ -30,7 +30,7 @@ class GradeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(GradesRequest $request)
+    public function store(GradeRequest $request)
     {
         try {
             $validated = $request->validated();
@@ -77,7 +77,7 @@ class GradeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(GradesRequest $request, string $id)
+    public function update(GradeRequest $request, string $id)
     {
         try {
             $validated = $request->validated();
@@ -112,10 +112,12 @@ class GradeController extends Controller
 
         if ($grade->classrooms()->count() > 0) {
             toastr()->error(trans('Grades_trans.delete_Grade_Error'));
+
             return redirect()->route('grades.index');
         } else {
             $grade->delete();
             toastr()->success(trans('messages.Delete'));
+
             return redirect()->route('grades.index');
         }
     }

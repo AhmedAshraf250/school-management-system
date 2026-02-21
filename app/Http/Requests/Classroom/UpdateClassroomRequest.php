@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Classroom;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -22,7 +22,7 @@ class UpdateClassroomRequest extends FormRequest
                 // Check if name->ar exists in the same grade, excluding current record
                 Rule::unique('classrooms', 'name->ar')
                     ->where('grade_id', $this->grade_id)
-                    ->ignore($this->id)
+                    ->ignore($this->id),
             ],
             'Name_en' => [
                 'required',
@@ -31,7 +31,7 @@ class UpdateClassroomRequest extends FormRequest
                 // Check if name->en exists in the same grade, excluding current record
                 Rule::unique('classrooms', 'name->en')
                     ->where('grade_id', $this->grade_id)
-                    ->ignore($this->id)
+                    ->ignore($this->id),
             ],
             'grade_id' => 'required|exists:grades,id',
         ];
