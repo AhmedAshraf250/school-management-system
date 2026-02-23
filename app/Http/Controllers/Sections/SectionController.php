@@ -40,7 +40,7 @@ class SectionController extends Controller
             $sections->classroom_id = $validated['classroom_id'];
             $sections->status = 1;
             $sections->save();
-            toastr()->success(trans('messages.success'));
+            flash()->success(trans('messages.success'));
 
             return redirect()->route('sections.index');
         } catch (\Exception $e) {
@@ -63,7 +63,7 @@ class SectionController extends Controller
             $section->status = $request->boolean('status');
 
             $section->save();
-            toastr()->success(trans('messages.Update'));
+            flash()->success(trans('messages.Update'));
 
             return redirect()->route('sections.index');
         } catch (\Exception $e) {
@@ -77,7 +77,7 @@ class SectionController extends Controller
     public function destroy(Section $section)
     {
         $section->delete();
-        toastr()->error(trans('messages.Delete'));
+        flash()->error(trans('messages.Delete'));
 
         return redirect()->route('sections.index');
     }

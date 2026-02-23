@@ -44,12 +44,12 @@ class ClassroomController extends Controller
             }
 
             DB::commit();
-            toastr()->success(trans('messages.success'));
+            flash()->success(trans('messages.success'));
 
             return redirect()->route('classrooms.index');
         } catch (\Exception $e) {
             DB::rollback();
-            toastr()->error(trans('messages.error').': '.$e->getMessage());
+            flash()->error(trans('messages.error').': '.$e->getMessage());
 
             return redirect()->back()->withInput();
         }
@@ -79,11 +79,11 @@ class ClassroomController extends Controller
                 'grade_id' => $request->grade_id,
             ]);
 
-            toastr()->success(trans('messages.update'));
+            flash()->success(trans('messages.update'));
 
             return redirect()->route('classrooms.index');
         } catch (\Exception $e) {
-            toastr()->error(trans('messages.error').': '.$e->getMessage());
+            flash()->error(trans('messages.error').': '.$e->getMessage());
 
             return redirect()->back();
         }
@@ -98,11 +98,11 @@ class ClassroomController extends Controller
             $classroom = Classroom::findOrFail($id);
             $classroom->delete();
 
-            toastr()->success(trans('messages.Delete'));
+            flash()->success(trans('messages.Delete'));
 
             return redirect()->route('classrooms.index');
         } catch (\Exception $e) {
-            toastr()->error(trans('messages.error').': '.$e->getMessage());
+            flash()->error(trans('messages.error').': '.$e->getMessage());
 
             return redirect()->back();
         }
@@ -118,14 +118,14 @@ class ClassroomController extends Controller
 
         // $ids = explode(',', $request->delete_all_id);`
         if (empty($ids)) {
-            toastr()->error(trans('messages.error'));
+            flash()->error(trans('messages.error'));
 
             return redirect()->back();
         }
 
         Classroom::whereIn('id', $ids)->delete();
 
-        toastr()->success(trans('messages.Delete'));
+        flash()->success(trans('messages.Delete'));
 
         return redirect()->route('classrooms.index');
     }

@@ -7,7 +7,7 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
 <!-- Title -->
-<title>@yield("title")</title>
+<title>@yield('title')</title>
 
 {{-- <title>{{ $title }}</title> --}}
 
@@ -23,12 +23,16 @@
 
 @yield('css')
 
+{{-- @vite(['resources/css/wizard.css']) --}}
+<link href="{{ URL::asset('css/wizard.css') }}" rel="stylesheet" id="bootstrap-css">
+
 <!--- Style css -->
 <link href="{{ URL::asset('assets/css/style.css') }}" rel="stylesheet">
 
+
 <!--- Style css -->
 @if (App::getLocale() == 'en')
-<link href="{{ URL::asset('assets/css/ltr.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('assets/css/ltr.css') }}" rel="stylesheet">
 @else
-<link href="{{ URL::asset('assets/css/rtl.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('assets/css/rtl.css') }}" rel="stylesheet">
 @endif

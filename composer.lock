@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6800ffb86d5f2d1bd28ee7e86138c8ae",
+    "content-hash": "56b118888c1e0e0d801ea5e234a4690a",
     "packages": [
         {
             "name": "brick/math",
@@ -1458,6 +1458,74 @@
             "time": "2026-02-03T06:55:34+00:00"
         },
         {
+            "name": "laravel/telescope",
+            "version": "v5.17.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/telescope.git",
+                "reference": "1000b2d994a3cc1ee893f97f9cc2f554352ebc76"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/telescope/zipball/1000b2d994a3cc1ee893f97f9cc2f554352ebc76",
+                "reference": "1000b2d994a3cc1ee893f97f9cc2f554352ebc76",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "laravel/framework": "^8.37|^9.0|^10.0|^11.0|^12.0",
+                "php": "^8.0",
+                "symfony/console": "^5.3|^6.0|^7.0",
+                "symfony/var-dumper": "^5.0|^6.0|^7.0"
+            },
+            "require-dev": {
+                "ext-gd": "*",
+                "guzzlehttp/guzzle": "^6.0|^7.0",
+                "laravel/octane": "^1.4|^2.0",
+                "orchestra/testbench": "^6.47.1|^7.55|^8.36|^9.15|^10.8",
+                "phpstan/phpstan": "^1.10"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Laravel\\Telescope\\TelescopeServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laravel\\Telescope\\": "src/",
+                    "Laravel\\Telescope\\Database\\Factories\\": "database/factories/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                },
+                {
+                    "name": "Mohamed Said",
+                    "email": "mohamed@laravel.com"
+                }
+            ],
+            "description": "An elegant debug assistant for the Laravel framework.",
+            "keywords": [
+                "debugging",
+                "laravel",
+                "monitoring"
+            ],
+            "support": {
+                "issues": "https://github.com/laravel/telescope/issues",
+                "source": "https://github.com/laravel/telescope/tree/v5.17.0"
+            },
+            "time": "2026-01-30T22:52:46+00:00"
+        },
+        {
             "name": "laravel/tinker",
             "version": "v2.11.1",
             "source": {
@@ -2081,6 +2149,82 @@
                 }
             ],
             "time": "2026-01-15T06:54:53+00:00"
+        },
+        {
+            "name": "livewire/livewire",
+            "version": "v4.1.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/livewire/livewire.git",
+                "reference": "4697085e02a1f5f11410a1b5962400e3539f8843"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/livewire/livewire/zipball/4697085e02a1f5f11410a1b5962400e3539f8843",
+                "reference": "4697085e02a1f5f11410a1b5962400e3539f8843",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "^10.0|^11.0|^12.0",
+                "illuminate/routing": "^10.0|^11.0|^12.0",
+                "illuminate/support": "^10.0|^11.0|^12.0",
+                "illuminate/validation": "^10.0|^11.0|^12.0",
+                "laravel/prompts": "^0.1.24|^0.2|^0.3",
+                "league/mime-type-detection": "^1.9",
+                "php": "^8.1",
+                "symfony/console": "^6.0|^7.0",
+                "symfony/http-kernel": "^6.2|^7.0"
+            },
+            "require-dev": {
+                "calebporzio/sushi": "^2.1",
+                "laravel/framework": "^10.15.0|^11.0|^12.0",
+                "mockery/mockery": "^1.3.1",
+                "orchestra/testbench": "^8.21.0|^9.0|^10.0",
+                "orchestra/testbench-dusk": "^8.24|^9.1|^10.0",
+                "phpunit/phpunit": "^10.4|^11.5",
+                "psy/psysh": "^0.11.22|^0.12"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "Livewire": "Livewire\\Livewire"
+                    },
+                    "providers": [
+                        "Livewire\\LivewireServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "Livewire\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Caleb Porzio",
+                    "email": "calebporzio@gmail.com"
+                }
+            ],
+            "description": "A front-end framework for Laravel.",
+            "support": {
+                "issues": "https://github.com/livewire/livewire/issues",
+                "source": "https://github.com/livewire/livewire/tree/v4.1.4"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/livewire",
+                    "type": "github"
+                }
+            ],
+            "time": "2026-02-09T22:59:54+00:00"
         },
         {
             "name": "mcamara/laravel-localization",
@@ -2789,143 +2933,6 @@
                 "open-source",
                 "php",
                 "phpflasher",
-                "user-feedback"
-            ],
-            "support": {
-                "issues": "https://github.com/php-flasher/php-flasher/issues",
-                "source": "https://github.com/php-flasher/php-flasher"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/yoeunes",
-                    "type": "github"
-                }
-            ],
-            "time": "2025-12-31T10:43:34+00:00"
-        },
-        {
-            "name": "php-flasher/flasher-toastr",
-            "version": "v2.4.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/php-flasher/flasher-toastr.git",
-                "reference": "812e150e6a18f15091125abb71ca5c816559a292"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/php-flasher/flasher-toastr/zipball/812e150e6a18f15091125abb71ca5c816559a292",
-                "reference": "812e150e6a18f15091125abb71ca5c816559a292",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=8.2",
-                "php-flasher/flasher": "^2.4.0"
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "functions.php",
-                    "helpers.php"
-                ],
-                "psr-4": {
-                    "Flasher\\Toastr\\Prime\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Younes ENNAJI",
-                    "email": "younes.ennaji.pro@gmail.com",
-                    "homepage": "https://www.linkedin.com/in/younes--ennaji/",
-                    "role": "Developer"
-                }
-            ],
-            "description": "PHPFlasher Toastr - An extension for PHPFlasher to integrate Toastr notifications seamlessly in Laravel or Symfony. Enhances UX with elegant, responsive toast messages.",
-            "homepage": "https://php-flasher.io",
-            "keywords": [
-                "customizable-alerts-php",
-                "flash-messages",
-                "interactive-web-notifications",
-                "laravel-notification",
-                "php-messaging-library",
-                "php-notification-system",
-                "php-user-interface",
-                "symfony-notification",
-                "user-engagement-php",
-                "user-feedback-tools",
-                "web-application-notifications"
-            ],
-            "support": {
-                "issues": "https://github.com/php-flasher/php-flasher/issues",
-                "source": "https://github.com/php-flasher/php-flasher"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/yoeunes",
-                    "type": "github"
-                }
-            ],
-            "time": "2025-12-31T10:43:34+00:00"
-        },
-        {
-            "name": "php-flasher/flasher-toastr-laravel",
-            "version": "v2.4.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/php-flasher/flasher-toastr-laravel.git",
-                "reference": "a22a6f2096246c6f475d1c97e73379ef18609a38"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/php-flasher/flasher-toastr-laravel/zipball/a22a6f2096246c6f475d1c97e73379ef18609a38",
-                "reference": "a22a6f2096246c6f475d1c97e73379ef18609a38",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=8.2",
-                "php-flasher/flasher-laravel": "^2.4.0",
-                "php-flasher/flasher-toastr": "^2.4.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "aliases": {
-                        "Toastr": "Flasher\\Toastr\\Laravel\\Facade\\Toastr"
-                    },
-                    "providers": [
-                        "Flasher\\Toastr\\Laravel\\FlasherToastrServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Flasher\\Toastr\\Laravel\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Younes ENNAJI",
-                    "email": "younes.ennaji.pro@gmail.com",
-                    "homepage": "https://www.linkedin.com/in/younes--ennaji/",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Leverage Toastr for stylish toast notifications in Laravel with PHPFlasher. Add Toastr's sleek notifications to your Laravel projects effortlessly.",
-            "homepage": "https://php-flasher.io",
-            "keywords": [
-                "dynamic-notifications",
-                "flash-notifications",
-                "laravel",
-                "open-source",
-                "phpflasher",
-                "toastr",
                 "user-feedback"
             ],
             "support": {
@@ -6640,67 +6647,6 @@
                 }
             ],
             "time": "2026-01-12T20:49:05+00:00"
-        },
-        {
-            "name": "yoeunes/toastr",
-            "version": "v3.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/yoeunes/toastr.git",
-                "reference": "83454ea5c229185f96382afeff1a4777d339f4e9"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/yoeunes/toastr/zipball/83454ea5c229185f96382afeff1a4777d339f4e9",
-                "reference": "83454ea5c229185f96382afeff1a4777d339f4e9",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=8.2",
-                "php-flasher/flasher-toastr-laravel": "^2.4.0"
-            },
-            "type": "library",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Younes ENNAJI",
-                    "email": "younes.ennaji.pro@gmail.com",
-                    "homepage": "https://www.linkedin.com/in/younes--ennaji/",
-                    "role": "Developer"
-                }
-            ],
-            "description": "toastr.js flush notifications for Laravel",
-            "homepage": "https://github.com/yoeunes/toastr",
-            "keywords": [
-                "dynamic-notifications",
-                "flash-notifications",
-                "laravel",
-                "open-source",
-                "phpflasher",
-                "toastr",
-                "user-feedback"
-            ],
-            "support": {
-                "docs": "https://php-flasher.io",
-                "email": "younes.ennaji.pro@gmail.com",
-                "issues": "https://github.com/php-flasher/php-flasher/issues",
-                "source": "https://github.com/php-flasher/php-flasher"
-            },
-            "funding": [
-                {
-                    "url": "https://www.paypal.com/paypalme/yoeunes",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/yoeunes",
-                    "type": "github"
-                }
-            ],
-            "abandoned": "php-flasher/flasher-toastr-laravel",
-            "time": "2025-12-31T10:47:55+00:00"
         }
     ],
     "packages-dev": [

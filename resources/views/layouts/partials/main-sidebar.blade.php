@@ -100,8 +100,10 @@
                             <div class="clearfix"></div>
                         </a>
                         <ul id="Parents-menu" class="collapse" data-parent="#sidebarnav">
-                            <li> <a href="calendar.html">Events Calendar </a> </li>
-                            <li> <a href="calendar-list.html">List Calendar</a> </li>
+                            <li> <a href="{{ route('guardians.index') }}">{{ trans('main_trans.List_Parents') }}</a>
+                            </li>
+                            <li> <a href="{{ route('guardians.create') }}">{{ trans('main_trans.Add_Parent') }}</a>
+                            </li>
                         </ul>
                     </li>
 

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Classrooms\ClassroomController;
 use App\Http\Controllers\Grades\GradeController;
+use App\Http\Controllers\Guardians\Dashboard\GuardianController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Sections\SectionController;
@@ -39,6 +40,9 @@ Route::group(
         // ==============================[Sections]============================ //
         Route::get('sections/classes/{id}', [SectionController::class, 'getclasses'])->name('sections.getclasses');
         Route::resource('sections', SectionController::class);
+
+        // ==============================[Guardians]============================ //
+        Route::resource('guardians', GuardianController::class);
     }
 
     // // ==============================[profile]============================ //

@@ -19,7 +19,7 @@ return [
     'Religion_Father_id' => 'Religion',
     'Address_Father' => 'Address Father',
 
-    //معلومات الام
+    // معلومات الام
     'Name_Mother' => 'Mother Name Arabic',
     'Name_Mother_en' => 'Mother Name English',
     'Job_Mother' => 'Job Title Arabic',
@@ -36,5 +36,5 @@ return [
     'Attachments' => 'Attachments',
     'Processes' => 'Processes',
 
-
+    'delete_warning' => 'Are you sure you want to delete this guardian ?',
 ];

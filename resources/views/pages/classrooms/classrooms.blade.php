@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('css')
-    @toastr_css
+    {{-- @toastr_css  // IGNORE (using Flasher instead of Toastr) --}}
 @endsection
 
 @section('title')
@@ -362,8 +362,7 @@
 @endsection
 
 @section('js')
-    @toastr_js
-    @toastr_render
+    @flasher_render
 @endsection
 
 @push('scripts')

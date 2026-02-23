@@ -50,7 +50,7 @@ class GradeController extends Controller
             $Grade->Notes = $validated['Notes'];
             $Grade->save();
 
-            toastr()->success(trans('messages.success'));
+            flash()->success(trans('messages.success'));
 
             return redirect()->route('grades.index');
         } catch (\Exception $e) {
@@ -96,7 +96,7 @@ class GradeController extends Controller
 
             $grade->save();
 
-            toastr()->success(trans('messages.Update'));
+            flash()->success(trans('messages.Update'));
 
             return redirect()->route('grades.index');
         } catch (\Exception $e) {
@@ -111,12 +111,12 @@ class GradeController extends Controller
     {
 
         if ($grade->classrooms()->count() > 0) {
-            toastr()->error(trans('Grades_trans.delete_Grade_Error'));
+            flash()->error(trans('Grades_trans.delete_Grade_Error'));
 
             return redirect()->route('grades.index');
         } else {
             $grade->delete();
-            toastr()->success(trans('messages.Delete'));
+            flash()->success(trans('messages.Delete'));
 
             return redirect()->route('grades.index');
         }
