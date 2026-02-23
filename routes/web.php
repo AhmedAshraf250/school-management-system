@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\Classrooms\ClassroomController;
 use App\Http\Controllers\Grades\GradeController;
-use App\Http\Controllers\Guardians\Dashboard\GuardianController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Sections\SectionController;
@@ -42,7 +41,7 @@ Route::group(
         Route::resource('sections', SectionController::class);
 
         // ==============================[Guardians]============================ //
-        Route::resource('guardians', GuardianController::class);
+        Route::view('guardians', 'pages.guardians.guardian')->name('guardians');
     }
 
     // // ==============================[profile]============================ //

@@ -30,6 +30,9 @@ return [
     'National_ID_Mother' => 'رقم الهوية',
     'Passport_ID_Mother' => 'رقم جواز السفر',
     'Phone_Mother' => 'رقم الهاتف',
+    'Nationality_Mother_id' => 'الجنسية',
+    'Blood_Type_Mother_id' => 'فصيلة الدم',
+    'Religion_Mother_id' => 'الديانة',
     'Address_Mother' => 'عنوان الام',
 
     'Next' => 'التالي',
@@ -38,7 +41,10 @@ return [
     'Choose' => 'اختيار من القائمة',
     'Attachments' => 'المرفقات',
     'Processes' => 'العمليات',
+    'Edit' => 'تعديل',
+    'Delete' => 'حذف',
 
     'delete_warning' => 'هل انت متاكد من حذف هذا ولي الامر ؟',
+    'confirm_save' => 'هل انت متاكد من حفظ البيانات ؟',
 
 ];

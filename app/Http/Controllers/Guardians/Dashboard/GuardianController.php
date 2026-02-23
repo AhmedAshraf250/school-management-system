@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Guardians\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Guardian;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
 class GuardianController extends Controller
@@ -19,9 +20,9 @@ class GuardianController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
-        return view('pages.guardians.create');
+        return view('pages.guardians.guardian');
     }
 
     /**

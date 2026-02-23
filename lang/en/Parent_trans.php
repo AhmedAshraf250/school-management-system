@@ -27,6 +27,9 @@ return [
     'National_ID_Mother' => 'Identification Number',
     'Passport_ID_Mother' => 'Passport Number',
     'Phone_Mother' => 'Telephone Number',
+    'Nationality_Mother_id' => 'Nationality',
+    'Blood_Type_Mother_id' => 'Blood Type',
+    'Religion_Mother_id' => 'Religion',
     'Address_Mother' => 'Address Mother',
 
     'Next' => 'Next',
@@ -35,6 +38,10 @@ return [
     'Choose' => 'Choose',
     'Attachments' => 'Attachments',
     'Processes' => 'Processes',
+    'Edit' => 'Edit',
+    'Delete' => 'Delete',
 
     'delete_warning' => 'Are you sure you want to delete this guardian ?',
+    'confirm_save' => 'Are you sure you want to save this data ?',
+
 ];

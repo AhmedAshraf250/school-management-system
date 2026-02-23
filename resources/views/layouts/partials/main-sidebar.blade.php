@@ -1,3 +1,11 @@
+@php
+    $isDashboardActive = request()->routeIs('dashboard');
+    $isGradesActive = request()->routeIs('grades.*');
+    $isClassroomsActive = request()->routeIs('classrooms.*');
+    $isSectionsActive = request()->routeIs('sections.*');
+    $isGuardiansActive = request()->routeIs('guardians');
+@endphp
+
 <div class="container-fluid">
     <div class="row">
         <!-- Left Sidebar start-->
@@ -5,8 +13,8 @@
             <div class="scrollbar side-menu-bg" style="overflow: scroll">
                 <ul class="nav navbar-nav side-menu" id="sidebarnav">
                     <!-- menu item Dashboard-->
-                    <li>
-                        <a href="{{ url('/dashboard') }}">
+                    <li class="{{ $isDashboardActive ? 'active' : '' }}">
+                        <a href="{{ route('dashboard') }}">
                             <div class="pull-left"><i class="ti-home"></i><span
                                     class="right-nav-text">{{ trans('main_trans.Dashboard') }}</span>
                             </div>
@@ -18,43 +26,50 @@
                     </li>
 
                     <!-- Grades-->
-                    <li>
+                    <li class="{{ $isGradesActive ? 'active' : '' }}">
                         <a href="javascript:void(0);" data-toggle="collapse" data-target="#Grades-menu">
                             <div class="pull-left"><i class="fas fa-school"></i><span
                                     class="right-nav-text">{{ trans('main_trans.Grades') }}</span></div>
                             <div class="pull-right"><i class="ti-plus"></i></div>
                             <div class="clearfix"></div>
                         </a>
-                        <ul id="Grades-menu" class="collapse" data-parent="#sidebarnav">
-                            <li><a href="{{ route('grades.index') }}">{{ trans('main_trans.Grades_list') }}</a></li>
+                        <ul id="Grades-menu" class="collapse {{ $isGradesActive ? 'show' : '' }}"
+                            data-parent="#sidebarnav">
+                            <li class="{{ request()->routeIs('grades.index') ? 'active' : '' }}">
+                                <a href="{{ route('grades.index') }}">{{ trans('main_trans.Grades_list') }}</a>
+                            </li>
 
                         </ul>
                     </li>
                     <!-- classes-->
-                    <li>
+                    <li class="{{ $isClassroomsActive ? 'active' : '' }}">
                         <a href="javascript:void(0);" data-toggle="collapse" data-target="#classes-menu">
                             <div class="pull-left"><i class="fa fa-building"></i><span
                                     class="right-nav-text">{{ trans('main_trans.classes') }}</span></div>
                             <div class="pull-right"><i class="ti-plus"></i></div>
                             <div class="clearfix"></div>
                         </a>
-                        <ul id="classes-menu" class="collapse" data-parent="#sidebarnav">
-                            <li><a href="{{ route('classrooms.index') }}">{{ trans('main_trans.List_classes') }}</a>
+                        <ul id="classes-menu" class="collapse {{ $isClassroomsActive ? 'show' : '' }}"
+                            data-parent="#sidebarnav">
+                            <li class="{{ request()->routeIs('classrooms.index') ? 'active' : '' }}">
+                                <a href="{{ route('classrooms.index') }}">{{ trans('main_trans.List_classes') }}</a>
                             </li>
                         </ul>
                     </li>
 
 
                     <!-- sections-->
-                    <li>
+                    <li class="{{ $isSectionsActive ? 'active' : '' }}">
                         <a href="javascript:void(0);" data-toggle="collapse" data-target="#sections-menu">
                             <div class="pull-left"><i class="fas fa-chalkboard"></i></i><span
                                     class="right-nav-text">{{ trans('main_trans.sections') }}</span></div>
                             <div class="pull-right"><i class="ti-plus"></i></div>
                             <div class="clearfix"></div>
                         </a>
-                        <ul id="sections-menu" class="collapse" data-parent="#sidebarnav">
-                            <li><a href="{{ route('sections.index') }}">{{ trans('main_trans.List_sections') }}</a>
+                        <ul id="sections-menu" class="collapse {{ $isSectionsActive ? 'show' : '' }}"
+                            data-parent="#sidebarnav">
+                            <li class="{{ request()->routeIs('sections.index') ? 'active' : '' }}">
+                                <a href="{{ route('sections.index') }}">{{ trans('main_trans.List_sections') }}</a>
                             </li>
                         </ul>
                     </li>
@@ -92,17 +107,17 @@
 
 
                     <!-- Parents-->
-                    <li>
+                    <li class="{{ $isGuardiansActive ? 'active' : '' }}">
                         <a href="javascript:void(0);" data-toggle="collapse" data-target="#Parents-menu">
                             <div class="pull-left"><i class="fas fa-user-tie"></i><span
                                     class="right-nav-text">{{ trans('main_trans.Parents') }}</span></div>
                             <div class="pull-right"><i class="ti-plus"></i></div>
                             <div class="clearfix"></div>
                         </a>
-                        <ul id="Parents-menu" class="collapse" data-parent="#sidebarnav">
-                            <li> <a href="{{ route('guardians.index') }}">{{ trans('main_trans.List_Parents') }}</a>
-                            </li>
-                            <li> <a href="{{ route('guardians.create') }}">{{ trans('main_trans.Add_Parent') }}</a>
+                        <ul id="Parents-menu" class="collapse {{ $isGuardiansActive ? 'show' : '' }}"
+                            data-parent="#sidebarnav">
+                            <li class="{{ $isGuardiansActive ? 'active' : '' }}">
+                                <a href="{{ route('guardians') }}">{{ trans('main_trans.List_Parents') }}</a>
                             </li>
                         </ul>
                     </li>

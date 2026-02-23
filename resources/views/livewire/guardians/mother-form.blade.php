@@ -66,7 +66,7 @@
     {{-- Mother lookup selects --}}
     <div class="form-row">
         <div class="form-group col-md-6">
-            <label>{{ trans('Parent_trans.Nationality_Father_id') }}</label>
+            <label>{{ trans('Parent_trans.Nationality_Mother_id') }}</label>
             <select class="custom-select my-1 mr-sm-2" wire:model="mother_nationality_id">
                 <option value="">{{ trans('Parent_trans.Choose') }}...</option>
                 @foreach ($nationalities as $nationality)
@@ -79,7 +79,7 @@
         </div>
 
         <div class="form-group col">
-            <label>{{ trans('Parent_trans.Blood_Type_Father_id') }}</label>
+            <label>{{ trans('Parent_trans.Blood_Type_Mother_id') }}</label>
             <select class="custom-select my-1 mr-sm-2" wire:model="mother_blood_type_id">
                 <option value="">{{ trans('Parent_trans.Choose') }}...</option>
                 @foreach ($blood_types as $bloodType)
@@ -92,7 +92,7 @@
         </div>
 
         <div class="form-group col">
-            <label>{{ trans('Parent_trans.Religion_Father_id') }}</label>
+            <label>{{ trans('Parent_trans.Religion_Mother_id') }}</label>
             <select class="custom-select my-1 mr-sm-2" wire:model="mother_religion_id">
                 <option value="">{{ trans('Parent_trans.Choose') }}...</option>
                 @foreach ($religions as $religion)
