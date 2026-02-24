@@ -5,6 +5,7 @@ use App\Http\Controllers\Grades\GradeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Sections\SectionController;
+use App\Http\Controllers\Teachers\TeacherController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -42,6 +43,9 @@ Route::group(
 
         // ==============================[Guardians]============================ //
         Route::view('guardians', 'pages.guardians.guardian')->name('guardians');
+
+        // ==============================[Teachers]============================ //
+        Route::resource('teachers', TeacherController::class)->except('show');
     }
 
     // // ==============================[profile]============================ //

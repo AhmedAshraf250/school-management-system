@@ -3,6 +3,7 @@
     $isGradesActive = request()->routeIs('grades.*');
     $isClassroomsActive = request()->routeIs('classrooms.*');
     $isSectionsActive = request()->routeIs('sections.*');
+    $isTeachersActive = request()->routeIs('teachers.*');
     $isGuardiansActive = request()->routeIs('guardians');
 @endphp
 
@@ -90,18 +91,19 @@
                     </li>
 
 
-
                     <!-- Teachers-->
-                    <li>
+                    <li class="{{ $isTeachersActive ? 'active' : '' }}">
                         <a href="javascript:void(0);" data-toggle="collapse" data-target="#Teachers-menu">
-                            <div class="pull-left"><i class="fas fa-chalkboard-teacher"></i></i><span
+                            <div class="pull-left"><i class="fas fa-chalkboard-teacher"></i><span
                                     class="right-nav-text">{{ trans('main_trans.Teachers') }}</span></div>
                             <div class="pull-right"><i class="ti-plus"></i></div>
                             <div class="clearfix"></div>
                         </a>
-                        <ul id="Teachers-menu" class="collapse" data-parent="#sidebarnav">
-                            <li> <a href="calendar.html">Events Calendar </a> </li>
-                            <li> <a href="calendar-list.html">List Calendar</a> </li>
+                        <ul id="Teachers-menu" class="collapse {{ $isTeachersActive ? 'show' : '' }}"
+                            data-parent="#sidebarnav">
+                            <li class="{{ $isTeachersActive ? 'active' : '' }}"> <a
+                                    href="{{ route('teachers.index') }}">{{ trans('main_trans.List_Teachers') }}</a>
+                            </li>
                         </ul>
                     </li>
 
