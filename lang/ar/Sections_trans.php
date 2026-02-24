@@ -25,6 +25,8 @@ return [
     'required_en' => 'يرجي ادخال اسم القسم باللغة الانجليزية',
     'Grade_id_required' => 'يرجي اختيار اسم المرحلة',
     'Class_id_required' => 'يرجي تحديد الصف الدراسي',
+    'Teacher_id_required' => 'يرجي اختيار معلم واحد على الاقل',
+    'Teacher_id_exists' => 'المعلم المحدد غير موجود',
     'Processes' => 'العمليات',
     'Edit' => 'تعديل',
     'Delete' => 'حذف',

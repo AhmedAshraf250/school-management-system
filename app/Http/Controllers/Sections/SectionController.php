@@ -7,8 +7,12 @@ use App\Http\Requests\Section\StoreSectionRequest;
 use App\Models\Classroom;
 use App\Models\Grade;
 use App\Models\Section;
+use App\Models\Teacher;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\DB;
+use Throwable;
 
 class SectionController extends Controller
 {
@@ -20,64 +24,85 @@ class SectionController extends Controller
         $grades = Grade::with([
             'sections:id,name,grade_id,classroom_id,status',
             'sections.classroom:id,name',
+            'sections.teachers:id,name',
         ])->get();
 
-        return view('pages.sections.sections', ['grades' => $grades]);
+        $teachers = Teacher::query()
+            ->select('id', 'name')
+            ->orderBy('name')
+            ->get();
+
+        return view('pages.sections.sections', ['grades' => $grades, 'teachers' => $teachers]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreSectionRequest $request)
+    public function store(StoreSectionRequest $request): RedirectResponse
     {
-
         try {
             $validated = $request->validated();
-            $sections = new Section;
 
-            $sections->name = ['ar' => $validated['name_ar'], 'en' => $validated['name_en']];
-            $sections->grade_id = $validated['grade_id'];
-            $sections->classroom_id = $validated['classroom_id'];
-            $sections->status = 1;
-            $sections->save();
-            flash()->success(trans('messages.success'));
+            DB::transaction(function () use ($validated): void {
+                $section = Section::query()->create([
+                    'name' => ['ar' => $validated['name_ar'], 'en' => $validated['name_en']],
+                    'grade_id' => $validated['grade_id'],
+                    'classroom_id' => $validated['classroom_id'],
+                    'status' => true,
+                ]);
+
+                $section->teachers()->sync($validated['teacher_id']);
+            });
+
+            $this->flashSuccess(trans('messages.success'));
 
             return redirect()->route('sections.index');
-        } catch (\Exception $e) {
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        } catch (Throwable $exception) {
+            report($exception);
+
+            return redirect()->back()
+                ->withInput()
+                ->withErrors(['error' => trans('messages.error')]);
         }
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(StoreSectionRequest $request, Section $section)
+    public function update(StoreSectionRequest $request, Section $section): RedirectResponse
     {
-
         try {
             $validated = $request->validated();
 
-            $section->name = ['ar' => $validated['name_ar'], 'en' => $validated['name_en']];
-            $section->grade_id = $validated['grade_id'];
-            $section->classroom_id = $validated['classroom_id'];
-            $section->status = $request->boolean('status');
+            DB::transaction(function () use ($request, $section, $validated): void {
+                $section->update([
+                    'name' => ['ar' => $validated['name_ar'], 'en' => $validated['name_en']],
+                    'grade_id' => $validated['grade_id'],
+                    'classroom_id' => $validated['classroom_id'],
+                    'status' => $request->boolean('status'),
+                ]);
 
-            $section->save();
-            flash()->success(trans('messages.Update'));
+                $section->teachers()->sync($validated['teacher_id'] ?? []);
+            });
+            $this->flashSuccess(trans('messages.Update'));
 
             return redirect()->route('sections.index');
-        } catch (\Exception $e) {
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        } catch (Throwable $exception) {
+            report($exception);
+
+            return redirect()->back()
+                ->withInput()
+                ->withErrors(['error' => trans('messages.error')]);
         }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Section $section)
+    public function destroy(Section $section): RedirectResponse
     {
         $section->delete();
-        flash()->error(trans('messages.Delete'));
+        $this->flashError(trans('messages.Delete'));
 
         return redirect()->route('sections.index');
     }

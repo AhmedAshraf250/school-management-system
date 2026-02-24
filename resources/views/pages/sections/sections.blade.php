@@ -54,6 +54,7 @@
                                                         <th>#</th>
                                                         <th>{{ trans('Sections_trans.Name_Section') }}</th>
                                                         <th>{{ trans('Sections_trans.Name_Class') }}</th>
+                                                        <th>{{ trans('Sections_trans.Name_Teacher') }}</th>
                                                         <th>{{ trans('Sections_trans.Status') }}</th>
                                                         <th>{{ trans('Sections_trans.Processes') }}</th>
                                                     </tr>
@@ -66,6 +67,14 @@
                                                             <td>{{ $loop->iteration }}</td>
                                                             <td>{{ $section->name }}</td>
                                                             <td>{{ $section->classroom?->name }}</td>
+                                                            <td>
+                                                                @forelse ($section->teachers as $teacher)
+                                                                    <span
+                                                                        class="badge badge-info mr-1">{{ $teacher->name }}</span>
+                                                                @empty
+                                                                    <span class="text-muted">--</span>
+                                                                @endforelse
+                                                            </td>
                                                             <td>
                                                                 @if ((int) $section->status === 1)
                                                                     <label class="badge badge-success">
@@ -181,6 +190,23 @@
                                                                                     </label>
                                                                                 </div>
                                                                             </div>
+
+                                                                            <br>
+
+                                                                            <div class="col">
+                                                                                <label for="inputName"
+                                                                                    class="control-label">{{ trans('Sections_trans.Name_Teacher') }}</label>
+                                                                                <select multiple name="teacher_id[]"
+                                                                                    class="form-control"
+                                                                                    id="edit-teachers-{{ $section->id }}">
+                                                                                    @foreach ($teachers as $teacherOption)
+                                                                                        <option value="{{ $teacherOption->id }}"
+                                                                                            @selected($section->teachers->contains('id', $teacherOption->id))>
+                                                                                            {{ $teacherOption->name }}
+                                                                                        </option>
+                                                                                    @endforeach
+                                                                                </select>
+                                                                            </div>
                                                                         </div>
 
                                                                         <div class="modal-footer">
@@ -265,15 +291,21 @@
                                 @csrf
 
                                 <div class="modal-body">
+                                    @php
+                                        $selectedTeacherIds = array_map('strval', old('teacher_id', []));
+                                    @endphp
+
                                     {{-- Name Inputs (AR/EN) --}}
                                     <div class="row">
                                         <div class="col">
                                             <input type="text" name="name_ar" class="form-control"
-                                                placeholder="{{ trans('Sections_trans.Section_name_ar') }}">
+                                                placeholder="{{ trans('Sections_trans.Section_name_ar') }}"
+                                                value="{{ old('name_ar') }}">
                                         </div>
                                         <div class="col">
                                             <input type="text" name="name_en" class="form-control"
-                                                placeholder="{{ trans('Sections_trans.Section_name_en') }}">
+                                                placeholder="{{ trans('Sections_trans.Section_name_en') }}"
+                                                value="{{ old('name_en') }}">
                                         </div>
                                     </div>
 
@@ -288,7 +320,10 @@
                                                 {{ trans('Sections_trans.Select_Grade') }}
                                             </option>
                                             @foreach ($grades as $listGrade)
-                                                <option value="{{ $listGrade->id }}">{{ $listGrade->Name }}</option>
+                                                <option value="{{ $listGrade->id }}"
+                                                    @selected((string) old('grade_id') === (string) $listGrade->id)>
+                                                    {{ $listGrade->Name }}
+                                                </option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -300,6 +335,21 @@
                                         <label class="control-label">{{ trans('Sections_trans.Name_Class') }}</label>
                                         <select name="classroom_id" id="create-classroom"
                                             class="custom-select classroom-selector"></select>
+                                    </div>
+
+                                    <br>
+
+                                    <div class="col p-0">
+                                        <label for="create-teachers"
+                                            class="control-label">{{ trans('Sections_trans.Name_Teacher') }}</label>
+                                        <select multiple name="teacher_id[]" class="form-control" id="create-teachers">
+                                            @foreach ($teachers as $teacher)
+                                                <option value="{{ $teacher->id }}"
+                                                    @selected(in_array((string) $teacher->id, $selectedTeacherIds, true))>
+                                                    {{ $teacher->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
 

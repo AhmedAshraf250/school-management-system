@@ -24,6 +24,9 @@ class StoreSectionRequest extends FormRequest
     {
         $section = $this->route('section');
         $sectionId = is_object($section) ? $section->id : $section;
+        $teacherIdsRules = $this->isMethod('post')
+            ? ['required', 'array', 'min:1']
+            : ['nullable', 'array'];
 
         return [
             'name_ar' => [
@@ -46,12 +49,15 @@ class StoreSectionRequest extends FormRequest
                         ->where('classroom_id', $this->classroom_id))
                     ->ignore($sectionId),
             ],
-            'grade_id' => ['required', 'exists:grades,id'],
+            'grade_id' => ['required', 'integer', 'exists:grades,id'],
             'classroom_id' => [
                 'required',
-                Rule::exists('classrooms', 'id')->where(fn ($query) => $query->where('grade_id', $this->grade_id)),
+                'integer',
+                Rule::exists('classrooms', 'id')->where(fn ($query): mixed => $query->where('grade_id', $this->grade_id)),
             ],
             'status' => ['nullable', 'boolean'],
+            'teacher_id' => $teacherIdsRules,
+            'teacher_id.*' => ['integer', 'distinct', 'exists:teachers,id'],
         ];
     }
 
@@ -65,6 +71,10 @@ class StoreSectionRequest extends FormRequest
             'grade_id.required' => trans('Sections_trans.Grade_id_required'),
             'classroom_id.required' => trans('Sections_trans.Class_id_required'),
             'classroom_id.exists' => trans('Sections_trans.Class_id_required'),
+            'teacher_id.required' => trans('Sections_trans.Teacher_id_required'),
+            'teacher_id.array' => trans('Sections_trans.Teacher_id_required'),
+            'teacher_id.min' => trans('Sections_trans.Teacher_id_required'),
+            'teacher_id.*.exists' => trans('Sections_trans.Teacher_id_exists'),
         ];
     }
 }

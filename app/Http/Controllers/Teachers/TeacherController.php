@@ -33,7 +33,7 @@ class TeacherController extends Controller
     {
         try {
             $this->teacherRepository->store($request->validated());
-            flash()->success(trans('messages.success'));
+            $this->flashSuccess(trans('messages.success'));
 
             return redirect()->route('teachers.index');
         } catch (\Throwable $exception) {
@@ -56,7 +56,7 @@ class TeacherController extends Controller
     {
         try {
             $this->teacherRepository->update($request->validated(), $teacher->id);
-            flash()->success(trans('messages.Update'));
+            $this->flashSuccess(trans('messages.Update'));
 
             return redirect()->route('teachers.index');
         } catch (\Throwable $exception) {
@@ -70,7 +70,7 @@ class TeacherController extends Controller
     {
         try {
             $this->teacherRepository->delete($teacher->id);
-            flash()->success(trans('messages.Delete'));
+            $this->flashSuccess(trans('messages.Delete'));
 
             return redirect()->route('teachers.index');
         } catch (\Throwable $exception) {

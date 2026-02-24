@@ -44,12 +44,12 @@ class ClassroomController extends Controller
             }
 
             DB::commit();
-            flash()->success(trans('messages.success'));
+            $this->flashSuccess(trans('messages.success'));
 
             return redirect()->route('classrooms.index');
         } catch (\Exception $e) {
             DB::rollback();
-            flash()->error(trans('messages.error').': '.$e->getMessage());
+            $this->flashError(trans('messages.error').': '.$e->getMessage());
 
             return redirect()->back()->withInput();
         }
@@ -79,11 +79,11 @@ class ClassroomController extends Controller
                 'grade_id' => $request->grade_id,
             ]);
 
-            flash()->success(trans('messages.update'));
+            $this->flashSuccess(trans('messages.update'));
 
             return redirect()->route('classrooms.index');
         } catch (\Exception $e) {
-            flash()->error(trans('messages.error').': '.$e->getMessage());
+            $this->flashError(trans('messages.error').': '.$e->getMessage());
 
             return redirect()->back();
         }
@@ -98,11 +98,11 @@ class ClassroomController extends Controller
             $classroom = Classroom::findOrFail($id);
             $classroom->delete();
 
-            flash()->success(trans('messages.Delete'));
+            $this->flashSuccess(trans('messages.Delete'));
 
             return redirect()->route('classrooms.index');
         } catch (\Exception $e) {
-            flash()->error(trans('messages.error').': '.$e->getMessage());
+            $this->flashError(trans('messages.error').': '.$e->getMessage());
 
             return redirect()->back();
         }
@@ -118,14 +118,14 @@ class ClassroomController extends Controller
 
         // $ids = explode(',', $request->delete_all_id);`
         if (empty($ids)) {
-            flash()->error(trans('messages.error'));
+            $this->flashError(trans('messages.error'));
 
             return redirect()->back();
         }
 
         Classroom::whereIn('id', $ids)->delete();
 
-        flash()->success(trans('messages.Delete'));
+        $this->flashSuccess(trans('messages.Delete'));
 
         return redirect()->route('classrooms.index');
     }

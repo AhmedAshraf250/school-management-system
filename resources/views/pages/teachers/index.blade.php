@@ -117,5 +117,5 @@
 @endsection
 
 @section('js')
-    @flasher_render()
+    @flasher_render
 @endsection

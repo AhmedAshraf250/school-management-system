@@ -41,6 +41,8 @@
                 </div>
             </div>
 
+            @include('layouts.partials.flash-alerts')
+
             @yield('content')
             {{-- {{ $slot }} --}}
 

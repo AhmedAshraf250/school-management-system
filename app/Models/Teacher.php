@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Spatie\Translatable\HasTranslations;
 
 class Teacher extends Model
@@ -33,6 +34,7 @@ class Teacher extends Model
         ];
     }
 
+    // ==== [Relations] ====//
     public function specialization(): BelongsTo
     {
         return $this->belongsTo(Specialization::class, 'specialization_id');
@@ -41,5 +43,10 @@ class Teacher extends Model
     public function gender(): BelongsTo
     {
         return $this->belongsTo(Gender::class, 'gender_id');
+    }
+
+    public function sections(): BelongsToMany
+    {
+        return $this->belongsToMany(Section::class, 'section_teacher', 'teacher_id', 'section_id');
     }
 }

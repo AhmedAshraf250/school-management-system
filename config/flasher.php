@@ -13,6 +13,7 @@ use Flasher\Prime\Configuration;
  *
  * @return array<string, mixed> PHPFlasher configuration
  */
+
 return Configuration::from([
     // Default notification library (e.g., 'flasher', 'toastr', 'noty', 'notyf', 'sweetalert')
     'default' => 'flasher',
