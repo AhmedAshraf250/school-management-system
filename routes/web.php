@@ -5,6 +5,7 @@ use App\Http\Controllers\Grades\GradeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Sections\SectionController;
+use App\Http\Controllers\Students\StudentController;
 use App\Http\Controllers\Teachers\TeacherController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -46,6 +47,11 @@ Route::group(
 
         // ==============================[Teachers]============================ //
         Route::resource('teachers', TeacherController::class)->except('show');
+
+        // ==============================[Students]============================ //
+        Route::get('students/classrooms/{id}', [StudentController::class, 'getClassrooms'])->name('students.getClassrooms');
+        Route::get('students/sections/{id}', [StudentController::class, 'getSections'])->name('students.getSections');
+        Route::resource('students', StudentController::class);
     }
 
     // // ==============================[profile]============================ //

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "56b118888c1e0e0d801ea5e234a4690a",
+    "content-hash": "e2cf126ef04814eb6034ea6c3349ab87",
     "packages": [
         {
             "name": "brick/math",
@@ -2933,6 +2933,143 @@
                 "open-source",
                 "php",
                 "phpflasher",
+                "user-feedback"
+            ],
+            "support": {
+                "issues": "https://github.com/php-flasher/php-flasher/issues",
+                "source": "https://github.com/php-flasher/php-flasher"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/yoeunes",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-12-31T10:43:34+00:00"
+        },
+        {
+            "name": "php-flasher/flasher-toastr",
+            "version": "v2.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-flasher/flasher-toastr.git",
+                "reference": "812e150e6a18f15091125abb71ca5c816559a292"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-flasher/flasher-toastr/zipball/812e150e6a18f15091125abb71ca5c816559a292",
+                "reference": "812e150e6a18f15091125abb71ca5c816559a292",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2",
+                "php-flasher/flasher": "^2.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "functions.php",
+                    "helpers.php"
+                ],
+                "psr-4": {
+                    "Flasher\\Toastr\\Prime\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Younes ENNAJI",
+                    "email": "younes.ennaji.pro@gmail.com",
+                    "homepage": "https://www.linkedin.com/in/younes--ennaji/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHPFlasher Toastr - An extension for PHPFlasher to integrate Toastr notifications seamlessly in Laravel or Symfony. Enhances UX with elegant, responsive toast messages.",
+            "homepage": "https://php-flasher.io",
+            "keywords": [
+                "customizable-alerts-php",
+                "flash-messages",
+                "interactive-web-notifications",
+                "laravel-notification",
+                "php-messaging-library",
+                "php-notification-system",
+                "php-user-interface",
+                "symfony-notification",
+                "user-engagement-php",
+                "user-feedback-tools",
+                "web-application-notifications"
+            ],
+            "support": {
+                "issues": "https://github.com/php-flasher/php-flasher/issues",
+                "source": "https://github.com/php-flasher/php-flasher"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/yoeunes",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-12-31T10:43:34+00:00"
+        },
+        {
+            "name": "php-flasher/flasher-toastr-laravel",
+            "version": "v2.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-flasher/flasher-toastr-laravel.git",
+                "reference": "a22a6f2096246c6f475d1c97e73379ef18609a38"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-flasher/flasher-toastr-laravel/zipball/a22a6f2096246c6f475d1c97e73379ef18609a38",
+                "reference": "a22a6f2096246c6f475d1c97e73379ef18609a38",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2",
+                "php-flasher/flasher-laravel": "^2.4.0",
+                "php-flasher/flasher-toastr": "^2.4.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "Toastr": "Flasher\\Toastr\\Laravel\\Facade\\Toastr"
+                    },
+                    "providers": [
+                        "Flasher\\Toastr\\Laravel\\FlasherToastrServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Flasher\\Toastr\\Laravel\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Younes ENNAJI",
+                    "email": "younes.ennaji.pro@gmail.com",
+                    "homepage": "https://www.linkedin.com/in/younes--ennaji/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Leverage Toastr for stylish toast notifications in Laravel with PHPFlasher. Add Toastr's sleek notifications to your Laravel projects effortlessly.",
+            "homepage": "https://php-flasher.io",
+            "keywords": [
+                "dynamic-notifications",
+                "flash-notifications",
+                "laravel",
+                "open-source",
+                "phpflasher",
+                "toastr",
                 "user-feedback"
             ],
             "support": {

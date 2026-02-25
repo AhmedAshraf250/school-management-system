@@ -200,7 +200,8 @@
                                                                                     class="form-control"
                                                                                     id="edit-teachers-{{ $section->id }}">
                                                                                     @foreach ($teachers as $teacherOption)
-                                                                                        <option value="{{ $teacherOption->id }}"
+                                                                                        <option
+                                                                                            value="{{ $teacherOption->id }}"
                                                                                             @selected($section->teachers->contains('id', $teacherOption->id))>
                                                                                             {{ $teacherOption->name }}
                                                                                         </option>
@@ -320,8 +321,7 @@
                                                 {{ trans('Sections_trans.Select_Grade') }}
                                             </option>
                                             @foreach ($grades as $listGrade)
-                                                <option value="{{ $listGrade->id }}"
-                                                    @selected((string) old('grade_id') === (string) $listGrade->id)>
+                                                <option value="{{ $listGrade->id }}" @selected((string) old('grade_id') === (string) $listGrade->id)>
                                                     {{ $listGrade->Name }}
                                                 </option>
                                             @endforeach
@@ -344,8 +344,7 @@
                                             class="control-label">{{ trans('Sections_trans.Name_Teacher') }}</label>
                                         <select multiple name="teacher_id[]" class="form-control" id="create-teachers">
                                             @foreach ($teachers as $teacher)
-                                                <option value="{{ $teacher->id }}"
-                                                    @selected(in_array((string) $teacher->id, $selectedTeacherIds, true))>
+                                                <option value="{{ $teacher->id }}" @selected(in_array((string) $teacher->id, $selectedTeacherIds, true))>
                                                     {{ $teacher->name }}
                                                 </option>
                                             @endforeach

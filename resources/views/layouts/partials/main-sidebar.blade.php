@@ -3,6 +3,7 @@
     $isGradesActive = request()->routeIs('grades.*');
     $isClassroomsActive = request()->routeIs('classrooms.*');
     $isSectionsActive = request()->routeIs('sections.*');
+    $isStudentsActive = request()->routeIs('students.*');
     $isTeachersActive = request()->routeIs('teachers.*');
     $isGuardiansActive = request()->routeIs('guardians');
 @endphp
@@ -62,7 +63,7 @@
                     <!-- sections-->
                     <li class="{{ $isSectionsActive ? 'active' : '' }}">
                         <a href="javascript:void(0);" data-toggle="collapse" data-target="#sections-menu">
-                            <div class="pull-left"><i class="fas fa-chalkboard"></i></i><span
+                            <div class="pull-left"><i class="fas fa-chalkboard"></i><span
                                     class="right-nav-text">{{ trans('main_trans.sections') }}</span></div>
                             <div class="pull-right"><i class="ti-plus"></i></div>
                             <div class="clearfix"></div>
@@ -77,16 +78,21 @@
 
 
                     <!-- students-->
-                    <li>
+                    <li class="{{ $isStudentsActive ? 'active' : '' }}">
                         <a href="javascript:void(0);" data-toggle="collapse" data-target="#students-menu">
-                            <div class="pull-left"><i class="fas fa-user-graduate"></i></i></i><span
+                            <div class="pull-left"><i class="fas fa-user-graduate"></i><span
                                     class="right-nav-text">{{ trans('main_trans.students') }}</span></div>
                             <div class="pull-right"><i class="ti-plus"></i></div>
                             <div class="clearfix"></div>
                         </a>
-                        <ul id="students-menu" class="collapse" data-parent="#sidebarnav">
-                            <li> <a href="calendar.html">Events Calendar </a> </li>
-                            <li> <a href="calendar-list.html">List Calendar</a> </li>
+                        <ul id="students-menu" class="collapse {{ $isStudentsActive ? 'show' : '' }}"
+                            data-parent="#sidebarnav">
+                            <li class="{{ request()->routeIs('students.index') ? 'active' : '' }}"> <a
+                                    href="{{ route('students.index') }}">{{ trans('main_trans.list_students') }}</a>
+                            </li>
+                            <li class="{{ request()->routeIs('students.create') ? 'active' : '' }}"> <a
+                                    href="{{ route('students.create') }}">{{ trans('main_trans.add_student') }}</a>
+                            </li>
                         </ul>
                     </li>
 

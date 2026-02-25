@@ -15,6 +15,11 @@ class RepoServiceProvider extends ServiceProvider
             \App\Repositories\Contracts\TeacherRepositoryInterface::class,
             \App\Repositories\Eloquent\TeacherEloRepository::class
         );
+
+        $this->app->bind(
+            \App\Repositories\Contracts\StudentRepositoryInterface::class,
+            \App\Repositories\Eloquent\StudentEloRepository::class
+        );
     }
 
     /**
