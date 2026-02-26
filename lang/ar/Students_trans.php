@@ -31,5 +31,8 @@ return [
     'created_at' => 'تاريخ الاضافة',
     'Download' => 'تحميل',
     'delete' => 'حذف',
+    'update' => 'تعديل',
+    'edit_student' => 'تعديل بيانات الطالب',
+    'add_images' => 'اضافة صور',
 
 ];

@@ -1,11 +1,11 @@
 @extends('layouts.master')
 
 @section('title')
-    {{ trans('messages.Update') }}
+    {{ trans('Students_trans.edit_student') }}
 @endsection
 
 @section('PageTitle')
-    {{ trans('messages.Update') }}
+    {{ trans('Students_trans.edit_student') }}
 @endsection
 
 @section('content')
@@ -29,14 +29,16 @@
                     @endif
 
                     {{-- Edit form --}}
-                    <form action="{{ route('students.update', $student->id) }}" method="post" autocomplete="off">
+                    <form action="{{ route('students.update', $student->id) }}" method="post" autocomplete="off"
+                        enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
 
                         @include('pages.students.partials.form-fields', ['student' => $student])
 
                         {{-- Primary submit action --}}
-                        <button class="btn btn-primary btn-sm d-inline-flex align-items-center px-4 py-2 rounded-pill shadow-sm pull-right"
+                        <button
+                            class="btn btn-primary btn-sm d-inline-flex align-items-center px-4 py-2 rounded-pill shadow-sm pull-right"
                             type="submit">
                             <i class="fa fa-save mr-2"></i>
                             {{ trans('Students_trans.submit') }}

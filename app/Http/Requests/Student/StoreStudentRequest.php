@@ -46,6 +46,8 @@ class StoreStudentRequest extends FormRequest
             ],
             'guardian_id' => ['required', 'integer', 'exists:guardians,id'],
             'academic_year' => ['required', 'string', 'max:20'],
+            'photos' => ['nullable', 'array'],
+            'photos.*' => ['nullable', 'image', 'max:2048'],
         ];
     }
 
@@ -73,6 +75,7 @@ class StoreStudentRequest extends FormRequest
             'section_id' => trans('Students_trans.section'),
             'guardian_id' => trans('Students_trans.parent'),
             'academic_year' => trans('Students_trans.academic_year'),
+            'photos.*' => trans('Students_trans.Attachments'),
         ];
     }
 }

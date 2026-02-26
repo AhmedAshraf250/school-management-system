@@ -29,13 +29,15 @@
                     @endif
 
                     {{-- Add form --}}
-                    <form method="post" action="{{ route('students.store') }}" autocomplete="off">
+                    <form method="post" action="{{ route('students.store') }}" autocomplete="off"
+                        enctype="multipart/form-data">
                         @csrf
 
                         @include('pages.students.partials.form-fields', ['student' => null])
 
                         {{-- Primary submit action --}}
-                        <button class="btn btn-primary btn-sm d-inline-flex align-items-center px-4 py-2 rounded-pill shadow-sm pull-right"
+                        <button
+                            class="btn btn-primary btn-sm d-inline-flex align-items-center px-4 py-2 rounded-pill shadow-sm pull-right"
                             type="submit">
                             <i class="fa fa-check mr-2"></i>
                             {{ trans('Students_trans.submit') }}

@@ -144,7 +144,7 @@ class AddGuardian extends Component
             DB::transaction(function () use ($id): void {
                 $guardian = Guardian::query()->findOrFail($id);
 
-                Storage::disk('public')->deleteDirectory('guardians/'.$guardian->id);
+                Storage::disk('public')->deleteDirectory('attachments/guardians/'.$guardian->id);
                 GuardianAttachment::query()->where('guardian_id', $guardian->id)->delete();
                 $guardian->delete();
             });
@@ -178,7 +178,7 @@ class AddGuardian extends Component
 
         foreach ($this->photos as $photo) {
             $fileName = Str::uuid()->toString().'_'.$photo->getClientOriginalName();
-            $photo->storeAs('guardians/'.$guardian->id, $fileName, 'public');
+            $photo->storeAs('attachments/guardians/'.$guardian->id, $fileName, 'public');
 
             GuardianAttachment::query()->create([
                 'file_name' => $fileName,

@@ -31,9 +31,11 @@
                 classroomSelect.html('<option value="" selected disabled>' + chooseLabel + '</option>');
 
                 $.each(data, function(key, value) {
-                    const selected = selectedClassroomId && String(selectedClassroomId) === String(key) ?
+                    const selected = selectedClassroomId && String(selectedClassroomId) ===
+                        String(key) ?
                         'selected' : '';
-                    classroomSelect.append('<option value="' + key + '" ' + selected + '>' + value +
+                    classroomSelect.append('<option value="' + key + '" ' + selected + '>' +
+                        value +
                         '</option>');
                 });
 
@@ -53,15 +55,18 @@
                 sectionSelect.html('<option value="" selected disabled>' + chooseLabel + '</option>');
 
                 $.each(data, function(key, value) {
-                    const selected = selectedSectionId && String(selectedSectionId) === String(key) ?
+                    const selected = selectedSectionId && String(selectedSectionId) === String(
+                            key) ?
                         'selected' : '';
-                    sectionSelect.append('<option value="' + key + '" ' + selected + '>' + value +
+                    sectionSelect.append('<option value="' + key + '" ' + selected + '>' +
+                        value +
                         '</option>');
                 });
             });
         }
 
         gradeSelect.on('change', function() {
+            setEmptyOptions();
             loadClassrooms($(this).val());
         });
 

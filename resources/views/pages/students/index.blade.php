@@ -26,8 +26,8 @@
 
                     {{-- Students listing table --}}
                     <div class="table-responsive">
-                        <table id="datatable" class="table table-hover table-sm table-bordered p-0"
-                            data-page-length="50" style="text-align: center;">
+                        <table id="datatable" class="table table-hover table-sm table-bordered p-0" data-page-length="50"
+                            style="text-align: center;">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -55,18 +55,21 @@
                                             {{-- Row actions --}}
                                             <a href="{{ route('students.edit', $student->id) }}"
                                                 class="btn btn-info btn-sm d-inline-flex align-items-center px-3 rounded-pill"
-                                                role="button" title="{{ trans('messages.Update') }}">
+                                                role="button" title="{{ trans('Students_trans.update') }}">
                                                 <i class="fa fa-edit mr-1"></i>
-                                                {{ trans('messages.Update') }}
+                                                {{ trans('Students_trans.update') }}
                                             </a>
                                             <button type="button"
                                                 class="btn btn-danger btn-sm d-inline-flex align-items-center px-3 rounded-pill"
-                                                data-toggle="modal"
-                                                data-target="#Delete_Student{{ $student->id }}"
-                                                title="{{ trans('messages.Delete') }}">
+                                                data-toggle="modal" data-target="#Delete_Student{{ $student->id }}"
+                                                title="{{ trans('Students_trans.delete') }}">
                                                 <i class="fa fa-trash mr-1"></i>
-                                                {{ trans('messages.Delete') }}
+                                                {{ trans('Students_trans.delete') }}
                                             </button>
+                                            <a href="{{ route('students.show', $student->id) }}"
+                                                title="{{ trans('Students_trans.Attachments') }}"
+                                                class="btn btn-warning btn-sm" role="button" aria-pressed="true"><i
+                                                    class="far fa-eye"></i></a>
                                         </td>
                                     </tr>
 

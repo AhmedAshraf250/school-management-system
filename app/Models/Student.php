@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Spatie\Translatable\HasTranslations;
 
 class Student extends Model
@@ -38,7 +39,7 @@ class Student extends Model
         ];
     }
 
-    // Relationships
+    // ==============[Relationships]============== //
     public function gender(): BelongsTo
     {
         return $this->belongsTo(Gender::class, 'gender_id');
@@ -72,5 +73,10 @@ class Student extends Model
     public function guardian(): BelongsTo
     {
         return $this->belongsTo(Guardian::class, 'guardian_id');
+    }
+
+    public function images(): MorphMany
+    {
+        return $this->morphMany(Image::class, 'imageable');
     }
 }

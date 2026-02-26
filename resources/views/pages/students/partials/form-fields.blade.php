@@ -50,7 +50,8 @@
     </div>
 
     <div class="form-group col-md-3">
-        <label for="nationality_id">{{ trans('Students_trans.Nationality') }} <span class="text-danger">*</span></label>
+        <label for="nationality_id">{{ trans('Students_trans.Nationality') }} <span
+                class="text-danger">*</span></label>
         <select id="nationality_id" class="custom-select" name="nationality_id">
             <option value="" selected disabled>{{ trans('Parent_trans.Choose') }} ...</option>
             @foreach ($nationalities as $nationality)
@@ -88,6 +89,7 @@
 
 {{-- Academic mapping (grade/classroom/section/guardian/year) --}}
 <div class="form-row">
+    {{-- Grade selector --}}
     <div class="form-group col-md-2">
         <label for="grade_id">{{ trans('Students_trans.Grade') }} <span class="text-danger">*</span></label>
         <select id="grade_id" class="custom-select" name="grade_id">
@@ -100,6 +102,7 @@
         </select>
     </div>
 
+    {{-- Classroom selector (depends on grade) --}}
     <div class="form-group col-md-3">
         <label for="classroom_id">{{ trans('Students_trans.classrooms') }} <span class="text-danger">*</span></label>
         <select id="classroom_id" class="custom-select" name="classroom_id">
@@ -112,6 +115,7 @@
         </select>
     </div>
 
+    {{-- Section selector (depends on classroom) --}}
     <div class="form-group col-md-3">
         <label for="section_id">{{ trans('Students_trans.section') }} <span class="text-danger">*</span></label>
         <select id="section_id" class="custom-select" name="section_id">
@@ -124,6 +128,7 @@
         </select>
     </div>
 
+    {{-- Guardian Field --}}
     <div class="form-group col-md-2">
         <label for="guardian_id">{{ trans('Students_trans.parent') }} <span class="text-danger">*</span></label>
         <select id="guardian_id" class="custom-select" name="guardian_id">
@@ -136,8 +141,10 @@
         </select>
     </div>
 
+    {{-- Academic year --}}
     <div class="form-group col-md-2">
-        <label for="academic_year">{{ trans('Students_trans.academic_year') }} <span class="text-danger">*</span></label>
+        <label for="academic_year">{{ trans('Students_trans.academic_year') }} <span
+                class="text-danger">*</span></label>
         <select id="academic_year" class="custom-select" name="academic_year">
             <option value="" selected disabled>{{ trans('Parent_trans.Choose') }} ...</option>
             @php
@@ -149,5 +156,17 @@
                 </option>
             @endfor
         </select>
+    </div>
+
+    {{-- Attachments upload field (supports multiple image files) --}}
+    <div class="form-group col-md-6">
+        <label for="photos">{{ trans('Students_trans.Attachments') }}</label>
+        <input id="photos" type="file" class="form-control-file" accept="image/*" name="photos[]" multiple>
+        @error('photos')
+            <span class="text-danger d-block mt-1">{{ $message }}</span>
+        @enderror
+        @error('photos.*')
+            <span class="text-danger d-block mt-1">{{ $message }}</span>
+        @enderror
     </div>
 </div>

@@ -6,14 +6,21 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Student\StoreStudentRequest;
 use App\Http\Requests\Student\UpdateStudentRequest;
 use App\Models\Student;
+use App\Repositories\Contracts\StaticDataRepositoryInterface;
 use App\Repositories\Contracts\StudentRepositoryInterface;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Storage;
 
 class StudentController extends Controller
 {
-    public function __construct(protected StudentRepositoryInterface $studentRepository) {}
+    public function __construct(
+        protected StudentRepositoryInterface $studentRepository,
+        protected StaticDataRepositoryInterface $staticData
+    ) {}
 
     public function index(): View
     {
@@ -43,15 +50,17 @@ class StudentController extends Controller
 
     public function edit(Student $student): View
     {
-        $student = $this->studentRepository->edit($student->id);
+        $student = $this->studentRepository->getById($student->id);
         $formData = $this->studentFormData($student);
 
         return view('pages.students.edit', array_merge($formData, ['student' => $student]));
     }
 
-    public function show(Student $student): RedirectResponse
+    public function show(Student $student): View
     {
-        return redirect()->route('students.edit', $student->id);
+        $student = $this->studentRepository->getById($student->id);
+
+        return view('pages.students.show', ['student' => $student]);
     }
 
     public function update(UpdateStudentRequest $request, Student $student): RedirectResponse
@@ -100,11 +109,11 @@ class StudentController extends Controller
      */
     private function studentFormData(?Student $student = null): array
     {
-        $grades = $this->studentRepository->getGrades();
-        $guardians = $this->studentRepository->getGuardians();
-        $genders = $this->studentRepository->getGenders();
-        $nationalities = $this->studentRepository->getNationalities();
-        $bloodTypes = $this->studentRepository->getBloodTypes();
+        $grades = $this->staticData->getGrades();
+        $guardians = $this->staticData->getGuardians();
+        $genders = $this->staticData->getGenders();
+        $nationalities = $this->staticData->getNationalities();
+        $bloodTypes = $this->staticData->getBloodTypes();
         $classrooms = collect();
         $sections = collect();
 
@@ -122,5 +131,38 @@ class StudentController extends Controller
             'classrooms',
             'sections',
         );
+    }
+
+    public function uploadAttachments(Request $request, Student $student): RedirectResponse
+    {
+        $validated = $request->validate([
+            'photos' => ['required', 'array'],
+            'photos.*' => ['required', 'image', 'mimes:jpg,jpeg,png', 'max:2048'],
+        ]);
+
+        $this->studentRepository->uploadImages($validated['photos'], $student);
+
+        $this->flashSuccess(trans('messages.success'));
+
+        return redirect()->route('students.show', $student->id);
+    }
+
+    public function deleteAttachment(Student $student, int $attachmentId): RedirectResponse
+    {
+        $this->studentRepository->deleteStudentAttachment($student, $attachmentId);
+
+        $this->flashSuccess(trans('messages.success'));
+
+        return redirect()->route('students.show', $student->id);
+    }
+
+    public function downloadAttachment(Student $student, int $attachmentId)
+    {
+        $attachment = $this->studentRepository->getStudentAttachment($student, $attachmentId);
+
+        // return Storage::disk('public')->download($attachment->path, $attachment->file_name);
+
+        $disk = Storage::disk('public');
+        return response()->download($disk->path($attachment->path), $attachment->file_name);
     }
 }

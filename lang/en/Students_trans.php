@@ -31,5 +31,8 @@ return [
     'created_at' => 'created_at',
     'Download' => 'Download',
     'delete' => 'Delete',
+    'update' => 'update',
+    'edit_student' => 'Edit Student',
+    'add_images' => 'Add images',
 
 ];
