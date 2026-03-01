@@ -25,6 +25,11 @@ class RepoServiceProvider extends ServiceProvider
             \App\Repositories\Contracts\StaticDataRepositoryInterface::class,
             \App\Repositories\Eloquent\StaticDataEloRepository::class
         );
+
+        $this->app->bind(
+            \App\Repositories\Contracts\PromotionRepositoryInterface::class,
+            \App\Repositories\Eloquent\PromotionEloRepository::class
+        );
     }
 
     /**

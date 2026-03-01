@@ -5,6 +5,7 @@ use App\Http\Controllers\Grades\GradeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Sections\SectionController;
+use App\Http\Controllers\Students\PromotionController;
 use App\Http\Controllers\Students\StudentController;
 use App\Http\Controllers\Teachers\TeacherController;
 use Illuminate\Support\Facades\Route;
@@ -60,6 +61,9 @@ Route::group(
         Route::delete('students/{student}/delete_attachment/{attachmentId}', [StudentController::class, 'deleteAttachment'])
             ->name('students.deleteAttachment');
         Route::resource('students', StudentController::class);
+
+        // ==============================[Students.Promotion]============================ //
+        Route::resource('promotions', PromotionController::class)->only(['index', 'create', 'store', 'destroy']);
     }
 
     // // ==============================[profile]============================ //
