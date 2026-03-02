@@ -5,6 +5,8 @@ use App\Http\Controllers\Grades\GradeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Sections\SectionController;
+use App\Http\Controllers\Students\FeeController;
+use App\Http\Controllers\Students\GraduationController;
 use App\Http\Controllers\Students\PromotionController;
 use App\Http\Controllers\Students\StudentController;
 use App\Http\Controllers\Teachers\TeacherController;
@@ -64,6 +66,13 @@ Route::group(
 
         // ==============================[Students.Promotion]============================ //
         Route::resource('promotions', PromotionController::class)->only(['index', 'create', 'store', 'destroy']);
+
+        // ==============================[Students.Graduation]============================ //
+        Route::post('graduates/bulk', [GraduationController::class, 'graduateBatch'])->name('graduates.bulk');
+        Route::resource('graduates', GraduationController::class)->only(['index', 'store', 'destroy']);
+
+        // ==============================[Fees]============================ //
+        Route::resource('fees', FeeController::class);
     }
 
     // // ==============================[profile]============================ //

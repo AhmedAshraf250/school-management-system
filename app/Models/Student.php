@@ -4,12 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Spatie\Translatable\HasTranslations;
 
 class Student extends Model
 {
     use HasTranslations;
+
+    public const STATUS_ACTIVE = 'active';
+
+    public const STATUS_GRADUATED = 'graduated';
 
     public $translatable = ['name'];
 
@@ -26,6 +31,7 @@ class Student extends Model
         'section_id',
         'guardian_id',
         'academic_year',
+        'status',
     ];
 
     protected $hidden = [
@@ -78,5 +84,10 @@ class Student extends Model
     public function images(): MorphMany
     {
         return $this->morphMany(Image::class, 'imageable');
+    }
+
+    public function graduations(): HasMany
+    {
+        return $this->hasMany(Graduation::class, 'student_id');
     }
 }

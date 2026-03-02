@@ -55,5 +55,17 @@ return [
     'rollback_one_done' => 'Student promotion has been rolled back successfully.',
     'rollback_all_done' => 'All promotions have been rolled back successfully.',
     'no_promotions' => 'No promotions found.',
+    'select_student' => 'Select Student',
+    'graduated_at' => 'Graduated At',
+    'notes' => 'Notes',
+    'graduation_done' => 'Student has been graduated successfully.',
+    'student_already_graduated' => 'This student is already graduated.',
+    'graduation_rollback_one' => 'Rollback Graduation',
+    'graduation_rollback_confirm' => 'Are you sure you want to rollback graduation for',
+    'graduation_rollback_done' => 'Graduation has been rolled back successfully.',
+    'no_graduations' => 'No graduations found.',
+    'graduate_section' => 'Graduate Section',
+    'no_students_for_graduation_batch' => 'No active students found for the selected stage.',
+    'graduation_batch_done' => ':count students have been graduated successfully.',
 
 ];

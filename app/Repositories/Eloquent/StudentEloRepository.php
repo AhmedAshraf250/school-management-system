@@ -29,6 +29,7 @@ class StudentEloRepository implements StudentRepositoryInterface
                 'section:id,name,grade_id,classroom_id',
                 'guardian:id,father_name',
             ])
+            ->where('status', Student::STATUS_ACTIVE)
             ->latest()
             ->get();
     }
@@ -43,7 +44,7 @@ class StudentEloRepository implements StudentRepositoryInterface
         return Classroom::query()
             ->where('grade_id', $gradeId)
             ->get(['id', 'name'])
-            ->mapWithKeys(fn(Classroom $classroom): array => [$classroom->id => $classroom->name]);
+            ->mapWithKeys(fn (Classroom $classroom): array => [$classroom->id => $classroom->name]);
     }
 
     public function getSectionsByClassroom(int $classroomId)
@@ -51,7 +52,7 @@ class StudentEloRepository implements StudentRepositoryInterface
         return Section::query()
             ->where('classroom_id', $classroomId)
             ->get(['id', 'name'])
-            ->mapWithKeys(fn(Section $section): array => [$section->id => $section->name]);
+            ->mapWithKeys(fn (Section $section): array => [$section->id => $section->name]);
     }
 
     public function store(array $data): Student

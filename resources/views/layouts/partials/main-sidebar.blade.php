@@ -9,6 +9,7 @@
     $isStudentsActive = $isStudentsInfoActive || $isStudentsPromotionsActive || $isStudentsGraduatesActive;
     $isTeachersActive = request()->routeIs('teachers.*');
     $isGuardiansActive = request()->routeIs('guardians');
+    $isFeesActive = request()->routeIs('fees.*');
 @endphp
 
 <div class="container-fluid">
@@ -94,11 +95,14 @@
                                     <div class="pull-right"><i class="ti-plus toggle-icon"></i></div>
                                     <div class="clearfix"></div>
                                 </a>
-                                <ul id="Student_information" class="collapse {{ $isStudentsInfoActive ? 'show' : '' }}">
+                                <ul id="Student_information"
+                                    class="collapse {{ $isStudentsInfoActive ? 'show' : '' }}">
                                     <li class="{{ request()->routeIs('students.create') ? 'active' : '' }}"> <a
                                             href="{{ route('students.create') }}">{{ trans('main_trans.add_student') }}</a>
                                     </li>
-                                    <li class="{{ request()->routeIs('students.index', 'students.show', 'students.edit') ? 'active' : '' }}"> <a
+                                    <li
+                                        class="{{ request()->routeIs('students.index', 'students.show', 'students.edit') ? 'active' : '' }}">
+                                        <a
                                             href="{{ route('students.index') }}">{{ trans('main_trans.list_students') }}</a>
                                     </li>
                                 </ul>
@@ -110,7 +114,8 @@
                                         class="pull-right"><i class="ti-plus toggle-icon"></i></div>
                                     <div class="clearfix"></div>
                                 </a>
-                                <ul id="Students_upgrade" class="collapse {{ $isStudentsPromotionsActive ? 'show' : '' }}">
+                                <ul id="Students_upgrade"
+                                    class="collapse {{ $isStudentsPromotionsActive ? 'show' : '' }}">
                                     <li class="{{ request()->routeIs('promotions.create') ? 'active' : '' }}"> <a
                                             href="{{ route('promotions.create') }}">{{ trans('main_trans.add_Promotion') }}</a>
                                     </li>
@@ -126,9 +131,16 @@
                                         class="pull-right"><i class="ti-plus toggle-icon"></i></div>
                                     <div class="clearfix"></div>
                                 </a>
-                                <ul id="Graduate-students" class="collapse {{ $isStudentsGraduatesActive ? 'show' : '' }}">
-                                    <li> <a href="#">{{ trans('main_trans.add_Graduate') }}</a> </li>
-                                    <li> <a href="#">{{ trans('main_trans.list_Graduate') }}</a> </li>
+                                <ul id="Graduate-students"
+                                    class="collapse {{ $isStudentsGraduatesActive ? 'show' : '' }}">
+                                    <li class="{{ request()->routeIs('graduates.index') ? 'active' : '' }}">
+                                        <a
+                                            href="{{ route('graduates.index') }}">{{ trans('main_trans.add_Graduate') }}</a>
+                                    </li>
+                                    <li class="{{ request()->routeIs('graduates.index') ? 'active' : '' }}">
+                                        <a
+                                            href="{{ route('graduates.index') }}">{{ trans('main_trans.list_Graduate') }}</a>
+                                    </li>
                                 </ul>
                             </li>
                         </ul>
@@ -168,16 +180,18 @@
                         </ul>
                     </li>
 
-                    <!-- Accounts-->
-                    <li>
+                    <!-- Fees-->
+                    <li class="{{ $isFeesActive ? 'active' : '' }}">
                         <a href="javascript:void(0);" data-toggle="collapse" data-target="#Accounts-menu">
                             <div class="pull-left"><i class="fas fa-money-bill-wave-alt"></i><span
                                     class="right-nav-text">{{ trans('main_trans.Accounts') }}</span></div>
                             <div class="pull-right"><i class="ti-plus toggle-icon"></i></div>
                             <div class="clearfix"></div>
                         </a>
-                        <ul id="Accounts-menu" class="collapse" data-parent="#sidebarnav">
-                            <li> <a href="calendar.html">Events Calendar </a> </li>
+                        <ul id="Accounts-menu" class="collapse {{ $isFeesActive ? 'show' : '' }}"
+                            data-parent="#sidebarnav">
+                            <li class="{{ $isFeesActive ? 'active' : '' }}"> <a
+                                    href="{{ route('fees.index') }}">{{ trans('fees_trans.tuition_fees') }}</a> </li>
                             <li> <a href="calendar-list.html">List Calendar</a> </li>
                         </ul>
                     </li>

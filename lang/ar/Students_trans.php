@@ -55,5 +55,17 @@ return [
     'rollback_one_done' => 'تم ارجاع ترقية الطالب بنجاح.',
     'rollback_all_done' => 'تم ارجاع جميع الترقيات بنجاح.',
     'no_promotions' => 'لا توجد ترقيات حالياً.',
+    'select_student' => 'اختر الطالب',
+    'graduated_at' => 'تاريخ التخرج',
+    'notes' => 'ملاحظات',
+    'graduation_done' => 'تم تخريج الطالب بنجاح.',
+    'student_already_graduated' => 'هذا الطالب متخرج بالفعل.',
+    'graduation_rollback_one' => 'التراجع عن التخرج',
+    'graduation_rollback_confirm' => 'هل أنت متأكد من التراجع عن تخرج الطالب',
+    'graduation_rollback_done' => 'تم التراجع عن التخرج بنجاح.',
+    'no_graduations' => 'لا توجد سجلات تخرج حالياً.',
+    'graduate_section' => 'تخريج قسم كامل',
+    'no_students_for_graduation_batch' => 'لا يوجد طلاب نشطون مطابقون للمرحلة الدراسية المحددة.',
+    'graduation_batch_done' => 'تم تخريج :count طالب بنجاح.',
 
 ];

@@ -1,0 +1,28 @@
+<?php
+
+return [
+    'tuition_fees' => 'Tuition Fees',
+    'exam_fees' => 'Exam Fees',
+    'transport_fees' => 'Transport Fees',
+    'library_fees' => 'Library Fees',
+    'other_fees' => 'Other Fees',
+    'total_fees' => 'Total Fees',
+    'student_fees' => 'Student Fees',
+    'fees' => 'Fees',
+    'fees_list' => 'Fees List',
+    'add_new_fees' => 'Add New Fees',
+    'edit_fee' => 'Edit Tuition Fee',
+    'name' => 'Name',
+    'amount' => 'Amount',
+    'grade' => 'Grade',
+    'classroom' => 'Classroom',
+    'academic_year' => 'Academic Year',
+    'notes' => 'Notes',
+    'processes' => 'Processes',
+    'name_ar' => 'Arabic Name',
+    'name_en' => 'English Name',
+    'confirm' => 'Confirm',
+    'no_fees' => 'No fees added yet',
+    'delete_fee' => 'Delete Tuition Fee',
+    'delete_confirmation' => 'Are you sure you want to delete this fee?',
+];

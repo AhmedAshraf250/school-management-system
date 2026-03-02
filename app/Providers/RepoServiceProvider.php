@@ -30,6 +30,16 @@ class RepoServiceProvider extends ServiceProvider
             \App\Repositories\Contracts\PromotionRepositoryInterface::class,
             \App\Repositories\Eloquent\PromotionEloRepository::class
         );
+
+        $this->app->bind(
+            \App\Repositories\Contracts\GraduationRepositoryInterface::class,
+            \App\Repositories\Eloquent\GraduationEloRepository::class
+        );
+
+        $this->app->bind(
+            \App\Repositories\Contracts\FeeRepositoryInterface::class,
+            \App\Repositories\Eloquent\FeeEloRepository::class
+        );
     }
 
     /**

@@ -5,7 +5,6 @@ namespace App\Repositories\Eloquent;
 use App\Models\Promotion;
 use App\Models\Student;
 use App\Repositories\Contracts\PromotionRepositoryInterface;
-use Illuminate\Database\Eloquent\Collection;
 
 class PromotionEloRepository implements PromotionRepositoryInterface
 {
@@ -32,6 +31,7 @@ class PromotionEloRepository implements PromotionRepositoryInterface
             ->where('classroom_id', (int) $data['from_classroom_id'])
             ->where('section_id', (int) $data['from_section_id'])
             ->where('academic_year', (string) $data['academic_year_from'])
+            ->where('status', Student::STATUS_ACTIVE)
             ->get();
     }
 
