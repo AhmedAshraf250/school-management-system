@@ -13,10 +13,12 @@
 @endsection
 
 @section('content')
+    {{-- Main Content --}}
     <div class="row">
         <div class="col-md-12 mb-30">
             <div class="card card-statistics h-100">
                 <div class="card-body">
+                    {{-- Validation Errors --}}
                     @if ($errors->any())
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
                             <ul class="mb-0">
@@ -30,8 +32,11 @@
                         </div>
                     @endif
 
+                    {{-- Form: Create Fee --}}
                     <form method="post" action="{{ route('fees.store') }}" autocomplete="off">
                         @csrf
+
+                        {{-- Titles + Amount --}}
                         <div class="form-row">
                             <div class="form-group col">
                                 <label for="title_ar">{{ trans('fees_trans.name_ar') }}</label>
@@ -52,12 +57,12 @@
                             </div>
                         </div>
 
+                        {{-- Grade + Classroom + Year + Fee Type --}}
                         <div class="form-row">
                             <div class="form-group col">
                                 <label for="grade_id">{{ trans('fees_trans.grade') }}</label>
                                 <select id="grade_id" class="custom-select mr-sm-2" name="grade_id" required>
-                                    <option value="" selected disabled>{{ trans('Parent_trans.Choose') }} ...
-                                    </option>
+                                    <option value="" selected disabled>{{ trans('Parent_trans.Choose') }} ...</option>
                                     @foreach ($grades as $grade)
                                         <option value="{{ $grade->id }}"
                                             {{ (string) old('grade_id') === (string) $grade->id ? 'selected' : '' }}>
@@ -70,16 +75,14 @@
                             <div class="form-group col">
                                 <label for="classroom_id">{{ trans('fees_trans.classroom') }}</label>
                                 <select id="classroom_id" class="custom-select mr-sm-2" name="classroom_id" required>
-                                    <option value="" selected disabled>{{ trans('Parent_trans.Choose') }} ...
-                                    </option>
+                                    <option value="" selected disabled>{{ trans('Parent_trans.Choose') }} ...</option>
                                 </select>
                             </div>
 
                             <div class="form-group col">
                                 <label for="year">{{ trans('fees_trans.academic_year') }}</label>
                                 <select id="year" class="custom-select mr-sm-2" name="year" required>
-                                    <option value="" selected disabled>{{ trans('Parent_trans.Choose') }} ...
-                                    </option>
+                                    <option value="" selected disabled>{{ trans('Parent_trans.Choose') }} ...</option>
                                     @php
                                         $current_year = date('Y');
                                     @endphp
@@ -91,14 +94,25 @@
                                     @endfor
                                 </select>
                             </div>
+
+                            <div class="form-group col">
+                                <label for="type">{{ trans('fees_trans.fee_type') }}</label>
+                                <select id="type" class="custom-select mr-sm-2" name="type">
+                                    <option value="1">{{ trans('fees_trans.tuition_fees') }}</option>
+                                    <option value="2">{{ trans('fees_trans.transport_fees') }}</option>
+                                </select>
+                            </div>
                         </div>
 
+                        {{-- Notes --}}
                         <div class="form-group">
                             <label for="description">{{ trans('fees_trans.notes') }}</label>
                             <textarea class="form-control" name="description" id="description" rows="4">{{ old('description') }}</textarea>
                         </div>
+
                         <br>
 
+                        {{-- Submit --}}
                         <button type="submit" class="btn btn-primary">{{ trans('fees_trans.confirm') }}</button>
                     </form>
                 </div>
@@ -111,6 +125,7 @@
     @toastr_js
     @toastr_render
 
+    {{-- Load classrooms by selected grade --}}
     <script>
         $(document).ready(function() {
             const classroomUrlTemplate = @json(route('students.getClassrooms', ['id' => '__id__']));
@@ -135,12 +150,9 @@
 
                 $.getJSON(buildUrl(classroomUrlTemplate, gradeId), function(data) {
                     $.each(data, function(key, value) {
-                        const selected = selectedClassroomId && String(selectedClassroomId) ===
-                            String(key) ?
+                        const selected = selectedClassroomId && String(selectedClassroomId) === String(key) ?
                             ' selected' : '';
-                        classroomSelect.append('<option value="' + key + '"' + selected + '>' +
-                            value +
-                            '</option>');
+                        classroomSelect.append('<option value="' + key + '"' + selected + '>' + value + '</option>');
                     });
                 });
             }

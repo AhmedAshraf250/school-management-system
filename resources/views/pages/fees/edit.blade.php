@@ -13,10 +13,12 @@
 @endsection
 
 @section('content')
+    {{-- Main Content --}}
     <div class="row">
         <div class="col-md-12 mb-30">
             <div class="card card-statistics h-100">
                 <div class="card-body">
+                    {{-- Validation Errors --}}
                     @if ($errors->any())
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
                             <ul class="mb-0">
@@ -30,12 +32,14 @@
                         </div>
                     @endif
 
+                    {{-- Form: Update Fee --}}
                     <form action="{{ route('fees.update', $fee->id) }}" method="post" autocomplete="off">
                         @method('PUT')
                         @csrf
 
                         <input type="hidden" value="{{ $fee->id }}" name="id">
 
+                        {{-- Titles + Amount --}}
                         <div class="form-row">
                             <div class="form-group col">
                                 <label for="title_ar">{{ trans('fees_trans.name_ar') }}</label>
@@ -53,11 +57,12 @@
 
                             <div class="form-group col">
                                 <label for="amount">{{ trans('fees_trans.amount') }}</label>
-                                <input id="amount" type="number" step="0.01" value="{{ old('amount', $fee->amount) }}"
-                                    name="amount" class="form-control" required>
+                                <input id="amount" type="number" step="0.01"
+                                    value="{{ old('amount', $fee->amount) }}" name="amount" class="form-control" required>
                             </div>
                         </div>
 
+                        {{-- Grade + Classroom + Year --}}
                         <div class="form-row">
                             <div class="form-group col">
                                 <label for="grade_id">{{ trans('fees_trans.grade') }}</label>
@@ -96,12 +101,15 @@
                             </div>
                         </div>
 
+                        {{-- Notes --}}
                         <div class="form-group">
                             <label for="description">{{ trans('fees_trans.notes') }}</label>
                             <textarea class="form-control" name="description" id="description" rows="4">{{ old('description', $fee->description) }}</textarea>
                         </div>
+
                         <br>
 
+                        {{-- Submit --}}
                         <button type="submit" class="btn btn-primary">{{ trans('fees_trans.confirm') }}</button>
                     </form>
                 </div>
@@ -114,6 +122,7 @@
     @toastr_js
     @toastr_render
 
+    {{-- Load classrooms by selected grade --}}
     <script>
         $(document).ready(function() {
             const classroomUrlTemplate = @json(route('students.getClassrooms', ['id' => '__id__']));
@@ -139,10 +148,8 @@
 
                 $.getJSON(buildUrl(classroomUrlTemplate, gradeId), function(data) {
                     $.each(data, function(key, value) {
-                        const selected = classroomId && String(classroomId) === String(key) ? ' selected' :
-                            '';
-                        classroomSelect.append('<option value="' + key + '"' + selected + '>' + value +
-                            '</option>');
+                        const selected = classroomId && String(classroomId) === String(key) ? ' selected' : '';
+                        classroomSelect.append('<option value="' + key + '"' + selected + '>' + value + '</option>');
                     });
                 });
             }

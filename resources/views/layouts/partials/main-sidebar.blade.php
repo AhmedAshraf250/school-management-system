@@ -9,7 +9,13 @@
     $isStudentsActive = $isStudentsInfoActive || $isStudentsPromotionsActive || $isStudentsGraduatesActive;
     $isTeachersActive = request()->routeIs('teachers.*');
     $isGuardiansActive = request()->routeIs('guardians');
-    $isFeesActive = request()->routeIs('fees.*');
+    $isAccountsActive = request()->routeIs([
+        'fees.*',
+        'fee-invoices.*',
+        'receipts.*',
+        'processing-fees.*',
+        'student-payments.*',
+    ]);
 @endphp
 
 <div class="container-fluid">
@@ -181,18 +187,31 @@
                     </li>
 
                     <!-- Fees-->
-                    <li class="{{ $isFeesActive ? 'active' : '' }}">
+                    <li class="{{ $isAccountsActive ? 'active' : '' }}">
                         <a href="javascript:void(0);" data-toggle="collapse" data-target="#Accounts-menu">
                             <div class="pull-left"><i class="fas fa-money-bill-wave-alt"></i><span
                                     class="right-nav-text">{{ trans('main_trans.Accounts') }}</span></div>
                             <div class="pull-right"><i class="ti-plus toggle-icon"></i></div>
                             <div class="clearfix"></div>
                         </a>
-                        <ul id="Accounts-menu" class="collapse {{ $isFeesActive ? 'show' : '' }}"
+                        <ul id="Accounts-menu" class="collapse {{ $isAccountsActive ? 'show' : '' }}"
                             data-parent="#sidebarnav">
-                            <li class="{{ $isFeesActive ? 'active' : '' }}"> <a
-                                    href="{{ route('fees.index') }}">{{ trans('fees_trans.tuition_fees') }}</a> </li>
-                            <li> <a href="calendar-list.html">List Calendar</a> </li>
+                            <li class="{{ request()->routeIs('fees.index') ? 'active' : '' }}"> <a
+                                    href="{{ route('fees.index') }}">{{ trans('fees_trans.tuition_fees') }}</a>
+                            </li>
+                            <li class="{{ request()->routeIs('fee-invoices.index') ? 'active' : '' }}"> <a
+                                    href="{{ route('fee-invoices.index') }}">{{ trans('fees_trans.invoices') }}</a>
+                            </li>
+                            <li class="{{ request()->routeIs('receipts.index') ? 'active' : '' }}"> <a
+                                    href="{{ route('receipts.index') }}">{{ trans('fees_trans.receipts') }}</a>
+                            </li>
+                            <li class="{{ request()->routeIs('processing-fees.index') ? 'active' : '' }}"> <a
+                                    href="{{ route('processing-fees.index') }}">{{ trans('fees_trans.fee_exclusion') }}</a>
+                            </li>
+                            <li class="{{ request()->routeIs('student-payments.index') ? 'active' : '' }}"> <a
+                                    href="{{ route('student-payments.index') }}">{{ trans('fees_trans.payment_voucher') }}</a>
+                            </li>
+
                         </ul>
                     </li>
 

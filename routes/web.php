@@ -4,9 +4,13 @@ use App\Http\Controllers\Classrooms\ClassroomController;
 use App\Http\Controllers\Grades\GradeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReceiptController;
 use App\Http\Controllers\Sections\SectionController;
 use App\Http\Controllers\Students\FeeController;
+use App\Http\Controllers\Students\FeeInvoiceController;
 use App\Http\Controllers\Students\GraduationController;
+use App\Http\Controllers\Students\PaymentController;
+use App\Http\Controllers\Students\ProcessingFeeController;
 use App\Http\Controllers\Students\PromotionController;
 use App\Http\Controllers\Students\StudentController;
 use App\Http\Controllers\Teachers\TeacherController;
@@ -73,6 +77,10 @@ Route::group(
 
         // ==============================[Fees]============================ //
         Route::resource('fees', FeeController::class);
+        Route::resource('fee-invoices', FeeInvoiceController::class);
+        Route::resource('receipts', ReceiptController::class);
+        Route::resource('processing-fees', ProcessingFeeController::class);
+        Route::resource('student-payments', PaymentController::class);
     }
 
     // // ==============================[profile]============================ //

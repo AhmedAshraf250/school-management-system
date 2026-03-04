@@ -52,24 +52,49 @@
                                         <td>{{ $student->classroom?->name }}</td>
                                         <td>{{ $student->section?->name }}</td>
                                         <td>
-                                            {{-- Row actions --}}
-                                            <a href="{{ route('students.edit', $student->id) }}"
-                                                class="btn btn-info btn-sm d-inline-flex align-items-center px-3 rounded-pill"
-                                                role="button" title="{{ trans('Students_trans.update') }}">
-                                                <i class="fa fa-edit mr-1"></i>
-                                                {{ trans('Students_trans.update') }}
-                                            </a>
-                                            <button type="button"
-                                                class="btn btn-danger btn-sm d-inline-flex align-items-center px-3 rounded-pill"
-                                                data-toggle="modal" data-target="#Delete_Student{{ $student->id }}"
-                                                title="{{ trans('Students_trans.delete') }}">
-                                                <i class="fa fa-trash mr-1"></i>
-                                                {{ trans('Students_trans.delete') }}
-                                            </button>
-                                            <a href="{{ route('students.show', $student->id) }}"
-                                                title="{{ trans('Students_trans.Attachments') }}"
-                                                class="btn btn-warning btn-sm" role="button" aria-pressed="true"><i
-                                                    class="far fa-eye"></i></a>
+                                            <div class="dropdown show">
+                                                <a class="btn btn-success btn-sm dropdown-toggle" href="#"
+                                                    role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                                                    aria-haspopup="true" aria-expanded="false">
+                                                    {{ trans('Students_trans.Processes') }}
+                                                </a>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                    <a class="dropdown-item"
+                                                        href="{{ route('students.show', $student->id) }}"><i
+                                                            style="color: #ffc107" class="far fa-eye "></i>&nbsp;
+                                                        {{ trans('Students_trans.show_students') }}</a>
+                                                    <a class="dropdown-item"
+                                                        href="{{ route('students.edit', $student->id) }}"><i
+                                                            style="color:green" class="fa fa-edit"></i>&nbsp;
+                                                        {{ trans('Students_trans.edit_students') }}</a>
+                                                    <a class="dropdown-item"
+                                                        href="{{ route('fee-invoices.show', $student->id) }}"><i
+                                                            style="color: #0000cc" class="fa fa-edit"></i>&nbsp;
+                                                        {{ trans('Students_trans.add_fee_ivoice') }}</a>
+
+                                                    <a class="dropdown-item"
+                                                        href="{{ route('receipts.show', $student->id) }}"><i
+                                                            style="color: #9dc8e2" class="fas fa-money-bill-alt"></i>&nbsp;
+                                                        &nbsp;{{ trans('Students_trans.receipt') }}</a>
+
+                                                    <a class="dropdown-item"
+                                                        href="{{ route('processing-fees.show', $student->id) }}"><i
+                                                            style="color: #9dc8e2" class="fas fa-money-bill-alt"></i>&nbsp;
+                                                        &nbsp; {{ trans('fees_trans.fee_exclusion') }}</a>
+
+                                                    <a class="dropdown-item"
+                                                        href="{{ route('student-payments.show', $student->id) }}"><i
+                                                            style="color:goldenrod" class="fas fa-donate"></i>&nbsp;
+                                                        &nbsp; {{ trans('fees_trans.payment_voucher') }}</a>
+
+                                                    <a class="dropdown-item"
+                                                        data-target="#Delete_Student{{ $student->id }}"
+                                                        data-toggle="modal" href="##Delete_Student{{ $student->id }}"><i
+                                                            style="color: red" class="fa fa-trash"></i>&nbsp;
+                                                        {{ trans('Students_trans.Deleted_Student') }}</a>
+                                                </div>
+                                            </div>
+
                                         </td>
                                     </tr>
 

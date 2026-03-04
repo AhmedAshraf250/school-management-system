@@ -24,6 +24,9 @@ return [
     'Attachments' => 'Attachments',
     'Student_details' => 'Student Details',
     'Deleted_Student' => 'Delete student data',
+    'show_students' => 'show students data',
+    'edit_students' => 'edit students data',
+    'add_fee_ivoice' => 'Add fee invoice',
     'Deleted_Student_tilte' => 'Are you sure to delete the student ?',
     'Delete_attachment' => 'Delete_attachment',
     'Delete_attachment_tilte' => 'Are you sure to delete the attachment?',
@@ -67,5 +70,6 @@ return [
     'graduate_section' => 'Graduate Section',
     'no_students_for_graduation_batch' => 'No active students found for the selected stage.',
     'graduation_batch_done' => ':count students have been graduated successfully.',
+    'receipt' => 'Receipt',
 
 ];

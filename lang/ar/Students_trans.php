@@ -24,6 +24,9 @@ return [
     'Attachments' => 'المرفقات',
     'Student_details' => 'معلومات الطالب',
     'Deleted_Student' => 'حذف بيانات الطالب',
+    'show_students' => 'عرض بيانات الطالب',
+    'edit_students' => 'تعديل بيانات الطالب',
+    'add_fee_ivoice' => 'اضافة فانورة رسوم',
     'Deleted_Student_tilte' => 'هل انت متأكد من حذف الطالب ؟',
     'Delete_attachment' => 'حذف مرفق',
     'Delete_attachment_tilte' => 'هل انت متأكد من حذف المرفق ؟',
@@ -67,5 +70,6 @@ return [
     'graduate_section' => 'تخريج قسم كامل',
     'no_students_for_graduation_batch' => 'لا يوجد طلاب نشطون مطابقون للمرحلة الدراسية المحددة.',
     'graduation_batch_done' => 'تم تخريج :count طالب بنجاح.',
+    'receipt' => 'سند قبض',
 
 ];

@@ -26,6 +26,7 @@ class FeeEloRepository implements FeeRepositoryInterface
             'classroom_id' => $data['classroom_id'],
             'description' => $data['description'],
             'year' => $data['year'],
+            'type' => $data['type'],
 
         ]);
     }
@@ -41,6 +42,7 @@ class FeeEloRepository implements FeeRepositoryInterface
             $fee->Classroom_id = $data['Classroom_id'];
             $fee->description = $data['description'];
             $fee->year = $data['year'];
+            $fee->type = $data['type'];
             $fee->save();
 
             return $fee;

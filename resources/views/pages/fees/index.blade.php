@@ -13,15 +13,19 @@
 @endsection
 
 @section('content')
+    {{-- Main Content --}}
     <div class="row">
         <div class="col-md-12 mb-30">
             <div class="card card-statistics h-100">
                 <div class="card-body">
+                    {{-- Top Action: Create New Fee --}}
                     <a href="{{ route('fees.create') }}" class="btn btn-success btn-sm" role="button" aria-pressed="true">
                         {{ trans('fees_trans.add_new_fees') }}
                     </a>
+
                     <br><br>
 
+                    {{-- Fees Table --}}
                     <div class="table-responsive">
                         <table id="datatable" class="table table-hover table-sm table-bordered p-0" data-page-length="50"
                             style="text-align: center;">
@@ -48,18 +52,21 @@
                                         <td>{{ $fee->year }}</td>
                                         <td>{{ $fee->description ?? '-' }}</td>
                                         <td>
+                                            {{-- Row Actions --}}
                                             <a href="{{ route('fees.edit', $fee->id) }}" class="btn btn-info btn-sm"
                                                 role="button" aria-pressed="true" title="{{ trans('fees_trans.edit_fee') }}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                             <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
                                                 data-target="#Delete_Fee{{ $fee->id }}"
-                                                title="{{ trans('Grades_trans.Delete') }}">
+                                                title="{{ trans('fees_trans.delete_fee') }}">
                                                 <i class="fa fa-trash"></i>
                                             </button>
                                         </td>
                                     </tr>
-                                    @include('pages.students.fees.delete', ['fee' => $fee])
+
+                                    {{-- Delete Modal --}}
+                                    @include('pages.fees.delete', ['fee' => $fee])
                                 @empty
                                     <tr>
                                         <td colspan="8" class="text-muted">{{ trans('fees_trans.no_fees') }}</td>

@@ -13,12 +13,13 @@ return new class extends Migration
     {
         Schema::create('fees', function (Blueprint $table) {
             $table->id();
-            $table->string('title', 100);
+            $table->string('title');
             $table->decimal('amount', 8, 2);
             $table->foreignId('grade_id')->nullable()->references('id')->on('grades')->nullOnDelete();
             $table->foreignId('classroom_id')->nullable()->references('id')->on('classrooms')->nullOnDelete();
             $table->string('description')->nullable();
             $table->string('year');
+            $table->tinyInteger('type');
             $table->timestamps();
         });
     }

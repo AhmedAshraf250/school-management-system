@@ -90,4 +90,19 @@ class Student extends Model
     {
         return $this->hasMany(Graduation::class, 'student_id');
     }
+
+    public function studentAccounts(): HasMany
+    {
+        return $this->studentAccountRelation();
+    }
+
+    public function student_account(): HasMany
+    {
+        return $this->studentAccountRelation();
+    }
+
+    private function studentAccountRelation(): HasMany
+    {
+        return $this->hasMany(StudentAccount::class, 'student_id');
+    }
 }

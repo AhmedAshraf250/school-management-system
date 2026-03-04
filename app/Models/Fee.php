@@ -11,7 +11,7 @@ class Fee extends Model
 
     public $translatable = ['title'];
 
-    protected $fillable = ['title', 'amount', 'grade_id', 'classroom_id', 'year', 'description'];
+    protected $fillable = ['title', 'amount', 'grade_id', 'classroom_id', 'year', 'description', 'type'];
 
     public function grade()
     {

@@ -1,0 +1,76 @@
+<?php
+
+namespace App\Http\Controllers\Students;
+
+use App\Http\Controllers\Controller;
+use App\Models\Payment;
+use App\Repositories\Contracts\PaymentRepositoryInterface;
+use Illuminate\Http\Request;
+
+class PaymentController extends Controller
+{
+    public function __construct(private PaymentRepositoryInterface $paymentRepository) {}
+
+    public function index()
+    {
+        $payments = $this->paymentRepository->all();
+
+        return view('pages.payments.index', compact('payments'));
+    }
+
+    public function create()
+    {
+        abort(404);
+    }
+
+    public function store(Request $request)
+    {
+        try {
+            $this->paymentRepository->createPayment($request->only(['student_id', 'debit', 'description']));
+            toastr()->success(trans('messages.success'));
+
+            return redirect()->route('student-payments.index');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        }
+    }
+
+    public function show($studentId)
+    {
+        $student = $this->paymentRepository->getStudentWithAccount($studentId);
+
+        return view('pages.payments.add', compact('student'));
+    }
+
+    public function edit(Payment $student_payment)
+    {
+        $payment = $this->paymentRepository->find($student_payment->id);
+        $student = $this->paymentRepository->getStudentWithAccount($payment->id);
+
+        return view('pages.payments.edit', compact('payment', 'student'));
+    }
+
+    public function update(Request $request, Payment $payment)
+    {
+        try {
+            $this->paymentRepository->updatePayment($payment->id, $request->only(['student_id', 'debit', 'description']));
+            toastr()->success(trans('messages.Update'));
+
+            return redirect()->route('student-payments.index');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        }
+    }
+
+    public function destroy(Payment $student_payment)
+    {
+        try {
+            $this->paymentRepository->deletePayment($student_payment->id);
+            toastr()->error(trans('messages.Delete'));
+
+            return redirect()->back();
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        }
+    }
+}

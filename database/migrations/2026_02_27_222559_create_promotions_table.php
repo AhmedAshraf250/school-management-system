@@ -14,15 +14,15 @@ return new class extends Migration
         Schema::create('promotions', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('student_id')->constrained('students')->nullOnDelete();
+            $table->foreignId('student_id')->constrained('students')->restrictOnDelete();
 
-            $table->foreignId('from_grade_id')->constrained('grades')->nullOnDelete();
-            $table->foreignId('from_classroom_id')->constrained('classrooms')->nullOnDelete();
-            $table->foreignId('from_section_id')->constrained('sections')->nullOnDelete();
+            $table->foreignId('from_grade_id')->nullable()->constrained('grades')->nullOnDelete();
+            $table->foreignId('from_classroom_id')->nullable()->constrained('classrooms')->nullOnDelete();
+            $table->foreignId('from_section_id')->nullable()->constrained('sections')->nullOnDelete();
 
-            $table->foreignId('to_grade_id')->constrained('grades')->nullOnDelete();
-            $table->foreignId('to_classroom_id')->constrained('classrooms')->nullOnDelete();
-            $table->foreignId('to_section_id')->constrained('sections')->nullOnDelete();
+            $table->foreignId('to_grade_id')->nullable()->constrained('grades')->nullOnDelete();
+            $table->foreignId('to_classroom_id')->nullable()->constrained('classrooms')->nullOnDelete();
+            $table->foreignId('to_section_id')->nullable()->constrained('sections')->nullOnDelete();
 
             $table->string('academic_year_from', 20);
             $table->string('academic_year_to', 20);
