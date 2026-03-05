@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Spatie\Translatable\HasTranslations;
 
@@ -104,5 +106,24 @@ class Student extends Model
     private function studentAccountRelation(): HasMany
     {
         return $this->hasMany(StudentAccount::class, 'student_id');
+    }
+
+    public function attendances(): HasMany
+    {
+        return $this->hasMany(Attendance::class, 'student_id');
+    }
+
+    public function todayAttendance(): HasOne
+    {
+        return $this->hasOne(Attendance::class, 'student_id')->today();
+    }
+
+    // ===== [SCOOPES] ===== //
+    public function scopeWithAttendanceInSection(Builder $query, int $sectionId): Builder
+    {
+        return $query->where('section_id', $sectionId)
+            ->with(['attendances' => function ($q) use ($sectionId) {
+                $q->where('section_id', $sectionId);
+            }]);
     }
 }

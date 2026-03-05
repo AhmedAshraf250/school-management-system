@@ -58,6 +58,23 @@ class RepoServiceProvider extends ServiceProvider
             \App\Repositories\Contracts\PaymentRepositoryInterface::class,
             \App\Repositories\Eloquent\PaymentEloRepository::class
         );
+
+        $this->app->bind(
+            \App\Repositories\Contracts\AttendanceRepoistoryInterface::class,
+            \App\Repositories\Eloquent\AttendanceEloRepoistory::class
+        );
+        // $this->app->bind(
+        //     \App\Repositories\Contracts\SubjectRepoistoryInterface::class,
+        //     \App\Repositories\Eloquent\SubjectEloRepoistory::class
+        // );
+        // $this->app->bind(
+        //     \App\Repositories\Contracts\QuizRepoistoryInterface::class,
+        //     \App\Repositories\Eloquent\QuizEloRepoistory::class
+        // );
+        // $this->app->bind(
+        //     \App\Repositories\Contracts\QuestionRepoistoryInterface::class,
+        //     \App\Repositories\Eloquent\QuestionEloRepoistory::class
+        // );
     }
 
     /**

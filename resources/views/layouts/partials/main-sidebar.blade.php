@@ -9,6 +9,11 @@
     $isStudentsActive = $isStudentsInfoActive || $isStudentsPromotionsActive || $isStudentsGraduatesActive;
     $isTeachersActive = request()->routeIs('teachers.*');
     $isGuardiansActive = request()->routeIs('guardians');
+    $isAttendanceActive = request()->routeIs('attendances.*');
+    $isSubjectsActive = request()->routeIs('subjects.*');
+    $isQuizzesActive = request()->routeIs('quizzes.*');
+    $isQuestionsActive = request()->routeIs('questions.*');
+    $isExamsActive = $isSubjectsActive || $isQuizzesActive || $isQuestionsActive;
     $isAccountsActive = request()->routeIs([
         'fees.*',
         'fee-invoices.*',
@@ -216,32 +221,50 @@
                     </li>
 
                     <!-- Attendance-->
-                    <li>
+                    <li class="{{ $isAttendanceActive ? 'active' : '' }}">
                         <a href="javascript:void(0);" data-toggle="collapse" data-target="#Attendance-icon">
                             <div class="pull-left"><i class="fas fa-calendar-alt"></i><span
                                     class="right-nav-text">{{ trans('main_trans.Attendance') }}</span></div>
                             <div class="pull-right"><i class="ti-plus toggle-icon"></i></div>
                             <div class="clearfix"></div>
                         </a>
-                        <ul id="Attendance-icon" class="collapse" data-parent="#sidebarnav">
-                            <li> <a href="fontawesome-icon.html">font Awesome</a> </li>
-                            <li> <a href="themify-icons.html">Themify icons</a> </li>
-                            <li> <a href="weather-icon.html">Weather icons</a> </li>
+                        <ul id="Attendance-icon" class="collapse {{ $isAttendanceActive ? 'show' : '' }}"
+                            data-parent="#sidebarnav">
+                            <li class="{{ $isAttendanceActive ? 'active' : '' }}"> <a
+                                    href="{{ route('attendances.index') }}">{{ trans('Attendance_trans.students_list') }}</a>
+                            </li>
                         </ul>
                     </li>
 
-                    <!-- Exams-->
-                    <li>
-                        <a href="javascript:void(0);" data-toggle="collapse" data-target="#Exams-icon">
+                    <!-- Subjects-->
+                    <li class="{{ $isSubjectsActive ? 'active' : '' }}">
+                        <a href="javascript:void(0);" data-toggle="collapse" data-target="#Subject-icon">
                             <div class="pull-left"><i class="fas fa-book-open"></i><span
-                                    class="right-nav-text">{{ trans('main_trans.Exams') }}</span></div>
-                            <div class="pull-right"><i class="ti-plus toggle-icon"></i></div>
+                                    class="right-nav-text">{{ trans('main_trans.Subjects') }}</span></div>
+                            <div class="pull-right"><i class="ti-plus"></i></div>
                             <div class="clearfix"></div>
                         </a>
-                        <ul id="Exams-icon" class="collapse" data-parent="#sidebarnav">
-                            <li> <a href="fontawesome-icon.html">font Awesome</a> </li>
-                            <li> <a href="themify-icons.html">Themify icons</a> </li>
-                            <li> <a href="weather-icon.html">Weather icons</a> </li>
+                        <ul id="Subject-icon" class="collapse {{ $isSubjectsActive ? 'show' : '' }}"
+                            data-parent="#sidebarnav">
+                            <li class="{{ $isSubjectsActive ? 'active' : '' }}"> <a
+                                    href="{{ route('subjects.index') }}">{{ trans('Subjects_trans.list') }}</a> </li>
+                        </ul>
+                    </li>
+
+                    <!-- Quizzes-->
+                    <li class="{{ $isExamsActive ? 'active' : '' }}">
+                        <a href="javascript:void(0);" data-toggle="collapse" data-target="#Quizzes-icon">
+                            <div class="pull-left"><i class="fas fa-book-open"></i><span
+                                    class="right-nav-text">{{ trans('main_trans.Exams') }}</span></div>
+                            <div class="pull-right"><i class="ti-plus"></i></div>
+                            <div class="clearfix"></div>
+                        </a>
+                        <ul id="Quizzes-icon" class="collapse {{ $isExamsActive ? 'show' : '' }}"
+                            data-parent="#sidebarnav">
+                            <li class="{{ $isQuizzesActive ? 'active' : '' }}"> <a
+                                    href="{{ route('quizzes.index') }}">{{ trans('Quizzes_trans.list') }}</a> </li>
+                            <li class="{{ $isQuestionsActive ? 'active' : '' }}"> <a
+                                    href="{{ route('questions.index') }}">{{ trans('Questions_trans.list') }}</a> </li>
                         </ul>
                     </li>
 

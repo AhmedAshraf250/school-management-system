@@ -4,8 +4,11 @@ use App\Http\Controllers\Classrooms\ClassroomController;
 use App\Http\Controllers\Grades\GradeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Questions\QuestionController;
+use App\Http\Controllers\Quizzes\QuizController;
 use App\Http\Controllers\ReceiptController;
 use App\Http\Controllers\Sections\SectionController;
+use App\Http\Controllers\Students\AttendanceController;
 use App\Http\Controllers\Students\FeeController;
 use App\Http\Controllers\Students\FeeInvoiceController;
 use App\Http\Controllers\Students\GraduationController;
@@ -13,6 +16,7 @@ use App\Http\Controllers\Students\PaymentController;
 use App\Http\Controllers\Students\ProcessingFeeController;
 use App\Http\Controllers\Students\PromotionController;
 use App\Http\Controllers\Students\StudentController;
+use App\Http\Controllers\Subjects\SubjectController;
 use App\Http\Controllers\Teachers\TeacherController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -75,12 +79,24 @@ Route::group(
         Route::post('graduates/bulk', [GraduationController::class, 'graduateBatch'])->name('graduates.bulk');
         Route::resource('graduates', GraduationController::class)->only(['index', 'store', 'destroy']);
 
-        // ==============================[Fees]============================ //
+        // ==============================[Students.Fees]============================ //
         Route::resource('fees', FeeController::class);
         Route::resource('fee-invoices', FeeInvoiceController::class);
         Route::resource('receipts', ReceiptController::class);
         Route::resource('processing-fees', ProcessingFeeController::class);
         Route::resource('student-payments', PaymentController::class);
+
+        // ==============================[Students.Attendances]============================ //
+        Route::resource('attendances', AttendanceController::class);
+
+        // ==============================[Subjects]============================ //
+        Route::resource('subjects', SubjectController::class);
+
+        // ==============================[Quizzes]============================ //
+        Route::resource('quizzes', QuizController::class);
+
+        // ==============================[Questions]============================ //
+        Route::resource('questions', QuestionController::class);
     }
 
     // // ==============================[profile]============================ //

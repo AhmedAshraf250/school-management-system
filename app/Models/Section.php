@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\Translatable\HasTranslations;
 
 class Section extends Model
@@ -29,5 +30,17 @@ class Section extends Model
     public function teachers(): BelongsToMany
     {
         return $this->belongsToMany(Teacher::class, 'section_teacher', 'section_id', 'teacher_id');
+    }
+
+    public function students(): HasMany
+    {
+        return $this->hasMany(Student::class, 'section_id');
+    }
+
+    public function studentsWithAttendance(): HasMany
+    {
+        return $this->students()->with(['attendances' => function ($query) {
+            $query->where('section_id', $this->id);
+        }]);
     }
 }
