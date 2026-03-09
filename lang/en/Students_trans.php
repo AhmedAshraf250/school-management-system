@@ -71,5 +71,11 @@ return [
     'no_students_for_graduation_batch' => 'No active students found for the selected stage.',
     'graduation_batch_done' => ':count students have been graduated successfully.',
     'receipt' => 'Receipt',
+    'online_class_meeting_id' => 'Meeting ID',
+    'online_class_topic' => 'Class Topic',
+    'online_class_start_time' => 'Class Date and Time',
+    'online_class_duration' => 'Class Duration (minutes)',
+    'online_class_start_url' => 'Start URL',
+    'online_class_join_url' => 'Join URL',
 
 ];

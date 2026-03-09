@@ -71,5 +71,11 @@ return [
     'no_students_for_graduation_batch' => 'لا يوجد طلاب نشطون مطابقون للمرحلة الدراسية المحددة.',
     'graduation_batch_done' => 'تم تخريج :count طالب بنجاح.',
     'receipt' => 'سند قبض',
+    'online_class_meeting_id' => 'رقم الاجتماع',
+    'online_class_topic' => 'عنوان الحصة',
+    'online_class_start_time' => 'تاريخ ووقت الحصة',
+    'online_class_duration' => 'مدة الحصة بالدقائق',
+    'online_class_start_url' => 'رابط بدء الاجتماع',
+    'online_class_join_url' => 'رابط انضمام الطلاب',
 
 ];

@@ -264,7 +264,8 @@
                             <li class="{{ $isQuizzesActive ? 'active' : '' }}"> <a
                                     href="{{ route('quizzes.index') }}">{{ trans('Quizzes_trans.list') }}</a> </li>
                             <li class="{{ $isQuestionsActive ? 'active' : '' }}"> <a
-                                    href="{{ route('questions.index') }}">{{ trans('Questions_trans.list') }}</a> </li>
+                                    href="{{ route('questions.index') }}">{{ trans('Questions_trans.list') }}</a>
+                            </li>
                         </ul>
                     </li>
 
@@ -285,7 +286,7 @@
                     </li>
 
 
-                    <!-- Onlinec lasses-->
+                    <!-- Onlinec Classes-->
                     <li>
                         <a href="javascript:void(0);" data-toggle="collapse" data-target="#Onlineclasses-icon">
                             <div class="pull-left"><i class="fas fa-video"></i><span
@@ -294,9 +295,7 @@
                             <div class="clearfix"></div>
                         </a>
                         <ul id="Onlineclasses-icon" class="collapse" data-parent="#sidebarnav">
-                            <li> <a href="fontawesome-icon.html">font Awesome</a> </li>
-                            <li> <a href="themify-icons.html">Themify icons</a> </li>
-                            <li> <a href="weather-icon.html">Weather icons</a> </li>
+                            <li> <a href="{{ route('online-classes.index') }}">حصص اونلاين مع زوم</a> </li>
                         </ul>
                     </li>
 

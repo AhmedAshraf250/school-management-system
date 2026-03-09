@@ -12,6 +12,7 @@ use App\Http\Controllers\Students\AttendanceController;
 use App\Http\Controllers\Students\FeeController;
 use App\Http\Controllers\Students\FeeInvoiceController;
 use App\Http\Controllers\Students\GraduationController;
+use App\Http\Controllers\Students\OnlineClassController;
 use App\Http\Controllers\Students\PaymentController;
 use App\Http\Controllers\Students\ProcessingFeeController;
 use App\Http\Controllers\Students\PromotionController;
@@ -21,7 +22,7 @@ use App\Http\Controllers\Teachers\TeacherController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 Route::group(['middleware' => ['guest']], function () {
 
@@ -88,6 +89,13 @@ Route::group(
 
         // ==============================[Students.Attendances]============================ //
         Route::resource('attendances', AttendanceController::class);
+
+        // ==============================[Students.OnlineClasses]============================ //
+        Route::get('online-classes/indirect', [OnlineClassController::class, 'indirectCreate'])
+            ->name('online-classes.indirectCreate');
+        Route::post('online-classes/indirect', [OnlineClassController::class, 'storeIndirect'])
+            ->name('online-classes.indirectStore');
+        Route::resource('online-classes', OnlineClassController::class);
 
         // ==============================[Subjects]============================ //
         Route::resource('subjects', SubjectController::class);
