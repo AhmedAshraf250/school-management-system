@@ -14,6 +14,7 @@
     $isQuizzesActive = request()->routeIs('quizzes.*');
     $isQuestionsActive = request()->routeIs('questions.*');
     $isExamsActive = $isSubjectsActive || $isQuizzesActive || $isQuestionsActive;
+    $isLibrariesActive = request()->routeIs('libraries.*');
     $isAccountsActive = request()->routeIs([
         'fees.*',
         'fee-invoices.*',
@@ -271,17 +272,19 @@
 
 
                     <!-- library-->
-                    <li>
+                    <li class="{{ $isLibrariesActive ? 'active' : '' }}">
                         <a href="javascript:void(0);" data-toggle="collapse" data-target="#library-icon">
                             <div class="pull-left"><i class="fas fa-book"></i><span
                                     class="right-nav-text">{{ trans('main_trans.library') }}</span></div>
                             <div class="pull-right"><i class="ti-plus toggle-icon"></i></div>
                             <div class="clearfix"></div>
                         </a>
-                        <ul id="library-icon" class="collapse" data-parent="#sidebarnav">
-                            <li> <a href="fontawesome-icon.html">font Awesome</a> </li>
-                            <li> <a href="themify-icons.html">Themify icons</a> </li>
-                            <li> <a href="weather-icon.html">Weather icons</a> </li>
+                        <ul id="library-icon" class="collapse {{ $isLibrariesActive ? 'show' : '' }}"
+                            data-parent="#sidebarnav">
+                            <li class="{{ $isLibrariesActive ? 'active' : '' }}">
+                                <a
+                                    href="{{ route('libraries.index') }}">{{ trans('libraries_trans.page_title') }}</a>
+                            </li>
                         </ul>
                     </li>
 
@@ -302,17 +305,8 @@
 
                     <!-- Settings-->
                     <li>
-                        <a href="javascript:void(0);" data-toggle="collapse" data-target="#Settings-icon">
-                            <div class="pull-left"><i class="fas fa-cogs"></i><span
-                                    class="right-nav-text">{{ trans('main_trans.Settings') }}</span></div>
-                            <div class="pull-right"><i class="ti-plus toggle-icon"></i></div>
-                            <div class="clearfix"></div>
-                        </a>
-                        <ul id="Settings-icon" class="collapse" data-parent="#sidebarnav">
-                            <li> <a href="fontawesome-icon.html">font Awesome</a> </li>
-                            <li> <a href="themify-icons.html">Themify icons</a> </li>
-                            <li> <a href="weather-icon.html">Weather icons</a> </li>
-                        </ul>
+                        <a href="{{ route('settings.index') }}"><i class="fas fa-cogs"></i><span
+                                class="right-nav-text">{{ trans('main_trans.Settings') }} </span></a>
                     </li>
 
 

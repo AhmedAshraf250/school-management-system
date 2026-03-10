@@ -3,15 +3,11 @@
 namespace App\Repositories\Concerns;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
 trait HandlesMorphImageUploads
 {
-    /**
-     * @param  array<int, UploadedFile>  $photos
-     */
+    use HandlesAttachmentUploads;
+
     protected function storeMorphImages(Model $model, array $photos, string $directory, string $disk = 'public'): void
     {
         if ($photos === []) {
@@ -19,16 +15,11 @@ trait HandlesMorphImageUploads
         }
 
         foreach ($photos as $photo) {
-            $fileName = Str::uuid()->toString().'_'.$photo->getClientOriginalName();
-            $storedPath = $photo->storeAs($directory.'/'.$model->getKey(), $fileName, $disk);
-
-            if ($storedPath === false) {
-                continue;
-            }
+            $fileData = $this->storeAttachment($photo, $directory . '/' . $model->getKey(), $disk);
 
             $model->images()->create([
-                'file_name' => $fileName,
-                'path' => $storedPath,
+                'file_name' => $fileData['file_name'],
+                'path' => $fileData['path'],
             ]);
         }
     }
@@ -38,7 +29,7 @@ trait HandlesMorphImageUploads
         $images = $model->images()->get();
 
         foreach ($images as $image) {
-            Storage::disk($disk)->delete($image->path);
+            $this->deleteAttachment($image->path, $disk);
         }
 
         $model->images()->delete();

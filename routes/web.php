@@ -3,11 +3,12 @@
 use App\Http\Controllers\Classrooms\ClassroomController;
 use App\Http\Controllers\Grades\GradeController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Libraries\LibraryController;
 use App\Http\Controllers\Questions\QuestionController;
 use App\Http\Controllers\Quizzes\QuizController;
 use App\Http\Controllers\ReceiptController;
 use App\Http\Controllers\Sections\SectionController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\Students\AttendanceController;
 use App\Http\Controllers\Students\FeeController;
 use App\Http\Controllers\Students\FeeInvoiceController;
@@ -22,9 +23,11 @@ use App\Http\Controllers\Teachers\TeacherController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';
 
-Route::group(['middleware' => ['guest']], function () {
+Route::group([
+    'middleware' => ['guest'],
+], function () {
 
     Route::get('/', function () {
         return view('auth.login');
@@ -105,6 +108,13 @@ Route::group(
 
         // ==============================[Questions]============================ //
         Route::resource('questions', QuestionController::class);
+
+        // ==============================[library]============================ //
+        Route::get('libraries/{library}/download', [LibraryController::class, 'download'])->name('libraries.download');
+        Route::resource('libraries', LibraryController::class);
+
+        // ==============================[Settings]============================ //
+        Route::resource('settings', SettingController::class)->only(['index', 'update']);
     }
 
     // // ==============================[profile]============================ //
