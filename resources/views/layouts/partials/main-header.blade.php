@@ -1,10 +1,20 @@
+@php
+    $activeGuard = \App\Support\Auth\GuardResolver::currentGuard() ?? 'admin';
+    $dashboardRoute = match ($activeGuard) {
+        'student' => route('student.dashboard'),
+        'teacher' => route('teacher.dashboard'),
+        'guardian' => route('guardian.dashboard'),
+        default => route('dashboard'),
+    };
+@endphp
+
 <nav class="admin-header navbar navbar-default col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
     <!-- Logo -->
     <div class="text-left navbar-brand-wrapper">
-        <a class="navbar-brand brand-logo" href="{{ url('/dashboard') }}">
+        <a class="navbar-brand brand-logo" href="{{ $dashboardRoute }}">
             <img src="{{ URL::asset('assets/images/logo-dark.png') }}" alt="">
         </a>
-        <a class="navbar-brand brand-logo-mini" href="{{ url('/dashboard') }}">
+        <a class="navbar-brand brand-logo-mini" href="{{ $dashboardRoute }}">
             <img src="{{ URL::asset('assets/images/logo-icon-dark.png') }}" alt="">
         </a>
     </div>
@@ -20,7 +30,8 @@
             <div class="search">
                 <a class="search-btn not_click" href="javascript:void(0);"></a>
                 <div class="search-box not-click">
-                    <input type="text" class="not-click form-control" placeholder="Search" name="search">
+                    <input type="text" class="not-click form-control"
+                        placeholder="{{ trans('Sidebar_trans.search_placeholder') }}" name="search">
                     <button class="search-button" type="submit">
                         <i class="fa fa-search not-click"></i>
                     </button>
@@ -52,20 +63,20 @@
                     <span class="badge badge-pill badge-warning">05</span>
                 </div>
                 <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">New registered user
-                    <small class="float-right text-muted time">Just now</small>
+                <a href="#" class="dropdown-item">{{ trans('Sidebar_trans.new_registered_user') }}
+                    <small class="float-right text-muted time">{{ trans('Sidebar_trans.just_now') }}</small>
                 </a>
-                <a href="#" class="dropdown-item">New invoice received
-                    <small class="float-right text-muted time">22 mins</small>
+                <a href="#" class="dropdown-item">{{ trans('Sidebar_trans.new_invoice_received') }}
+                    <small class="float-right text-muted time">{{ trans('Sidebar_trans.time_22_mins') }}</small>
                 </a>
-                <a href="#" class="dropdown-item">Server error report
-                    <small class="float-right text-muted time">7 hrs</small>
+                <a href="#" class="dropdown-item">{{ trans('Sidebar_trans.server_error_report') }}
+                    <small class="float-right text-muted time">{{ trans('Sidebar_trans.time_7_hrs') }}</small>
                 </a>
-                <a href="#" class="dropdown-item">Database report
-                    <small class="float-right text-muted time">1 days</small>
+                <a href="#" class="dropdown-item">{{ trans('Sidebar_trans.database_report') }}
+                    <small class="float-right text-muted time">{{ trans('Sidebar_trans.time_1_day') }}</small>
                 </a>
-                <a href="#" class="dropdown-item">Order confirmation
-                    <small class="float-right text-muted time">2 days</small>
+                <a href="#" class="dropdown-item">{{ trans('Sidebar_trans.order_confirmation') }}
+                    <small class="float-right text-muted time">{{ trans('Sidebar_trans.time_2_days') }}</small>
                 </a>
             </div>
         </li>
@@ -77,27 +88,27 @@
             </a>
             <div class="dropdown-menu dropdown-menu-right dropdown-big">
                 <div class="dropdown-header">
-                    <strong>Quick Links</strong>
+                    <strong>{{ trans('Sidebar_trans.quick_links') }}</strong>
                 </div>
                 <div class="dropdown-divider"></div>
                 <div class="nav-grid">
                     <a href="#" class="nav-grid-item">
                         <i class="ti-files text-primary"></i>
-                        <h5>New Task</h5>
+                        <h5>{{ trans('Sidebar_trans.new_task') }}</h5>
                     </a>
                     <a href="#" class="nav-grid-item">
                         <i class="ti-check-box text-success"></i>
-                        <h5>Assign Task</h5>
+                        <h5>{{ trans('Sidebar_trans.assign_task') }}</h5>
                     </a>
                 </div>
                 <div class="nav-grid">
                     <a href="#" class="nav-grid-item">
                         <i class="ti-pencil-alt text-warning"></i>
-                        <h5>Add Orders</h5>
+                        <h5>{{ trans('Sidebar_trans.add_orders') }}</h5>
                     </a>
                     <a href="#" class="nav-grid-item">
                         <i class="ti-truck text-danger"></i>
-                        <h5>New Orders</h5>
+                        <h5>{{ trans('Sidebar_trans.new_orders') }}</h5>
                     </a>
                 </div>
             </div>

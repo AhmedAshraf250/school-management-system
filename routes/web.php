@@ -23,27 +23,42 @@ use App\Http\Controllers\Teachers\TeacherController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
-require __DIR__.'/auth.php';
-
 Route::group([
-    'middleware' => ['guest'],
+    'prefix' => LaravelLocalization::setLocale(),
+    'middleware' => ['localeCookieRedirect', 'localizationRedirect', 'localeViewPath'],
 ], function () {
 
-    Route::get('/', function () {
-        return view('auth.login');
-    });
+    Route::view('/', 'home')->name('home');
+    Route::view('/selection', 'auth.selection')->name('auth.selection');
 });
+
+Route::group([
+    'prefix' => LaravelLocalization::setLocale(),
+    'middleware' => ['localeCookieRedirect', 'localizationRedirect', 'localeViewPath'],
+], function () {
+    require __DIR__.'/auth.php';
+});
+
+require __DIR__.'/student.php';
+require __DIR__.'/teacher.php';
+require __DIR__.'/guardian.php';
 
 // ==============================[Translated Pages]============================ //
 Route::group(
     [
         'prefix' => LaravelLocalization::setLocale(),
-        'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath', 'auth'],
+        'middleware' => [
+            // 'localeSessionRedirect',
+            'localeCookieRedirect',
+            'localizationRedirect',
+            'localeViewPath',
+            'auth:admin',
+        ],
     ],
     function () {
 
         // ==============================[dashboard]============================ //
-        Route::get('/dashboard', [HomeController::class, 'index'])->middleware('auth')->name('dashboard');
+        Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
 
         // ==============================[Grades]============================ //
         Route::resource('grades', GradeController::class);

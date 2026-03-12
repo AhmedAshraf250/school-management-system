@@ -1,4 +1,8 @@
 {{-- resources/views/components/ui/user-dropdown.blade.php --}}
+@php
+    $activeGuard = \App\Support\Auth\GuardResolver::currentGuard() ?? 'admin';
+    $activeUser = auth()->guard($activeGuard)->user();
+@endphp
 
 <li class="nav-item dropdown mr-30">
     <a class="nav-link nav-pill user-avatar" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
@@ -10,30 +14,33 @@
         <div class="dropdown-header">
             <div class="media">
                 <div class="media-body">
-                    <h5 class="mt-0 mb-0">{{ Auth::user()->name }}</h5>
-                    <span>{{ Auth::user()->email }}</span>
+                    <h5 class="mt-0 mb-0">{{ $activeUser?->name }}</h5>
+                    <span>{{ $activeUser?->email }}</span>
                 </div>
             </div>
         </div>
 
         <div class="dropdown-divider"></div>
 
-        <a class="dropdown-item" href="#"><i class="text-secondary ti-reload"></i>Activity</a>
-        <a class="dropdown-item" href="#"><i class="text-success ti-email"></i>Messages</a>
-        <a class="dropdown-item" href="#"><i class="text-warning ti-user"></i>Profile</a>
-        <a class="dropdown-item" href="#"><i class="text-dark ti-layers-alt"></i>Projects
+        <a class="dropdown-item" href="#"><i class="text-secondary ti-reload"></i>{{ trans('Sidebar_trans.activity') }}</a>
+        <a class="dropdown-item" href="#"><i
+                class="text-success ti-email"></i>{{ trans('Sidebar_trans.messages') }}</a>
+        <a class="dropdown-item" href="#"><i class="text-warning ti-user"></i>{{ trans('Sidebar_trans.profile') }}</a>
+        <a class="dropdown-item" href="#"><i class="text-dark ti-layers-alt"></i>{{ trans('Sidebar_trans.projects') }}
             <span class="badge badge-info">6</span>
         </a>
 
         <div class="dropdown-divider"></div>
 
-        <a class="dropdown-item" href="#"><i class="text-info ti-settings"></i>Settings</a>
-        <a class="dropdown-item" href="{{ route('logout') }}"
+        <a class="dropdown-item" href="{{ route('settings.index') }}"><i
+                class="text-info ti-settings"></i>{{ trans('Sidebar_trans.settings') }}</a>
+        <a class="dropdown-item" href="{{ route('logout.guard', ['guard' => $activeGuard]) }}"
             onclick="event.preventDefault();document.getElementById('logout-form').submit();">
             <i class="text-danger ti-unlock"></i>{{ __('Sidebar_trans.Logoff') }}
         </a>
 
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        <form id="logout-form" action="{{ route('logout.guard', ['guard' => $activeGuard]) }}" method="POST"
+            style="display: none;">
             @csrf
         </form>
     </div>

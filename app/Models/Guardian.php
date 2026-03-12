@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Translatable\HasTranslations;
 
-class Guardian extends Model
+class Guardian extends Authenticatable
 {
     use HasTranslations;
 
@@ -34,6 +34,10 @@ class Guardian extends Model
         'mother_blood_type_id',
         'mother_religion_id',
         'mother_address',
+    ];
+
+    protected $hidden = [
+        'password',
     ];
 
     public function fatherBloodType(): BelongsTo

@@ -9,18 +9,21 @@ use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Support\Auth\GuardResolver;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('guest')->group(function () {
+Route::middleware('redirect.authenticated:admin')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])
         ->name('register');
 
     Route::post('register', [RegisteredUserController::class, 'store']);
 
     Route::get('login', [AuthenticatedSessionController::class, 'create'])
+        ->defaults('guard', 'admin')
         ->name('login');
 
-    Route::post('login', [AuthenticatedSessionController::class, 'store']);
+    Route::post('login', [AuthenticatedSessionController::class, 'store'])
+        ->defaults('guard', 'admin');
 
     Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])
         ->name('password.request');
@@ -35,7 +38,16 @@ Route::middleware('guest')->group(function () {
         ->name('password.store');
 });
 
-Route::middleware('auth')->group(function () {
+Route::get('login/{guard}', [AuthenticatedSessionController::class, 'create'])
+    ->middleware('redirect.authenticated:admin,student,teacher,guardian')
+    ->whereIn('guard', array_keys(GuardResolver::guards()))
+    ->name('login.guard');
+
+Route::post('login/{guard}', [AuthenticatedSessionController::class, 'store'])
+    ->whereIn('guard', array_keys(GuardResolver::guards()))
+    ->name('login.guard.attempt');
+
+Route::middleware('auth:admin')->group(function () {
     Route::get('verify-email', EmailVerificationPromptController::class)
         ->name('verification.notice');
 
@@ -55,5 +67,11 @@ Route::middleware('auth')->group(function () {
     Route::put('password', [PasswordController::class, 'update'])->name('password.update');
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
+        ->defaults('guard', 'admin')
         ->name('logout');
 });
+
+Route::post('logout/{guard}', [AuthenticatedSessionController::class, 'destroy'])
+    ->middleware('auth:admin,student,teacher,guardian')
+    ->whereIn('guard', array_keys(GuardResolver::guards()))
+    ->name('logout.guard');

@@ -1,28 +1,25 @@
-{{-- ========== PRELOADER OVERLAY ========== --}}
-<div id="preloader">
-    <div class="preloader-inner">
-        <div class="spinner">
-            <div class="double-bounce1"></div>
-            <div class="double-bounce2"></div>
-        </div>
-        <p class="preloader-text">{{ config('app.name') }}</p>
+{{-- Preloader overlay component --}}
+<div id="preloader" aria-live="polite" aria-label="Loading">
+    <div class="preloader-card">
+        <div class="preloader-ring"></div>
+        <p class="preloader-name">ahmed - laravel</p>
     </div>
 </div>
 
-{{-- ========== STYLES ========== --}}
+{{-- Component styles --}}
 <style>
     #preloader {
         position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: #ffffff;
+        inset: 0;
         z-index: 99999;
         display: flex;
         align-items: center;
         justify-content: center;
-        transition: opacity 0.5s ease, visibility 0.5s ease;
+        background:
+            radial-gradient(circle at 20% 20%, rgba(14, 165, 233, 0.18) 0%, transparent 40%),
+            radial-gradient(circle at 80% 80%, rgba(16, 185, 129, 0.14) 0%, transparent 40%),
+            #f7fafc;
+        transition: opacity 0.35s ease, visibility 0.35s ease;
     }
 
     #preloader.hide {
@@ -30,75 +27,56 @@
         visibility: hidden;
     }
 
-    .spinner {
-        width: 60px;
-        height: 60px;
-        position: relative;
-        margin: 0 auto 16px;
+    .preloader-card {
+        min-width: 190px;
+        padding: 22px 26px;
+        border-radius: 18px;
+        text-align: center;
+        box-shadow: 0 18px 44px rgba(15, 23, 42, 0.14);
+        background-color: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(4px);
     }
 
-    .double-bounce1,
-    .double-bounce2 {
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-        background-color: #4f46e5;
-        /* غيّر اللون حسب موقعك */
-        opacity: 0.6;
-        position: absolute;
-        top: 0;
-        left: 0;
-        animation: bounce 2s infinite ease-in-out;
+    .preloader-ring {
+        width: 62px;
+        height: 62px;
+        margin: 0 auto 14px;
+        border-radius: 999px;
+        border: 4px solid rgba(14, 165, 233, 0.22);
+        border-top-color: #0ea5e9;
+        border-right-color: #10b981;
+        animation: preloader-spin 0.9s linear infinite;
     }
 
-    .double-bounce2 {
-        animation-delay: -1s;
-    }
-
-    @keyframes bounce {
-
-        0%,
-        100% {
-            transform: scale(0);
-        }
-
-        50% {
-            transform: scale(1);
-        }
-    }
-
-    .preloader-text {
-        font-size: 14px;
-        font-weight: 600;
-        color: #6b7280;
+    .preloader-name {
+        margin: 0;
+        color: #0f172a;
+        font-size: 16px;
+        font-weight: 700;
         letter-spacing: 2px;
         text-transform: uppercase;
-        margin: 0;
-        animation: pulse 1.5s infinite ease-in-out;
     }
 
-    @keyframes pulse {
-
-        0%,
-        100% {
-            opacity: 1;
-        }
-
-        50% {
-            opacity: 0.4;
+    @keyframes preloader-spin {
+        to {
+            transform: rotate(360deg);
         }
     }
 </style>
 
-{{-- ========== SCRIPT ========== --}}
+{{-- Component script --}}
 <script>
-    // لما الصفحة تخلص تحميل خالص، اخفي الـ preloader
     window.addEventListener('load', function() {
         const preloader = document.getElementById('preloader');
-        if (preloader) {
-            preloader.classList.add('hide');
-            // بعد انتهاء الـ transition شيله من الـ DOM
-            setTimeout(() => preloader.remove(), 500);
+
+        if (!preloader) {
+            return;
         }
+
+        preloader.classList.add('hide');
+
+        setTimeout(function() {
+            preloader.remove();
+        }, 350);
     });
 </script>

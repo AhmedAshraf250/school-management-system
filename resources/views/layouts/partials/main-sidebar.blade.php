@@ -298,7 +298,11 @@
                             <div class="clearfix"></div>
                         </a>
                         <ul id="Onlineclasses-icon" class="collapse" data-parent="#sidebarnav">
-                            <li> <a href="{{ route('online-classes.index') }}">حصص اونلاين مع زوم</a> </li>
+                            <li>
+                                <a href="{{ route('online-classes.index') }}">
+                                    {{ trans('Sidebar_trans.online_classes_zoom') }}
+                                </a>
+                            </li>
                         </ul>
                     </li>
 
@@ -319,10 +323,7 @@
                             <div class="clearfix"></div>
                         </a>
                         <ul id="Users-icon" class="collapse" data-parent="#sidebarnav">
-                            <li> <a href="fontawesome-icon.html">font Awesome</a> </li>
-                            <li> <a href="themify-icons.html">Themify icons</a> </li>
-                            <li> <a href="weather-icon.html">Weather icons</a> </li>
-                        </ul>
+                            <li> <a href="fontawesome-icon.html">{{ trans('Sidebar_trans.font_awesome') }}</a> </li>
                     </li>
 
                 </ul>

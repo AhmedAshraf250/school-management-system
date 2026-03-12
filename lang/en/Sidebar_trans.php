@@ -4,8 +4,29 @@ return [
 
     'Notifications' => 'Notifications',
     'Logoff' => 'Logoff',
-
-
-
-
+    'new_registered_user' => 'New registered user',
+    'just_now' => 'Just now',
+    'new_invoice_received' => 'New invoice received',
+    'time_22_mins' => '22 mins',
+    'server_error_report' => 'Server error report',
+    'time_7_hrs' => '7 hrs',
+    'database_report' => 'Database report',
+    'time_1_day' => '1 day',
+    'order_confirmation' => 'Order confirmation',
+    'time_2_days' => '2 days',
+    'quick_links' => 'Quick Links',
+    'new_task' => 'New Task',
+    'assign_task' => 'Assign Task',
+    'add_orders' => 'Add Orders',
+    'new_orders' => 'New Orders',
+    'online_classes_zoom' => 'Online classes with Zoom',
+    'font_awesome' => 'Font Awesome',
+    'themify_icons' => 'Themify icons',
+    'weather_icons' => 'Weather icons',
+    'search_placeholder' => 'Search',
+    'activity' => 'Activity',
+    'messages' => 'Messages',
+    'profile' => 'Profile',
+    'projects' => 'Projects',
+    'settings' => 'Settings',
 ];
