@@ -1,54 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.user-portal')
+
 @section('title')
     {{ trans('main_trans.Main_title') }}
 @stop
 
-<head>
-    @include('layouts.partials.head')
-    @stack('css')
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600&display=swap" rel="stylesheet">
-</head>
+@section('content')
+    @php
+        $student = auth()->guard('student')->user();
+    @endphp
 
-<body style="font-family: 'Cairo', sans-serif">
+    {{-- Unified dashboard title --}}
+    @include('layouts.partials.dashboard-title', [
+        'roleLabel' => trans('main_trans.role_student'),
+        'identity' => $student?->name ?? $student?->email ?? '-',
+    ])
 
-    <div class="wrapper" style="font-family: 'Cairo', sans-serif">
-
-        {{-- Global preloader --}}
-        <x-preloader />
-
-        {{-- Main header --}}
-        @include('layouts.partials.main-header')
-
-        {{-- Main sidebar --}}
-        @include('layouts.partials.main-sidebar')
-
-
-        <div class="content-wrapper">
-            {{-- Student dashboard title --}}
-            <div class="page-title">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <h4 class="mb-0" style="font-family: 'Cairo', sans-serif">
-                            {{ trans('main_trans.student_dashboard_title') }}</h4>
-                    </div>
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb pt-0 pr-0 float-left float-sm-right">
-                        </ol>
-                    </div>
-                </div>
+    {{-- Welcome message --}}
+    <div class="row">
+        <div class="col-12 mb-30">
+            <div class="alert alert-primary mb-0" role="alert">
+                <strong>{{ trans('main_trans.welcome_user', ['name' => $student?->name]) }}</strong>
             </div>
-
-
-            @include('layouts.partials.footer')
-
         </div>
     </div>
 
-    @include('layouts.partials.footer-scripts')
-    @stack('scripts')
-
-</body>
-
-</html>
+    {{-- Current student quick info --}}
+    <div class="row">
+        <div class="col-xl-12 mb-30">
+            <div class="card card-statistics h-100">
+                <div class="card-body">
+                    <h5 class="card-title mb-2">{{ trans('main_trans.current_user_label') }}</h5>
+                    <p class="mb-0">
+                        <strong>{{ trans('Students_trans.name') }}:</strong> {{ $student?->name }}
+                    </p>
+                    <p class="mb-0">
+                        <strong>{{ trans('Students_trans.email') }}:</strong> {{ $student?->email }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection

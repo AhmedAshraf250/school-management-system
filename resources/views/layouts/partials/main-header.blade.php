@@ -8,7 +8,7 @@
     };
 @endphp
 
-<nav class="admin-header navbar navbar-default col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+<nav class="admin-header navbar navbar-default p-0 fixed-top d-flex flex-row w-100">
     <!-- Logo -->
     <div class="text-left navbar-brand-wrapper">
         <a class="navbar-brand brand-logo" href="{{ $dashboardRoute }}">
@@ -48,6 +48,13 @@
         <li class="nav-item fullscreen">
             <a id="btnFullscreen" href="#" class="nav-link">
                 <i class="ti-fullscreen"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ $dashboardRoute }}"
+                onclick="event.preventDefault(); if (window.history.length > 1) { window.history.back(); } else { window.location.href = '{{ $dashboardRoute }}'; }"
+                title="{{ trans('Sidebar_trans.back') }}">
+                <i class="ti-arrow-right"></i>
             </a>
         </li>
 

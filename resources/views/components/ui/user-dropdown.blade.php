@@ -2,6 +2,7 @@
 @php
     $activeGuard = \App\Support\Auth\GuardResolver::currentGuard() ?? 'admin';
     $activeUser = auth()->guard($activeGuard)->user();
+    $displayName = $activeUser?->name ?? $activeUser?->father_name ?? $activeUser?->email;
 @endphp
 
 <li class="nav-item dropdown mr-30">
@@ -14,7 +15,7 @@
         <div class="dropdown-header">
             <div class="media">
                 <div class="media-body">
-                    <h5 class="mt-0 mb-0">{{ $activeUser?->name }}</h5>
+                    <h5 class="mt-0 mb-0">{{ $displayName }}</h5>
                     <span>{{ $activeUser?->email }}</span>
                 </div>
             </div>
@@ -32,8 +33,15 @@
 
         <div class="dropdown-divider"></div>
 
-        <a class="dropdown-item" href="{{ route('settings.index') }}"><i
-                class="text-info ti-settings"></i>{{ trans('Sidebar_trans.settings') }}</a>
+        <a class="dropdown-item" href="{{ route('auth.selection') }}">
+            <i class="text-primary ti-exchange-vertical"></i>{{ trans('Sidebar_trans.switch_account') }}
+        </a>
+
+        @if ($activeGuard === 'admin')
+            <a class="dropdown-item" href="{{ route('settings.index') }}"><i
+                    class="text-info ti-settings"></i>{{ trans('Sidebar_trans.settings') }}</a>
+        @endif
+
         <a class="dropdown-item" href="{{ route('logout.guard', ['guard' => $activeGuard]) }}"
             onclick="event.preventDefault();document.getElementById('logout-form').submit();">
             <i class="text-danger ti-unlock"></i>{{ __('Sidebar_trans.Logoff') }}

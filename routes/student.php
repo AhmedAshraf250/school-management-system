@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Students\DashboardController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -14,7 +15,10 @@ Route::group(
         ],
     ],
     function (): void {
-        Route::view('/student/dashboard', 'pages.students.dashboard.dashboard')
+        Route::get('/student/dashboard', [DashboardController::class, 'index'])
             ->name('student.dashboard');
+
+        Route::get('/student/calendar', [DashboardController::class, 'calendar'])
+            ->name('student.calendar');
     }
 );

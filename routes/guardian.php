@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Guardians\DashboardController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -14,7 +15,10 @@ Route::group(
         ],
     ],
     function (): void {
-        Route::view('/guardian/dashboard', 'pages.guardians.dashboard.dashboard')
+        Route::get('/guardian/dashboard', [DashboardController::class, 'index'])
             ->name('guardian.dashboard');
+
+        Route::get('/guardian/calendar', [DashboardController::class, 'calendar'])
+            ->name('guardian.calendar');
     }
 );

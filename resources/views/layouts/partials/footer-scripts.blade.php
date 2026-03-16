@@ -31,17 +31,28 @@
 
 
 <script>
-    $(document).ready(function() {
-        $('#datatable').DataTable();
+    document.addEventListener('DOMContentLoaded', function() {
+        if (typeof window.jQuery === 'undefined') {
+            console.error('jQuery failed to load. Skipping DataTable initialization.');
+            return;
+        }
+
+        if (typeof window.jQuery.fn.DataTable !== 'function') {
+            return;
+        }
+
+        if (window.jQuery('#datatable').length > 0) {
+            window.jQuery('#datatable').DataTable();
+        }
     });
 </script>
 
 
 
 @if (App::getLocale() == 'en')
-<script src="{{ URL::asset('assets/js/bootstrap-datatables/en/jquery.dataTables.min.js') }}"></script>
-<script src="{{ URL::asset('assets/js/bootstrap-datatables/en/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/js/bootstrap-datatables/en/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/js/bootstrap-datatables/en/dataTables.bootstrap4.min.js') }}"></script>
 @else
-<script src="{{ URL::asset('assets/js/bootstrap-datatables/ar/jquery.dataTables.min.js') }}"></script>
-<script src="{{ URL::asset('assets/js/bootstrap-datatables/ar/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/js/bootstrap-datatables/ar/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/js/bootstrap-datatables/ar/dataTables.bootstrap4.min.js') }}"></script>
 @endif

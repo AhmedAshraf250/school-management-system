@@ -29,5 +29,7 @@ return [
     'profile' => 'الملف الشخصي',
     'projects' => 'المشاريع',
     'settings' => 'الإعدادات',
+    'switch_account' => 'تبديل الحساب',
+    'back' => 'رجوع',
 
 ];

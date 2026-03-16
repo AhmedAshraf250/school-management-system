@@ -29,4 +29,6 @@ return [
     'profile' => 'Profile',
     'projects' => 'Projects',
     'settings' => 'Settings',
+    'switch_account' => 'Switch account',
+    'back' => 'Back',
 ];

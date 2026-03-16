@@ -9,17 +9,17 @@ use App\Http\Controllers\Quizzes\QuizController;
 use App\Http\Controllers\ReceiptController;
 use App\Http\Controllers\Sections\SectionController;
 use App\Http\Controllers\SettingController;
-use App\Http\Controllers\Students\AttendanceController;
-use App\Http\Controllers\Students\FeeController;
-use App\Http\Controllers\Students\FeeInvoiceController;
-use App\Http\Controllers\Students\GraduationController;
-use App\Http\Controllers\Students\OnlineClassController;
-use App\Http\Controllers\Students\PaymentController;
-use App\Http\Controllers\Students\ProcessingFeeController;
-use App\Http\Controllers\Students\PromotionController;
-use App\Http\Controllers\Students\StudentController;
+use App\Http\Controllers\Students\Admin\AttendanceController;
+use App\Http\Controllers\Students\Admin\FeeController;
+use App\Http\Controllers\Students\Admin\FeeInvoiceController;
+use App\Http\Controllers\Students\Admin\GraduationController;
+use App\Http\Controllers\Students\Admin\OnlineClassController;
+use App\Http\Controllers\Students\Admin\PaymentController;
+use App\Http\Controllers\Students\Admin\ProcessingFeeController;
+use App\Http\Controllers\Students\Admin\PromotionController;
+use App\Http\Controllers\Students\Admin\StudentController;
 use App\Http\Controllers\Subjects\SubjectController;
-use App\Http\Controllers\Teachers\TeacherController;
+use App\Http\Controllers\Teachers\Admin\TeacherController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -73,7 +73,7 @@ Route::group(
         Route::resource('sections', SectionController::class);
 
         // ==============================[Guardians]============================ //
-        Route::view('guardians', 'pages.guardians.guardian')->name('guardians');
+        Route::view('guardians', 'pages.guardians.admin.guardian')->name('guardians');
 
         // ==============================[Teachers]============================ //
         Route::resource('teachers', TeacherController::class)->except('show');
