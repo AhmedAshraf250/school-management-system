@@ -11,6 +11,10 @@ class Quiz extends Model
 {
     use HasTranslations;
 
+    public const STATUS_DRAFT = 'draft';
+
+    public const STATUS_PUBLISHED = 'published';
+
     public $translatable = ['name'];
 
     protected $fillable = [
@@ -20,6 +24,8 @@ class Quiz extends Model
         'classroom_id',
         'section_id',
         'teacher_id',
+        'status',
+        'academic_year',
     ];
 
     public function teacher(): BelongsTo

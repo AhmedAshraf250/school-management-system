@@ -10,9 +10,12 @@
         'roleLabel' => trans('main_trans.role_teacher'),
         'identity' => $teacher->name ?? $teacher->email ?? '-',
     ])
+    @include('pages.teachers.partials.ui-typography')
+    @include('pages.teachers.partials.page-heading', ['title' => trans('main_trans.teacher_dashboard_title')])
 
-    {{-- Welcome hero --}}
-    <div class="row">
+    <div class="teacher-view-scope">
+        {{-- Welcome hero --}}
+        <div class="row">
         <div class="col-12 mb-30">
             <div class="card bg-primary text-white border-0">
                 <div class="card-body py-4 text-center text-md-left">
@@ -23,8 +26,8 @@
         </div>
     </div>
 
-    {{-- Top quick stats --}}
-    <div class="row">
+        {{-- Top quick stats --}}
+        <div class="row">
         <div class="col-xl-3 col-lg-6 col-md-6 mb-30">
             <div class="card card-statistics h-100">
                 <div class="card-body text-center">
@@ -70,8 +73,8 @@
         </div>
     </div>
 
-    {{-- Sections cards --}}
-    <div class="row">
+        {{-- Sections cards --}}
+        <div class="row">
         <div class="col-12 mb-30">
             <div class="card card-statistics">
                 <div class="card-body">
@@ -105,8 +108,8 @@
         </div>
     </div>
 
-    {{-- Latest students compact list --}}
-    <div class="row">
+        {{-- Latest students compact list --}}
+        <div class="row">
         <div class="col-12 mb-30">
             <div class="card card-statistics">
                 <div class="card-body">
@@ -133,6 +136,7 @@
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     </div>
 @endsection

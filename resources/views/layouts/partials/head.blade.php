@@ -84,4 +84,5 @@
         color: #7a5600;
         font-size: 0.95rem;
     }
+
 </style>

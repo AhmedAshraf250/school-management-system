@@ -6,6 +6,7 @@ test('calendar event model defines expected fillable attributes', function () {
     $calendarEvent = new CalendarEvent;
 
     expect($calendarEvent->getFillable())->toBe([
+        'teacher_id',
         'title_ar',
         'title_en',
         'starts_at',

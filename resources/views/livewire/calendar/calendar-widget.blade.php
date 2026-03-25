@@ -95,6 +95,8 @@
                                 end: event.end ? event.end.format() : null,
                             }).then(function() {
                                 window.jQuery('#dashboard-calendar').fullCalendar('refetchEvents');
+                            }).catch(function() {
+                                window.jQuery('#dashboard-calendar').fullCalendar('refetchEvents');
                             });
                         };
                     }

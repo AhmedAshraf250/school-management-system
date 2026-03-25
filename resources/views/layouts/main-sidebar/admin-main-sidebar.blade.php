@@ -1,4 +1,5 @@
 @php
+    // Active-state map for all admin sidebar groups.
     $isDashboardActive = request()->routeIs('dashboard');
     $isGradesActive = request()->routeIs('grades.*');
     $isClassroomsActive = request()->routeIs('classrooms.*');
@@ -24,8 +25,10 @@
     ]);
 @endphp
 
+{{-- Admin sidebar shell --}}
 <div class="side-menu-fixed">
     <div class="scrollbar side-menu-bg" style="overflow-y: auto; overflow-x: hidden;">
+        {{-- Main admin navigation list --}}
         <ul class="nav navbar-nav side-menu" id="sidebarnav">
             <!-- menu item Dashboard-->
             <li class="{{ $isDashboardActive ? 'active' : '' }}">
@@ -36,7 +39,7 @@
                     <div class="clearfix"></div>
                 </a>
             </li>
-            <!-- menu title -->
+            {{-- System label separator --}}
             <li class="mt-10 mb-10 text-muted pl-4 font-medium menu-title">{{ trans('main_trans.Programname') }}
             </li>
 
@@ -89,7 +92,7 @@
             </li>
 
 
-            <!-- students-->
+            {{-- Students module: profile, promotions, and graduates --}}
             <li class="{{ $isStudentsActive ? 'active' : '' }}">
                 <a href="javascript:void(0);" data-toggle="collapse" data-target="#students-menu"><i
                         class="fas fa-user-graduate"></i>{{ trans('main_trans.students') }}<div class="pull-right"><i
@@ -182,7 +185,7 @@
                 </ul>
             </li>
 
-            <!-- Fees-->
+            {{-- Accounts module: fees, invoices, receipts, and payments --}}
             <li class="{{ $isAccountsActive ? 'active' : '' }}">
                 <a href="javascript:void(0);" data-toggle="collapse" data-target="#Accounts-menu">
                     <div class="pull-left"><i class="fas fa-money-bill-wave-alt"></i><span
@@ -242,7 +245,7 @@
                 </ul>
             </li>
 
-            <!-- Quizzes-->
+            {{-- Exams module: quizzes and questions --}}
             <li class="{{ $isExamsActive ? 'active' : '' }}">
                 <a href="javascript:void(0);" data-toggle="collapse" data-target="#Quizzes-icon">
                     <div class="pull-left"><i class="fas fa-book-open"></i><span
