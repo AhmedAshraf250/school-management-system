@@ -1,9 +1,5 @@
 @extends('layouts.user-portal')
 
-@section('title')
-    {{ trans('main_trans.teacher_reports_attendance_title') }}
-@stop
-
 @section('content')
     {{-- Unified dashboard title --}}
     @include('layouts.partials.dashboard-title', [

@@ -20,7 +20,7 @@ class OnlineClassController extends Controller
     public function index()
     {
         $online_classes = onlineClass::query()
-            ->with(['grade', 'classroom', 'section', 'user'])
+            ->with(['grade', 'classroom', 'section', 'teacherCreator', 'adminCreator'])
             ->latest()
             ->get();
 
@@ -54,12 +54,13 @@ class OnlineClassController extends Controller
     {
         try {
             $validated = $request->validated();
+            $authenticatedAdmin = Auth::guard('admin')->user();
             $password = $validated['password'] ?? Str::upper(Str::random(8));
             $meetingPayload = [
                 'topic' => $validated['topic'],
                 'type' => 2,                                                // 1 => instant, 2 => scheduled, 3 => recurring with no fixed time, 8 => recurring with fixed time
                 'duration' => $validated['duration'],                       // in minutes
-                'timezone' => config('app.timezone', 'UTC'),  // set timezone
+                'timezone' => config('app.timezone', 'UTC'),                // set timezone
                 'password' => $password,                                    // 'set password',
                 'start_time' => $validated['start_time'],                   // set start time
                 'settings' => [
@@ -86,7 +87,7 @@ class OnlineClassController extends Controller
                 'grade_id' => $validated['grade_id'],
                 'classroom_id' => $validated['classroom_id'],
                 'section_id' => $validated['section_id'],
-                'user_id' => (int) Auth::id(),
+                'created_by' => (string) $authenticatedAdmin?->email,
                 'meeting_id' => ($meetingData['id'] ?? ''),
                 'topic' => $validated['topic'],
                 'start_at' => $this->normalizeDateTime($meetingData['start_time'] ?? $validated['start_time']),
@@ -113,13 +114,14 @@ class OnlineClassController extends Controller
     {
         try {
             $validated = $request->validated();
+            $authenticatedAdmin = Auth::guard('admin')->user();
 
             onlineClass::create([
                 'integration' => false,
                 'grade_id' => $validated['grade_id'],
                 'classroom_id' => $validated['classroom_id'],
                 'section_id' => $validated['section_id'],
-                'user_id' => (int) Auth::id(),
+                'created_by' => (string) $authenticatedAdmin?->email,
                 'meeting_id' => $validated['meeting_id'],
                 'topic' => $validated['topic'],
                 'start_at' => $this->normalizeDateTime($validated['start_time']),

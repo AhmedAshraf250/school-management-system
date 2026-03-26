@@ -38,6 +38,7 @@
                                             <th>{{ trans('OnlineClasses_trans.topic') }}</th>
                                             <th>{{ trans('OnlineClasses_trans.start_at') }}</th>
                                             <th>{{ trans('OnlineClasses_trans.duration') }}</th>
+                                            <th>{{ trans('OnlineClasses_trans.passcode') }}</th>
                                             <th>{{ trans('OnlineClasses_trans.join_link') }}</th>
                                             <th>{{ trans('OnlineClasses_trans.operations') }}</th>
                                         </tr>
@@ -49,12 +50,23 @@
                                                 <td>{{ $online_classe->grade->Name }}</td>
                                                 <td>{{ $online_classe->classroom->name }}</td>
                                                 <td>{{ $online_classe->section->name }}</td>
-                                                <td>{{ $online_classe->user->name }}</td>
+                                                <td>{{ $online_classe->creator_display_name }}</td>
                                                 <td>{{ $online_classe->topic }}</td>
                                                 <td>{{ $online_classe->start_at }}</td>
                                                 <td>{{ $online_classe->duration }}</td>
+                                                <td>
+                                                    <span class="meeting-password-mask"
+                                                        data-password="{{ $online_classe->password }}">••••••••</span>
+                                                    <button type="button"
+                                                        class="btn btn-sm btn-outline-info toggle-password-visibility ml-1"
+                                                        data-show-text="{{ trans('OnlineClasses_trans.show_passcode') }}"
+                                                        data-hide-text="{{ trans('OnlineClasses_trans.hide_passcode') }}">
+                                                        {{ trans('OnlineClasses_trans.show_passcode') }}
+                                                    </button>
+                                                </td>
                                                 <td class="text-danger"><a href="{{ $online_classe->join_url }}"
-                                                        target="_blank">{{ trans('OnlineClasses_trans.join_now') }}</a></td>
+                                                        target="_blank">{{ trans('OnlineClasses_trans.join_now') }}</a>
+                                                </td>
                                                 <td>
                                                     <button type="button" class="btn btn-danger btn-sm"
                                                         data-toggle="modal"
@@ -78,4 +90,32 @@
 @section('js')
 @toastr_js
 @toastr_render
+
+<script>
+    document.addEventListener('click', function(event) {
+        const button = event.target.closest('.toggle-password-visibility');
+
+        if (!button) {
+            return;
+        }
+
+        const container = button.closest('td');
+        const passwordSpan = container?.querySelector('.meeting-password-mask');
+
+        if (!passwordSpan) {
+            return;
+        }
+
+        const isMasked = passwordSpan.textContent.trim() === '••••••••';
+        const passwordValue = passwordSpan.dataset.password ?? '';
+
+        if (isMasked) {
+            passwordSpan.textContent = passwordValue;
+            button.textContent = button.dataset.hideText ?? '';
+        } else {
+            passwordSpan.textContent = '••••••••';
+            button.textContent = button.dataset.showText ?? '';
+        }
+    });
+</script>
 @endsection

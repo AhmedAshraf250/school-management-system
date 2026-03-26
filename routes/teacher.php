@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Teachers\DashboardController;
+use App\Http\Controllers\Teachers\OnlineClassController;
 use App\Http\Controllers\Teachers\QuestionController;
 use App\Http\Controllers\Teachers\QuizController;
 use App\Http\Controllers\Teachers\StudentController;
@@ -25,6 +26,11 @@ Route::group(
         Route::get('/teacher/calendar', [DashboardController::class, 'calendar'])
             ->name('teacher.calendar');
 
+        Route::get('/teacher/profile', [DashboardController::class, 'profile'])
+            ->name('teacher.profile');
+        Route::put('/teacher/password', [DashboardController::class, 'updatePassword'])
+            ->name('teacher.password.update');
+
         // ===================[Students & Attendance Management]================ //
         Route::get('/teacher/students', [StudentController::class, 'index'])
             ->name('teacher.students.index');
@@ -41,6 +47,15 @@ Route::group(
         // =======================[Attendance Reports]========================= //
         Route::get('/teacher/reports/attendances', [StudentController::class, 'attendanceReport'])
             ->name('teacher.reports.attendances');
+
+        // ============================[Online Classes]========================= //
+        Route::get('/teacher/online-classes/indirect', [OnlineClassController::class, 'indirectCreate'])
+            ->name('teacher.online-classes.indirectCreate');
+        Route::post('/teacher/online-classes/indirect', [OnlineClassController::class, 'storeIndirect'])
+            ->name('teacher.online-classes.indirectStore');
+        Route::resource('/teacher/online-classes', OnlineClassController::class)
+            ->names('teacher.online-classes')
+            ->except(['show', 'edit', 'update']);
 
         // =============================[Quizzes]============================= //
         Route::resource('/teacher/quizzes', QuizController::class)

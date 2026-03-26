@@ -7,6 +7,8 @@
     $isTeacherReportsActive = request()->routeIs('teacher.reports.*');
     $isTeacherQuizzesActive = request()->routeIs('teacher.quizzes.*');
     $isTeacherQuestionsActive = request()->routeIs('teacher.questions.*');
+    $isTeacherOnlineClassesActive = request()->routeIs('teacher.online-classes.*');
+    $isTeacherProfileActive = request()->routeIs('teacher.profile');
     $isTeacherQuizMenuActive = $isTeacherQuizzesActive || $isTeacherQuestionsActive;
 @endphp
 
@@ -54,6 +56,16 @@
                 </a>
             </li>
 
+            {{-- Online classes link --}}
+            <li class="{{ $isTeacherOnlineClassesActive ? 'active' : '' }}">
+                <a href="{{ route('teacher.online-classes.index') }}">
+                    <div class="pull-left"><i class="fas fa-video"></i><span
+                            class="right-nav-text">{{ trans('main_trans.teacher_online_classes_entry') }}</span>
+                    </div>
+                    <div class="clearfix"></div>
+                </a>
+            </li>
+
             {{-- Quizzes module with nested links (quizzes + all questions) --}}
             <li class="{{ $isTeacherQuizMenuActive ? 'active' : '' }}">
                 <a href="javascript:void(0);" data-toggle="collapse" data-target="#teacher-quizzes-menu">
@@ -96,6 +108,16 @@
                         </a>
                     </li>
                 </ul>
+            </li>
+
+            {{-- Profile link --}}
+            <li class="{{ $isTeacherProfileActive ? 'active' : '' }}">
+                <a href="{{ route('teacher.profile') }}">
+                    <div class="pull-left"><i class="fas fa-id-card"></i><span
+                            class="right-nav-text">{{ trans('main_trans.profile_tab_title') }}</span>
+                    </div>
+                    <div class="clearfix"></div>
+                </a>
             </li>
 
         </ul>

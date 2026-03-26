@@ -3,6 +3,7 @@
     $isStudentDashboardActive = request()->routeIs('student.dashboard');
     $isStudentCalendarActive = request()->routeIs('student.calendar');
     $isStudentQuizzesActive = request()->routeIs('student.quizzes');
+    $isStudentProfileActive = request()->routeIs('student.profile');
 @endphp
 
 {{-- Student sidebar shell --}}
@@ -32,6 +33,15 @@
                 <a href="{{ route('student.quizzes') }}">
                     <div class="pull-left"><i class="fas fa-file-alt"></i><span
                             class="right-nav-text">{{ trans('Quizzes_trans.title_page') }}</span></div>
+                    <div class="clearfix"></div>
+                </a>
+            </li>
+
+            {{-- Profile link --}}
+            <li class="{{ $isStudentProfileActive ? 'active' : '' }}">
+                <a href="{{ route('student.profile') }}">
+                    <div class="pull-left"><i class="fas fa-id-card"></i><span
+                            class="right-nav-text">{{ trans('main_trans.profile_tab_title') }}</span></div>
                     <div class="clearfix"></div>
                 </a>
             </li>

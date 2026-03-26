@@ -1,8 +1,12 @@
-{{-- resources/views/components/ui/user-dropdown.blade.php --}}
 @php
     $activeGuard = \App\Support\Auth\GuardResolver::currentGuard() ?? 'admin';
     $activeUser = auth()->guard($activeGuard)->user();
-    $displayName = $activeUser?->name ?? $activeUser?->father_name ?? $activeUser?->email;
+    $displayName = $activeUser?->name ?? ($activeUser?->father_name ?? $activeUser?->email);
+    $profileRoute = match ($activeGuard) {
+        'teacher' => route('teacher.profile'),
+        'student' => route('student.profile'),
+        default => '#',
+    };
 @endphp
 
 <li class="nav-item dropdown mr-30">
@@ -23,11 +27,14 @@
 
         <div class="dropdown-divider"></div>
 
-        <a class="dropdown-item" href="#"><i class="text-secondary ti-reload"></i>{{ trans('Sidebar_trans.activity') }}</a>
+        <a class="dropdown-item" href="#"><i
+                class="text-secondary ti-reload"></i>{{ trans('Sidebar_trans.activity') }}</a>
         <a class="dropdown-item" href="#"><i
                 class="text-success ti-email"></i>{{ trans('Sidebar_trans.messages') }}</a>
-        <a class="dropdown-item" href="#"><i class="text-warning ti-user"></i>{{ trans('Sidebar_trans.profile') }}</a>
-        <a class="dropdown-item" href="#"><i class="text-dark ti-layers-alt"></i>{{ trans('Sidebar_trans.projects') }}
+        <a class="dropdown-item" href="{{ $profileRoute }}"><i
+                class="text-warning ti-user"></i>{{ trans('Sidebar_trans.profile') }}</a>
+        <a class="dropdown-item" href="#"><i
+                class="text-dark ti-layers-alt"></i>{{ trans('Sidebar_trans.projects') }}
             <span class="badge badge-info">6</span>
         </a>
 

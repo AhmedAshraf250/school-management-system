@@ -23,5 +23,10 @@ Route::group(
 
         Route::get('/student/quizzes', [DashboardController::class, 'quizzes'])
             ->name('student.quizzes');
+
+        Route::get('/student/profile', [DashboardController::class, 'profile'])
+            ->name('student.profile');
+        Route::put('/student/password', [DashboardController::class, 'updatePassword'])
+            ->name('student.password.update');
     }
 );

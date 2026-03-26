@@ -1,0 +1,28 @@
+<div class="modal fade" id="Delete_receipt{{ $online_classe->id }}" tabindex="-1"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 style="font-family: 'Cairo', sans-serif;" class="modal-title" id="exampleModalLabel">{{ trans('OnlineClasses_trans.delete_title') }}
+                    {{ $online_classe->topic }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                {{-- Delete class using route model binding --}}
+                <form action="{{ route('teacher.online-classes.destroy', $online_classe->id) }}" method="post">
+                    @csrf
+                    @method('DELETE')
+
+                    <h5 style="font-family: 'Cairo', sans-serif;">{{ trans('OnlineClasses_trans.delete_confirm') }}</h5>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary"
+                            data-dismiss="modal">{{ trans('Students_trans.Close') }}</button>
+                        <button class="btn btn-danger">{{ trans('Students_trans.submit') }}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
