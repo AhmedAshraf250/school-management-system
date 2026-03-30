@@ -6,10 +6,11 @@
     $isTeacherCalendarActive = request()->routeIs('teacher.calendar');
     $isTeacherReportsActive = request()->routeIs('teacher.reports.*');
     $isTeacherQuizzesActive = request()->routeIs('teacher.quizzes.*');
+    $isTeacherQuizResultsActive = request()->routeIs('teacher.quizzes.results.*');
     $isTeacherQuestionsActive = request()->routeIs('teacher.questions.*');
     $isTeacherOnlineClassesActive = request()->routeIs('teacher.online-classes.*');
     $isTeacherProfileActive = request()->routeIs('teacher.profile');
-    $isTeacherQuizMenuActive = $isTeacherQuizzesActive || $isTeacherQuestionsActive;
+    $isTeacherQuizMenuActive = $isTeacherQuizzesActive || $isTeacherQuestionsActive || $isTeacherQuizResultsActive;
 @endphp
 
 {{-- Teacher sidebar shell --}}
@@ -86,6 +87,12 @@
                         {{-- Questions list across teacher quizzes --}}
                         <a href="{{ route('teacher.questions.index') }}">
                             {{ trans('main_trans.teacher_questions_list_entry') }}
+                        </a>
+                    </li>
+                    <li>
+                        {{-- Quizzes results list --}}
+                        <a href="{{ route('teacher.quizzes.results.index') }}">
+                            {{ trans('Quizzes_trans.teacher_results_sidebar_entry') }}
                         </a>
                     </li>
                 </ul>

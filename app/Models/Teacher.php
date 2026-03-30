@@ -60,4 +60,9 @@ class Teacher extends Authenticatable
     {
         return $this->hasMany(CalendarEvent::class, 'teacher_id');
     }
+
+    public function unlockedQuizAttempts(): HasMany
+    {
+        return $this->hasMany(QuizAttempt::class, 'unlocked_by_teacher_id');
+    }
 }

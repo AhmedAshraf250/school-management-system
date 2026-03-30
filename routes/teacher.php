@@ -4,6 +4,7 @@ use App\Http\Controllers\Teachers\DashboardController;
 use App\Http\Controllers\Teachers\OnlineClassController;
 use App\Http\Controllers\Teachers\QuestionController;
 use App\Http\Controllers\Teachers\QuizController;
+use App\Http\Controllers\Teachers\Quizzes\QuizResultController;
 use App\Http\Controllers\Teachers\StudentController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -64,6 +65,10 @@ Route::group(
 
         Route::post('/teacher/quizzes/{quiz}/publish', [QuizController::class, 'publish'])
             ->name('teacher.quizzes.publish');
+        Route::get('/teacher/quizzes-results', [QuizResultController::class, 'index'])
+            ->name('teacher.quizzes.results.index');
+        Route::post('/teacher/quizzes-results/{attempt}/unlock', [QuizResultController::class, 'unlock'])
+            ->name('teacher.quizzes.results.unlock');
 
         // =============================[Questions]=========================== //
         Route::get('/teacher/questions', [QuestionController::class, 'all'])

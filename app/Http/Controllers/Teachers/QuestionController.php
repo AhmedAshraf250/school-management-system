@@ -68,12 +68,12 @@ class QuestionController extends Controller
             ->get(['sections.id', 'sections.name', 'sections.grade_id', 'sections.classroom_id']);
 
         $gradeOptions = $teacherSections
-            ->map(fn(Section $section): array => ['id' => $section->grade_id, 'name' => $section->grade?->Name ?? '-'])
+            ->map(fn (Section $section): array => ['id' => $section->grade_id, 'name' => $section->grade?->Name ?? '-'])
             ->unique('id')
             ->values();
 
         $classroomOptions = $teacherSections
-            ->map(fn(Section $section): array => ['id' => $section->classroom_id, 'name' => $section->classroom?->name ?? '-'])
+            ->map(fn (Section $section): array => ['id' => $section->classroom_id, 'name' => $section->classroom?->name ?? '-'])
             ->unique('id')
             ->values();
 
@@ -183,7 +183,7 @@ class QuestionController extends Controller
         $question = $this->authorizedQuestion($quiz, $question);
         $question->delete();
 
-        toastr()->error(trans('messages.Delete'));
+        toastr()->success(trans('messages.Delete'));
 
         return redirect()->route('teacher.quizzes.questions.index', $quiz->id);
     }

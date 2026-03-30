@@ -113,6 +113,11 @@ class Student extends Authenticatable
         return $this->hasMany(Attendance::class, 'student_id');
     }
 
+    public function quizAttempts(): HasMany
+    {
+        return $this->hasMany(QuizAttempt::class, 'student_id');
+    }
+
     public function todayAttendance(): HasOne
     {
         return $this->hasOne(Attendance::class, 'student_id')->today();

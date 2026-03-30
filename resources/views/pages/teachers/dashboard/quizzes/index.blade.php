@@ -34,10 +34,26 @@
                                 <a href="{{ route('teacher.quizzes.create') }}" class="btn btn-success btn-sm">
                                     {{ trans('Quizzes_trans.add_new') }}
                                 </a>
+                                <a href="{{ route('teacher.quizzes.results.index') }}" class="btn btn-outline-primary btn-sm">
+                                    {{ trans('Quizzes_trans.teacher_results_title') }}
+                                </a>
                                 <a href="{{ route('teacher.dashboard') }}" class="btn btn-outline-secondary btn-sm">
                                     {{ trans('main_trans.teacher_students_back_dashboard') }}
                                 </a>
                             </div>
+                            <form method="GET" action="{{ route('teacher.quizzes.index') }}"
+                                class="d-flex flex-wrap align-items-center gap-2">
+                                <label for="academic_year" class="mb-0 text-muted">{{ trans('Quizzes_trans.academic_year') }}</label>
+                                <select id="academic_year" name="academic_year" class="custom-select custom-select-sm"
+                                    onchange="this.form.submit()">
+                                    <option value="">{{ trans('main_trans.filter_all') }}</option>
+                                    @foreach ($academicYearOptions as $academicYear)
+                                        <option value="{{ $academicYear }}" @selected($selectedAcademicYear === $academicYear)>
+                                            {{ $academicYear }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </form>
                         </div>
 
                         {{-- Quizzes table --}}

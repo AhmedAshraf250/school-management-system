@@ -10,6 +10,7 @@ use App\Models\Section;
 use App\Models\Subject;
 use App\Models\Teacher;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
@@ -17,9 +18,12 @@ use Illuminate\View\View;
 
 class QuizController extends Controller
 {
-    public function index(): View
+    public function index(Request $request): View
     {
         $teacher = $this->authenticatedTeacher();
+
+        // $selectedAcademicYear = trim((string) $request->input('academic_year', ''));
+        $selectedAcademicYear = $request->string('academic_year')->trim()->toString();
 
         $quizzes = Quiz::query()
             ->with([
@@ -30,12 +34,24 @@ class QuizController extends Controller
             ])
             ->withCount('questions')
             ->where('teacher_id', $teacher->id)
+            ->when(filled($selectedAcademicYear), function ($query) use ($selectedAcademicYear): void {
+                $query->where('academic_year', $selectedAcademicYear);
+            })
             ->latest()
             ->get();
+
+        $academicYearOptions = Quiz::query()
+            ->where('teacher_id', $teacher->id)
+            ->whereNotNull('academic_year')
+            ->distinct()
+            ->orderBy('academic_year')
+            ->pluck('academic_year');
 
         return view('pages.teachers.dashboard.quizzes.index', [
             'teacher' => $teacher,
             'quizzes' => $quizzes,
+            'academicYearOptions' => $academicYearOptions,
+            'selectedAcademicYear' => $selectedAcademicYear,
         ]);
     }
 
@@ -127,7 +143,7 @@ class QuizController extends Controller
         $quiz = $this->authorizedQuiz($teacher, $quiz);
         $quiz->delete();
 
-        toastr()->error(trans('messages.Delete'));
+        toastr()->success(trans('messages.Delete'));
 
         return redirect()->route('teacher.quizzes.index');
     }
