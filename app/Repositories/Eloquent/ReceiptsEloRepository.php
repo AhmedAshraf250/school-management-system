@@ -13,9 +13,17 @@ use Illuminate\Validation\ValidationException;
 
 class ReceiptsEloRepository implements ReceiptsRepositoryInterface
 {
-    public function all(): Collection
+    public function all(bool $onlyTrashed = false): Collection
     {
-        return Receipt::with('student:id,name')->orderByDesc('date')->get();
+        $query = Receipt::query()
+            ->with('student:id,name')
+            ->orderByDesc('date');
+
+        if ($onlyTrashed) {
+            $query->onlyTrashed();
+        }
+
+        return $query->get();
     }
 
     public function find(int $id): Receipt
@@ -74,6 +82,11 @@ class ReceiptsEloRepository implements ReceiptsRepositoryInterface
     public function deleteReceipt(int $id): void
     {
         Receipt::findOrFail($id)->delete();
+    }
+
+    public function restoreReceipt(int $id): void
+    {
+        Receipt::withTrashed()->findOrFail($id)->restore();
     }
 
     private function loadStudent(int $studentId): Student
@@ -150,15 +163,24 @@ class ReceiptsEloRepository implements ReceiptsRepositoryInterface
             return $outstandingBalance;
         }
 
-        $currentReceiptCredit = (float) StudentAccount::where('receipt_id', $receipt->id)->value('credit');
+        $currentReceiptCredit = (float) StudentAccount::query()
+            ->includedInTotals()
+            ->where('receipt_id', $receipt->id)
+            ->value('credit');
 
         return $outstandingBalance + ($currentReceiptCredit > 0 ? $currentReceiptCredit : (float) $receipt->debit);
     }
 
     private function outstandingBalance(int $studentId): float
     {
-        $debitTotal = (float) StudentAccount::where('student_id', $studentId)->sum('debit');
-        $creditTotal = (float) StudentAccount::where('student_id', $studentId)->sum('credit');
+        $debitTotal = (float) StudentAccount::query()
+            ->includedInTotals()
+            ->where('student_id', $studentId)
+            ->sum('debit');
+        $creditTotal = (float) StudentAccount::query()
+            ->includedInTotals()
+            ->where('student_id', $studentId)
+            ->sum('credit');
 
         return $debitTotal - $creditTotal;
     }

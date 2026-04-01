@@ -2,10 +2,12 @@
 
 return [
     'title' => 'حصص اونلاين',
-    'add_integrated_title' => 'اضافة حصة جديدة',
-    'add_manual_title' => 'اضافة حصة جديدة اوفلاين',
-    'add_integrated_button' => 'اضافة حصة اونلاين جديدة',
-    'add_manual_button' => 'اضافة حصة اوفلاين جديدة',
+    'add_integrated_title' => 'إنشاء اجتماع Zoom جديد من داخل النظام',
+    'add_manual_title' => 'إضافة اجتماع Zoom منشأ مسبقًا',
+    'add_integrated_button' => 'إنشاء اجتماع جديد عبر Zoom',
+    'add_manual_button' => 'إضافة اجتماع منشأ مسبقًا',
+    'add_integrated_hint' => 'يتم إنشاء الاجتماع تلقائيًا عبر تكامل Zoom وربطه بالمنصة.',
+    'add_manual_hint' => 'أنشئ الاجتماع من موقع Zoom ثم أدخل بياناته وروابطه هنا.',
     'grade' => 'المرحلة',
     'classroom' => 'الصف',
     'section' => 'القسم',

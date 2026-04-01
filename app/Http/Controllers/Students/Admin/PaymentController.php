@@ -11,11 +11,12 @@ class PaymentController extends Controller
 {
     public function __construct(private PaymentRepositoryInterface $paymentRepository) {}
 
-    public function index()
+    public function index(Request $request)
     {
-        $payments = $this->paymentRepository->all();
+        $isTrashView = $request->boolean('trash');
+        $payments = $this->paymentRepository->all($isTrashView);
 
-        return view('pages.payments.index', compact('payments'));
+        return view('pages.payments.index', compact('payments', 'isTrashView'));
     }
 
     public function create()
@@ -70,6 +71,18 @@ class PaymentController extends Controller
 
             return redirect()->back();
         } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        }
+    }
+
+    public function restore(int $paymentId)
+    {
+        try {
+            $this->paymentRepository->restorePayment($paymentId);
+            toastr()->success(trans('messages.success'));
+
+            return redirect()->route('student-payments.index', ['trash' => 1]);
+        } catch (\Throwable $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
     }

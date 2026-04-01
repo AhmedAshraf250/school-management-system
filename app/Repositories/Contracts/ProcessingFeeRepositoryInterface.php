@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Collection;
 
 interface ProcessingFeeRepositoryInterface
 {
-    public function all(): Collection;
+    public function all(bool $onlyTrashed = false): Collection;
 
     public function find(int $id): ProcessingFee;
 
@@ -19,4 +19,6 @@ interface ProcessingFeeRepositoryInterface
     public function updateProcessingFee(int $id, array $data): ProcessingFee;
 
     public function deleteProcessingFee(int $id): void;
+
+    public function restoreProcessingFee(int $id): void;
 }

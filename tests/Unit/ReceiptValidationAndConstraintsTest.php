@@ -25,3 +25,32 @@ test('financial migration relations keep accounting history for reporting', func
         ->and($fundAccountsMigration)->toContain("->constrained('payments')->nullOnDelete()")
         ->and($feeInvoicesMigration)->toContain("->constrained('students')->restrictOnDelete()");
 });
+
+test('financial operations use soft deletes to preserve accounting links', function () {
+    $softDeletesMigration = file_get_contents(__DIR__.'/../../database/migrations/2026_03_31_151102_add_soft_deletes_to_financial_operation_tables.php');
+    $receiptModel = file_get_contents(__DIR__.'/../../app/Models/Receipt.php');
+    $paymentModel = file_get_contents(__DIR__.'/../../app/Models/Payment.php');
+    $processingFeeModel = file_get_contents(__DIR__.'/../../app/Models/ProcessingFee.php');
+
+    expect($softDeletesMigration)->toContain("Schema::table('receipts'")
+        ->and($softDeletesMigration)->toContain("Schema::table('payments'")
+        ->and($softDeletesMigration)->toContain("Schema::table('processing_fees'")
+        ->and($softDeletesMigration)->toContain('->softDeletes();')
+        ->and($receiptModel)->toContain('use SoftDeletes;')
+        ->and($paymentModel)->toContain('use SoftDeletes;')
+        ->and($processingFeeModel)->toContain('use SoftDeletes;');
+});
+
+test('financial repositories expose trash restore workflow and hard delete guard', function () {
+    $receiptsContract = file_get_contents(__DIR__.'/../../app/Repositories/Contracts/ReceiptsRepositoryInterface.php');
+    $paymentsContract = file_get_contents(__DIR__.'/../../app/Repositories/Contracts/PaymentRepositoryInterface.php');
+    $processingContract = file_get_contents(__DIR__.'/../../app/Repositories/Contracts/ProcessingFeeRepositoryInterface.php');
+    $forceDeleteGuardTrait = file_get_contents(__DIR__.'/../../app/Models/Concerns/PreventsForceDelete.php');
+    $feesTranslations = file_get_contents(__DIR__.'/../../lang/en/fees_trans.php');
+
+    expect($receiptsContract)->toContain('restoreReceipt')
+        ->and($paymentsContract)->toContain('restorePayment')
+        ->and($processingContract)->toContain('restoreProcessingFee')
+        ->and($forceDeleteGuardTrait)->toContain('force_delete_not_allowed')
+        ->and($feesTranslations)->toContain('force_delete_not_allowed');
+});

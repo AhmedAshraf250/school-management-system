@@ -74,4 +74,9 @@ class Guardian extends Authenticatable
     {
         return $this->hasMany(GuardianAttachment::class, 'guardian_id');
     }
+
+    public function students(): HasMany
+    {
+        return $this->hasMany(Student::class, 'guardian_id');
+    }
 }

@@ -12,9 +12,17 @@ use Illuminate\Support\Facades\DB;
 
 class PaymentEloRepository implements PaymentRepositoryInterface
 {
-    public function all(): Collection
+    public function all(bool $onlyTrashed = false): Collection
     {
-        return Payment::with('student:id,name')->orderByDesc('date')->get();
+        $query = Payment::query()
+            ->with('student:id,name')
+            ->orderByDesc('date');
+
+        if ($onlyTrashed) {
+            $query->onlyTrashed();
+        }
+
+        return $query->get();
     }
 
     public function find(int $id): Payment
@@ -71,6 +79,11 @@ class PaymentEloRepository implements PaymentRepositoryInterface
     public function deletePayment(int $id): void
     {
         Payment::findOrFail($id)->delete();
+    }
+
+    public function restorePayment(int $id): void
+    {
+        Payment::withTrashed()->findOrFail($id)->restore();
     }
 
     private function loadStudent(int $studentId): Student

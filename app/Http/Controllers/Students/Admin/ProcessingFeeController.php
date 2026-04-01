@@ -11,11 +11,12 @@ class ProcessingFeeController extends Controller
 {
     public function __construct(private ProcessingFeeRepositoryInterface $processingFeeRepository) {}
 
-    public function index()
+    public function index(Request $request)
     {
-        $processingFees = $this->processingFeeRepository->all();
+        $isTrashView = $request->boolean('trash');
+        $processingFees = $this->processingFeeRepository->all($isTrashView);
 
-        return view('pages.processing-fees.index', compact('processingFees'));
+        return view('pages.processing-fees.index', compact('processingFees', 'isTrashView'));
     }
 
     public function create(): void
@@ -73,6 +74,18 @@ class ProcessingFeeController extends Controller
             toastr()->error(trans('messages.Delete'));
 
             return redirect()->route('processing-fees.index');
+        } catch (\Throwable $th) {
+            return redirect()->back()->withErrors(['error' => $th->getMessage()]);
+        }
+    }
+
+    public function restore(int $processingFeeId)
+    {
+        try {
+            $this->processingFeeRepository->restoreProcessingFee($processingFeeId);
+            toastr()->success(trans('messages.success'));
+
+            return redirect()->route('processing-fees.index', ['trash' => 1]);
         } catch (\Throwable $th) {
             return redirect()->back()->withErrors(['error' => $th->getMessage()]);
         }

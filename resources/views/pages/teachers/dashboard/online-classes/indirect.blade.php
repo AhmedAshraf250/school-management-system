@@ -3,6 +3,10 @@
     @toastr_css
 @endpush
 
+@section('title')
+    {{ trans('OnlineClasses_trans.add_manual_title') }}
+@endsection
+
 @section('content')
 
     @include('pages.teachers.partials.ui-typography')
@@ -15,6 +19,9 @@
         <div class="col-md-12 mb-30">
             <div class="card card-statistics h-100">
                 <div class="card-body">
+                    <div class="alert alert-warning">
+                        {{ trans('OnlineClasses_trans.add_manual_hint') }}
+                    </div>
 
                     {{-- Validation errors --}}
                     @if ($errors->any())

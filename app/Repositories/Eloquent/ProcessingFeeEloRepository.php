@@ -11,9 +11,17 @@ use Illuminate\Support\Facades\DB;
 
 class ProcessingFeeEloRepository implements ProcessingFeeRepositoryInterface
 {
-    public function all(): Collection
+    public function all(bool $onlyTrashed = false): Collection
     {
-        return ProcessingFee::with('student:id,name')->orderByDesc('date')->get();
+        $query = ProcessingFee::query()
+            ->with('student:id,name')
+            ->orderByDesc('date');
+
+        if ($onlyTrashed) {
+            $query->onlyTrashed();
+        }
+
+        return $query->get();
     }
 
     public function find(int $id): ProcessingFee
@@ -68,6 +76,11 @@ class ProcessingFeeEloRepository implements ProcessingFeeRepositoryInterface
     public function deleteProcessingFee(int $id): void
     {
         ProcessingFee::findOrFail($id)->delete();
+    }
+
+    public function restoreProcessingFee(int $id): void
+    {
+        ProcessingFee::withTrashed()->findOrFail($id)->restore();
     }
 
     private function loadStudent(int $studentId): Student

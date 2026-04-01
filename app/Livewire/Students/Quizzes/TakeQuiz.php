@@ -36,7 +36,7 @@ class TakeQuiz extends Component
         $this->questionItems = $attempt->quiz->questions
             ->sortBy('id')
             ->values()
-            ->map(fn(Question $question): array => [
+            ->map(fn (Question $question): array => [
                 'id' => (int) $question->id,
                 'title' => (string) $question->title,
                 'answers' => $question->answerOptions(),
@@ -111,7 +111,7 @@ class TakeQuiz extends Component
 
         $attempt = QuizAttempt::query()->findOrFail($this->attemptId);
         if ($attempt->status !== QuizAttempt::STATUS_IN_PROGRESS) {
-            $this->redirectRoute('student.quizzes.show', $attempt->quiz_id, navigate: true);
+            $this->redirectRoute('student.quizzes.show', $attempt->quiz_id);
 
             return;
         }
@@ -133,7 +133,7 @@ class TakeQuiz extends Component
             ]);
         });
 
-        $this->redirectRoute('student.quizzes.show', $attempt->quiz_id, navigate: true);
+        $this->redirectRoute('student.quizzes.show', $attempt->quiz_id);
     }
 
     public function render()
@@ -152,7 +152,7 @@ class TakeQuiz extends Component
             ->count();
     }
 
-    private function saveCurrentAnswer(): void
+    private function saveCurrentAnswer()
     {
         $attempt = QuizAttempt::query()->findOrFail($this->attemptId);
         if ($attempt->status !== QuizAttempt::STATUS_IN_PROGRESS) {
@@ -167,9 +167,8 @@ class TakeQuiz extends Component
             return;
         }
 
-
         $allowedAnswers = collect($currentQuestion['answers'])
-            ->map(fn(string $answer): string => trim($answer))
+            ->map(fn (string $answer): string => trim($answer))
             ->filter()
             ->values();
 
@@ -240,7 +239,7 @@ class TakeQuiz extends Component
             'violations_count' => $attempt->violations_count + 1,
         ]);
 
-        $this->redirectRoute('student.quizzes.show', $attempt->quiz_id, navigate: true);
+        $this->redirectRoute('student.quizzes.show', $attempt->quiz_id);
     }
 
     private function firstUnansweredIndex(): int

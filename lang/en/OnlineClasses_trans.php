@@ -2,10 +2,12 @@
 
 return [
     'title' => 'Online Classes',
-    'add_integrated_title' => 'Add New Class',
-    'add_manual_title' => 'Add New Offline Class',
-    'add_integrated_button' => 'Add New Online Class',
-    'add_manual_button' => 'Add New Offline Class',
+    'add_integrated_title' => 'Create a New Zoom Meeting from the Platform',
+    'add_manual_title' => 'Add a Pre-Created Zoom Meeting',
+    'add_integrated_button' => 'Create New Meeting via Zoom',
+    'add_manual_button' => 'Add Pre-Created Meeting',
+    'add_integrated_hint' => 'The meeting is created automatically through Zoom integration and linked to the platform.',
+    'add_manual_hint' => 'Create the meeting on Zoom first, then add its details and links here.',
     'grade' => 'Grade',
     'classroom' => 'Classroom',
     'section' => 'Section',

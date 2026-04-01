@@ -93,11 +93,6 @@ class Student extends Authenticatable
         return $this->hasMany(Graduation::class, 'student_id');
     }
 
-    public function studentAccounts(): HasMany
-    {
-        return $this->studentAccountRelation();
-    }
-
     public function student_account(): HasMany
     {
         return $this->studentAccountRelation();
@@ -105,7 +100,8 @@ class Student extends Authenticatable
 
     private function studentAccountRelation(): HasMany
     {
-        return $this->hasMany(StudentAccount::class, 'student_id');
+        return $this->hasMany(StudentAccount::class, 'student_id')
+            ->includedInTotals();
     }
 
     public function attendances(): HasMany

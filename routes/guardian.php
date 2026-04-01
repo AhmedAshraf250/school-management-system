@@ -15,10 +15,17 @@ Route::group(
         ],
     ],
     function (): void {
-        Route::get('/guardian/dashboard', [DashboardController::class, 'index'])
-            ->name('guardian.dashboard');
+        Route::prefix('/guardian')
+            ->name('guardian.')
+            ->controller(DashboardController::class)
+            ->group(function (): void {
+                Route::get('/dashboard', 'index')->name('dashboard');
+                Route::get('/dashboard/attendance', 'attendance')->name('dashboard.attendance');
+                Route::get('/dashboard/financial-reports', 'financialReports')->name('dashboard.financial');
+                Route::get('/profile', 'profile')->name('profile');
+                Route::put('/password', 'updatePassword')->name('password.update');
 
-        Route::get('/guardian/calendar', [DashboardController::class, 'calendar'])
-            ->name('guardian.calendar');
+                Route::get('/calendar', 'calendar')->name('calendar');
+            });
     }
 );

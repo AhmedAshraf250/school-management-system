@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Collection;
 
 interface PaymentRepositoryInterface
 {
-    public function all(): Collection;
+    public function all(bool $onlyTrashed = false): Collection;
 
     public function find(int $id): Payment;
 
@@ -19,4 +19,6 @@ interface PaymentRepositoryInterface
     public function updatePayment(int $id, array $data): Payment;
 
     public function deletePayment(int $id): void;
+
+    public function restorePayment(int $id): void;
 }

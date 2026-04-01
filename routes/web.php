@@ -104,6 +104,12 @@ Route::group(
         Route::resource('receipts', ReceiptController::class);
         Route::resource('processing-fees', ProcessingFeeController::class);
         Route::resource('student-payments', PaymentController::class);
+        Route::patch('receipts/{receiptId}/restore', [ReceiptController::class, 'restore'])
+            ->name('receipts.restore');
+        Route::patch('processing-fees/{processingFeeId}/restore', [ProcessingFeeController::class, 'restore'])
+            ->name('processing-fees.restore');
+        Route::patch('student-payments/{paymentId}/restore', [PaymentController::class, 'restore'])
+            ->name('student-payments.restore');
 
         // ==============================[Students.Attendances]============================ //
         Route::resource('attendances', AttendanceController::class);

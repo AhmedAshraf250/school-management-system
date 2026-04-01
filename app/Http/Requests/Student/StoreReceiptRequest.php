@@ -45,8 +45,14 @@ class StoreReceiptRequest extends FormRequest
     // ترجع المبلغ المعلق والقائم او المستحق الدفع
     private function outstandingBalance(int $studentId): float
     {
-        $debitTotal = (float) StudentAccount::where('student_id', $studentId)->sum('debit');
-        $creditTotal = (float) StudentAccount::where('student_id', $studentId)->sum('credit');
+        $debitTotal = (float) StudentAccount::query()
+            ->includedInTotals()
+            ->where('student_id', $studentId)
+            ->sum('debit');
+        $creditTotal = (float) StudentAccount::query()
+            ->includedInTotals()
+            ->where('student_id', $studentId)
+            ->sum('credit');
 
         return $debitTotal - $creditTotal;
     }

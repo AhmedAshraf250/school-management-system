@@ -7,6 +7,7 @@ use App\Http\Requests\Student\UpdateReceiptRequest;
 use App\Models\Receipt;
 use App\Repositories\Contracts\ReceiptsRepositoryInterface;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
@@ -14,11 +15,12 @@ class ReceiptController extends Controller
 {
     public function __construct(private ReceiptsRepositoryInterface $receiptsRepository) {}
 
-    public function index(): View
+    public function index(Request $request): View
     {
-        $receipts = $this->receiptsRepository->all();
+        $isTrashView = $request->boolean('trash');
+        $receipts = $this->receiptsRepository->all($isTrashView);
 
-        return view('pages.receipts.index', compact('receipts'));
+        return view('pages.receipts.index', compact('receipts', 'isTrashView'));
     }
 
     public function create(): void
@@ -81,6 +83,18 @@ class ReceiptController extends Controller
             toastr()->error(trans('messages.Delete'));
 
             return redirect()->route('receipts.index');
+        } catch (\Throwable $th) {
+            return redirect()->back()->withErrors(['error' => $th->getMessage()]);
+        }
+    }
+
+    public function restore(int $receiptId): RedirectResponse
+    {
+        try {
+            $this->receiptsRepository->restoreReceipt($receiptId);
+            toastr()->success(trans('messages.success'));
+
+            return redirect()->route('receipts.index', ['trash' => 1]);
         } catch (\Throwable $th) {
             return redirect()->back()->withErrors(['error' => $th->getMessage()]);
         }

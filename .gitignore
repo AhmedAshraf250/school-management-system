@@ -10,6 +10,8 @@
 /.nova
 /.phpunit.cache
 /.vscode
+/.codex
+/.agents
 /.zed
 /auth.json
 /node_modules

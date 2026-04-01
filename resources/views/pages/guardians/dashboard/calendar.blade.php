@@ -5,15 +5,14 @@
 @stop
 
 @section('content')
-    @php
-        $guardian = auth()->guard('guardian')->user();
-    @endphp
-
     {{-- Unified dashboard title --}}
     @include('layouts.partials.dashboard-title', [
         'roleLabel' => trans('main_trans.role_guardian'),
-        'identity' => $guardian?->father_name ?? $guardian?->email ?? '-',
+        'identity' => $guardian?->father_name ?? ($guardian?->email ?? '-'),
     ])
+
+    {{-- Guardian dashboard tabs --}}
+    @include('pages.guardians.dashboard.partials.tabs')
 
     {{-- Guardian read-only calendar --}}
     <div class="row">

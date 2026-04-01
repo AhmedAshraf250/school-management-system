@@ -1,6 +1,9 @@
 @php
     // Active-state map for guardian sidebar links.
     $isGuardianDashboardActive = request()->routeIs('guardian.dashboard');
+    $isGuardianAttendanceActive = request()->routeIs('guardian.dashboard.attendance');
+    $isGuardianFinancialActive = request()->routeIs('guardian.dashboard.financial');
+    $isGuardianProfileActive = request()->routeIs('guardian.profile');
     $isGuardianCalendarActive = request()->routeIs('guardian.calendar');
 @endphp
 
@@ -13,6 +16,33 @@
             <li class="{{ $isGuardianDashboardActive ? 'active' : '' }}">
                 <a href="{{ route('guardian.dashboard') }}">
                     <div class="pull-left"><i class="ti-home"></i><span class="right-nav-text">{{ trans('main_trans.Dashboard') }}</span></div>
+                    <div class="clearfix"></div>
+                </a>
+            </li>
+
+            {{-- Attendance follow-up link --}}
+            <li class="{{ $isGuardianAttendanceActive ? 'active' : '' }}">
+                <a href="{{ route('guardian.dashboard.attendance') }}">
+                    <div class="pull-left"><i class="ti-check-box"></i><span
+                            class="right-nav-text">{{ trans('main_trans.guardian_attendance_tab') }}</span></div>
+                    <div class="clearfix"></div>
+                </a>
+            </li>
+
+            {{-- Financial reports link --}}
+            <li class="{{ $isGuardianFinancialActive ? 'active' : '' }}">
+                <a href="{{ route('guardian.dashboard.financial') }}">
+                    <div class="pull-left"><i class="ti-wallet"></i><span
+                            class="right-nav-text">{{ trans('main_trans.guardian_financial_tab') }}</span></div>
+                    <div class="clearfix"></div>
+                </a>
+            </li>
+
+            {{-- Profile link --}}
+            <li class="{{ $isGuardianProfileActive ? 'active' : '' }}">
+                <a href="{{ route('guardian.profile') }}">
+                    <div class="pull-left"><i class="fas fa-id-card"></i><span
+                            class="right-nav-text">{{ trans('main_trans.profile_tab_title') }}</span></div>
                     <div class="clearfix"></div>
                 </a>
             </li>

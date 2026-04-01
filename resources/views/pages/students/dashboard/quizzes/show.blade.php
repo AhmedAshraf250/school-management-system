@@ -60,7 +60,7 @@
                         </div>
                     @else
                         {{-- Livewire interactive component --}}
-                        @livewire('students.quizzes.take-quiz', ['attempt' => $attempt], key('quiz-attempt-' . $attempt->id))
+                        <livewire:students.quizzes.take-quiz :attempt="$attempt" :key="'quiz-attempt-'.$attempt->id" />
                     @endif
                 </div>
             </div>

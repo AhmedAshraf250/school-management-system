@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Collection;
 
 interface ReceiptsRepositoryInterface
 {
-    public function all(): Collection;
+    public function all(bool $onlyTrashed = false): Collection;
 
     public function find(int $id): Receipt;
 
@@ -19,4 +19,6 @@ interface ReceiptsRepositoryInterface
     public function updateReceipt(int $id, array $data): Receipt;
 
     public function deleteReceipt(int $id): void;
+
+    public function restoreReceipt(int $id): void;
 }
