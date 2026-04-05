@@ -49,20 +49,13 @@
                                     </div>
                                 </div>
 
+                                {{-- Current academic year (read-only) --}}
                                 <div class="form-group row">
-                                    <label for="current_session" class="col-lg-3 col-form-label font-weight-semibold">
-                                        {{ trans('settings_trans.current_session') }} <span class="text-danger">*</span>
+                                    <label class="col-lg-3 col-form-label font-weight-semibold">
+                                        {{ trans('settings_trans.current_academic_year') }}
                                     </label>
                                     <div class="col-lg-9">
-                                        <select required name="current_session" id="current_session" class="form-control">
-                                            <option value="" disabled>{{ trans('Parent_trans.Choose') }}...</option>
-                                            @for ($year = now()->year - 2; $year <= now()->year + 2; $year++)
-                                                @php $sessionValue = $year . '-' . ($year + 1); @endphp
-                                                <option value="{{ $sessionValue }}" @selected(old('current_session', $setting['current_session']) === $sessionValue)>
-                                                    {{ $sessionValue }}
-                                                </option>
-                                            @endfor
-                                        </select>
+                                        <input type="text" class="form-control" value="{{ now()->year }}" readonly>
                                     </div>
                                 </div>
 

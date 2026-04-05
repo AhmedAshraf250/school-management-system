@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -12,6 +13,7 @@ use Spatie\Translatable\HasTranslations;
 
 class Student extends Authenticatable
 {
+    use HasFactory;
     use HasTranslations;
 
     public const STATUS_ACTIVE = 'active';

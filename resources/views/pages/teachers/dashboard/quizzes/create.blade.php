@@ -84,7 +84,7 @@
                                 <div class="col-md-4 mb-3">
                                     <label for="academic_year">{{ trans('Quizzes_trans.academic_year') }}</label>
                                     <input id="academic_year" type="text" name="academic_year" class="form-control"
-                                        value="{{ old('academic_year', '2025-2026') }}" required>
+                                        value="{{ old('academic_year', now()->year) }}" required>
                                 </div>
                             </div>
 

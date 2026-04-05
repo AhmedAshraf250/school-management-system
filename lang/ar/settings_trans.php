@@ -3,7 +3,7 @@
 return [
     'page_title' => 'الإعدادات',
     'school_name' => 'اسم المدرسة',
-    'current_session' => 'العام الحالي',
+    'current_academic_year' => 'السنة الدراسية الحالية',
     'school_title' => 'اسم المدرسة المختصر',
     'phone' => 'الهاتف',
     'school_email' => 'البريد الإلكتروني للمدرسة',

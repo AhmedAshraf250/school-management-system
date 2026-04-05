@@ -3,7 +3,7 @@
 return [
     'page_title' => 'Settings',
     'school_name' => 'School Name',
-    'current_session' => 'Current Session',
+    'current_academic_year' => 'Current Academic Year',
     'school_title' => 'School Acronym',
     'phone' => 'Phone',
     'school_email' => 'School Email',

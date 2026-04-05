@@ -10,7 +10,9 @@ use App\Models\Religion;
 use App\Models\Section;
 use App\Models\Specialization;
 use App\Models\Student;
+use App\Models\Subject;
 use App\Models\Teacher;
+use Database\Seeders\SubjectSeeder;
 use Illuminate\Support\Facades\Hash;
 
 test('teacher dashboard shows teacher specific metrics', function () {
@@ -54,6 +56,73 @@ test('teacher can open dedicated calendar page', function () {
 
     $this->get(route('teacher.calendar'))
         ->assertSuccessful();
+});
+
+test('subject seeder gives each teacher with sections at least one subject', function () {
+    $grade = Grade::query()->create([
+        'Name' => 'Grade 1',
+        'Notes' => 'Seeder grade',
+    ]);
+
+    $classroomOne = Classroom::query()->create([
+        'name' => 'Class A',
+        'grade_id' => $grade->id,
+    ]);
+
+    $classroomTwo = Classroom::query()->create([
+        'name' => 'Class B',
+        'grade_id' => $grade->id,
+    ]);
+
+    $sectionOne = Section::query()->create([
+        'name' => 'Section 1',
+        'status' => true,
+        'grade_id' => $grade->id,
+        'classroom_id' => $classroomOne->id,
+    ]);
+
+    $sectionTwo = Section::query()->create([
+        'name' => 'Section 2',
+        'status' => true,
+        'grade_id' => $grade->id,
+        'classroom_id' => $classroomTwo->id,
+    ]);
+
+    $specialization = Specialization::query()->create(['name' => 'Science']);
+    $gender = Gender::query()->create(['name' => 'Male']);
+
+    $teacherOne = Teacher::query()->create([
+        'email' => 'teacher-one@school.test',
+        'password' => Hash::make('password'),
+        'name' => 'Teacher One',
+        'specialization_id' => $specialization->id,
+        'gender_id' => $gender->id,
+        'joining_date' => '2026-01-01',
+        'address' => 'Cairo',
+    ]);
+
+    $teacherTwo = Teacher::query()->create([
+        'email' => 'teacher-two@school.test',
+        'password' => Hash::make('password'),
+        'name' => 'Teacher Two',
+        'specialization_id' => $specialization->id,
+        'gender_id' => $gender->id,
+        'joining_date' => '2026-01-01',
+        'address' => 'Cairo',
+    ]);
+
+    $teacherOne->sections()->attach([$sectionOne->id]);
+    $teacherTwo->sections()->attach([$sectionTwo->id]);
+
+    $this->seed(SubjectSeeder::class);
+
+    $teacherIds = [$teacherOne->id, $teacherTwo->id];
+
+    foreach ($teacherIds as $teacherId) {
+        expect(
+            Subject::query()->where('teacher_id', $teacherId)->exists()
+        )->toBeTrue();
+    }
 });
 
 function seedTeacherWithSectionsAndStudents(): array

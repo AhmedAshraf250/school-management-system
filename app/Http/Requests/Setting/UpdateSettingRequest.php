@@ -18,7 +18,6 @@ class UpdateSettingRequest extends FormRequest
     {
         return [
             'school_name' => ['required', 'string', 'max:255'],
-            'current_session' => ['required', 'string', 'max:20'],
             'school_title' => ['nullable', 'string', 'max:100'],
             'phone' => ['nullable', 'string', 'max:50'],
             'school_email' => ['nullable', 'email', 'max:255'],
@@ -33,7 +32,6 @@ class UpdateSettingRequest extends FormRequest
     {
         return [
             'school_name' => trans('settings_trans.school_name'),
-            'current_session' => trans('settings_trans.current_session'),
             'school_title' => trans('settings_trans.school_title'),
             'phone' => trans('settings_trans.phone'),
             'school_email' => trans('settings_trans.school_email'),

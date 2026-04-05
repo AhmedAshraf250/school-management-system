@@ -11,7 +11,6 @@ class ClassroomSeeder extends Seeder
     public function run(): void
     {
         $grades = Grade::select('id', 'Name')->get();
-        $existingClassrooms = Classroom::query()->get();
 
         $classrooms = [
             ['en' => 'First grade', 'ar' => 'الصف الاول'],
@@ -21,21 +20,16 @@ class ClassroomSeeder extends Seeder
 
         foreach ($grades as $grade) {
             foreach ($classrooms as $classroom) {
-                $matchedClassroom = $existingClassrooms->first(function (Classroom $existingClassroom) use ($grade, $classroom): bool {
-                    return $existingClassroom->grade_id === $grade->id
-                        && $existingClassroom->getTranslation('name', 'en') === $classroom['en'];
-                });
-
-                if ($matchedClassroom !== null) {
-                    continue;
-                }
-
-                $newClassroom = Classroom::query()->create([
-                    'name' => $classroom,
-                    'grade_id' => $grade->id,
-                ]);
-
-                $existingClassrooms->push($newClassroom);
+                Classroom::query()->updateOrCreate(
+                    [
+                        'grade_id' => $grade->id,
+                        'name->en' => $classroom['en'],
+                    ],
+                    [
+                        'name' => $classroom,
+                        'grade_id' => $grade->id,
+                    ]
+                );
             }
         }
     }

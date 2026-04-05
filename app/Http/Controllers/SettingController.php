@@ -5,19 +5,17 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Setting\UpdateSettingRequest;
 use App\Models\Setting;
 use App\Repositories\Concerns\HandlesAttachmentUploads;
-use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 
 class SettingController extends Controller
 {
     use HandlesAttachmentUploads;
 
-    public function index(): View
+    public function index()
     {
         $setting = array_merge(
             [
                 'school_name' => '',
-                'current_session' => '',
                 'school_title' => '',
                 'phone' => '',
                 'school_email' => '',
@@ -30,7 +28,7 @@ class SettingController extends Controller
         );
 
         $logoValue = $setting['logo'] ?? '';
-        $logoUrl = $logoValue !== '' ? asset('storage/' . $logoValue) : null;
+        $logoUrl = $logoValue !== '' ? asset('storage/'.$logoValue) : null;
 
         // Technical route parameter for resource update; not part of settings domain logic.
         $settingId = (int) Setting::query()->value('id');
@@ -48,7 +46,6 @@ class SettingController extends Controller
 
             $payload = [
                 'school_name' => $validated['school_name'],
-                'current_session' => $validated['current_session'],
                 'school_title' => $validated['school_title'] ?? '',
                 'phone' => $validated['phone'] ?? '',
                 'school_email' => $validated['school_email'] ?? '',

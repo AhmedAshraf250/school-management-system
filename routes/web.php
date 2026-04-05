@@ -20,6 +20,7 @@ use App\Http\Controllers\Students\Admin\PromotionController;
 use App\Http\Controllers\Students\Admin\StudentController;
 use App\Http\Controllers\Subjects\SubjectController;
 use App\Http\Controllers\Teachers\Admin\TeacherController;
+use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -30,6 +31,7 @@ Route::group([
 
     Route::view('/', 'home')->name('home');
     Route::view('/selection', 'auth.selection')->name('auth.selection');
+    Route::get('/test', [TestController::class, 'test']);
 });
 
 Route::group([

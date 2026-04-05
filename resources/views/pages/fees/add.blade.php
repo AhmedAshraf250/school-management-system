@@ -84,14 +84,11 @@
                                 <select id="year" class="custom-select mr-sm-2" name="year" required>
                                     <option value="" selected disabled>{{ trans('Parent_trans.Choose') }} ...</option>
                                     @php
-                                        $current_year = date('Y');
+                                        $selectedYear = (string) old('year');
                                     @endphp
-                                    @for ($year = $current_year; $year <= $current_year + 1; $year++)
-                                        <option value="{{ $year }}"
-                                            {{ (string) old('year') === (string) $year ? 'selected' : '' }}>
-                                            {{ $year }}
-                                        </option>
-                                    @endfor
+                                    @foreach (range(now()->year - 2, now()->year + 2) as $year)
+                                        <option value="{{ $year }}" @selected($selectedYear === (string) $year)>{{ $year }}</option>
+                                    @endforeach
                                 </select>
                             </div>
 

@@ -28,7 +28,7 @@ class StoreFeeRequest extends FormRequest
             'grade_id' => 'required|integer|exists:grades,id',
             'classroom_id' => 'required|integer|exists:classrooms,id',
             'description' => 'string|nullable',
-            'year' => 'required',
+            'year' => ['required', 'regex:/^\d{4}$/'],
             'type' => 'required|integer',
         ];
     }

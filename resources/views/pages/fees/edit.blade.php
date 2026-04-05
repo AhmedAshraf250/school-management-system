@@ -89,14 +89,18 @@
                                 <label for="year">{{ trans('fees_trans.academic_year') }}</label>
                                 <select id="year" class="custom-select mr-sm-2" name="year" required>
                                     @php
-                                        $current_year = date('Y');
+                                        $selectedYear = (string) old('year', $fee->year);
+                                        $yearOptions = collect(range(now()->year - 2, now()->year + 2))
+                                            ->map(fn($year) => (string) $year)
+                                            ->push($selectedYear)
+                                            ->filter()
+                                            ->unique()
+                                            ->sort()
+                                            ->values();
                                     @endphp
-                                    @for ($year = $current_year; $year <= $current_year + 1; $year++)
-                                        <option value="{{ $year }}"
-                                            {{ (string) old('year', $fee->year) === (string) $year ? 'selected' : '' }}>
-                                            {{ $year }}
-                                        </option>
-                                    @endfor
+                                    @foreach ($yearOptions as $year)
+                                        <option value="{{ $year }}" @selected($selectedYear === $year)>{{ $year }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>

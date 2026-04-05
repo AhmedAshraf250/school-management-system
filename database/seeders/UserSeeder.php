@@ -13,8 +13,15 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+        User::query()->updateOrCreate(
+            ['email' => 'admin@school.test'],
+            [
+                'name' => 'System Admin',
+                'password' => Hash::make('12345678'),
+            ],
+        );
 
-        User::updateOrCreate(
+        User::query()->updateOrCreate(
             ['email' => 'ahmed@mail.com'],
             [
                 'name' => 'Ahmed Ashraf',

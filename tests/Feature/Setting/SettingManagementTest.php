@@ -23,7 +23,6 @@ test('can update settings and upload school logo', function () {
 
     $response = $this->actingAs($user)->put(route('settings.update', $settingId), [
         'school_name' => 'My New School',
-        'current_session' => '2026-2027',
         'school_title' => 'MNS',
         'phone' => '01000000000',
         'school_email' => 'info@myschool.test',
@@ -50,7 +49,6 @@ function seedSettingsValues(): void
 {
     $settings = [
         'school_name' => 'School Name',
-        'current_session' => '2025-2026',
         'school_title' => 'SN',
         'phone' => '0123456789',
         'school_email' => 'school@example.com',

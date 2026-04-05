@@ -16,9 +16,7 @@ class SectionSeeder extends Seeder
     {
         $grades = Grade::select('id', 'Name')->get();
 
-        $existingSections = Section::query()->get();
-
-        $Sections = [
+        $sections = [
             ['en' => 'a', 'ar' => 'ا'],
             ['en' => 'b', 'ar' => 'ب'],
             ['en' => 'c', 'ar' => 'ت'],
@@ -31,25 +29,20 @@ class SectionSeeder extends Seeder
                 ->get();
 
             foreach ($classrooms as $classroom) {
-                foreach ($Sections as $section) {
-                    $matchedSection = $existingSections->first(function (Section $existingSection) use ($grade, $classroom, $section): bool {
-                        return $existingSection->grade_id === $grade->id
-                            && $existingSection->classroom_id === $classroom->id
-                            && $existingSection->getTranslation('name', 'en') === $section['en'];
-                    });
-
-                    if ($matchedSection !== null) {
-                        continue;
-                    }
-
-                    $newSection = Section::query()->create([
-                        'name' => $section,
-                        'status' => 1,
-                        'grade_id' => $grade->id,
-                        'classroom_id' => $classroom->id,
-                    ]);
-
-                    $existingSections->push($newSection);
+                foreach ($sections as $section) {
+                    Section::query()->updateOrCreate(
+                        [
+                            'grade_id' => $grade->id,
+                            'classroom_id' => $classroom->id,
+                            'name->en' => $section['en'],
+                        ],
+                        [
+                            'name' => $section,
+                            'status' => 1,
+                            'grade_id' => $grade->id,
+                            'classroom_id' => $classroom->id,
+                        ]
+                    );
                 }
             }
         }

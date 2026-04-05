@@ -13,9 +13,8 @@ class SettingSeeder extends Seeder
     public function run(): void
     {
         $data = [
-            'current_session' => '2026-2027',
-            'school_title' => 'SMS',
-            'school_name' => 'School Management System',
+            'school_title' => 'CSMS',
+            'school_name' => 'Croco School Management System',
             'end_first_term' => '2026-12-31',
             'end_second_term' => '2027-05-31',
             'phone' => '0123456789',
