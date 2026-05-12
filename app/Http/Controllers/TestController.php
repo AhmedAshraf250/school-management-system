@@ -29,6 +29,10 @@ class TestController extends Controller
                 };
             }, true)
             ->map(fn ($gradeGroupSections) => $gradeGroupSections->values());
-        dd($sectionsByGradeGroup, $sections);
+
+        // =====
+
+        $path = base_path('app/Models/User.php');
+        dd($path, $sections);
     }
 }

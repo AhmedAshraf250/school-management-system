@@ -27,6 +27,14 @@ php artisan key:generate
 ```
 5. Configure database credentials in `.env`.
 
+6. Configure Zoom credentials in `.env` if Zoom integration is enabled:
+```env
+# Zoom
+ZOOM_CLIENT_KEY=SemsptIZREqtgp898_VWmg
+ZOOM_CLIENT_SECRET=W8F1RCXzsagc1LICenpuk2GeHkzGW72U
+ZOOM_ACCOUNT_ID=Lqx8IzIvT5y0ci2Ev5FPjg
+```
+
 ## Database Setup and Seeding
 Run:
 ```bash
