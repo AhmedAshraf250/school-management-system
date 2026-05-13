@@ -22,6 +22,9 @@ Route::group(
         Route::get('/student/calendar', [DashboardController::class, 'calendar'])
             ->name('student.calendar');
 
+        Route::get('/student/online-classes', [DashboardController::class, 'onlineClasses'])
+            ->name('student.online-classes');
+
         Route::get('/student/quizzes', [QuizController::class, 'index'])
             ->name('student.quizzes');
         Route::get('/student/quizzes/results', [QuizController::class, 'results'])

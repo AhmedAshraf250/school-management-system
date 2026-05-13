@@ -2,6 +2,7 @@
     // Active-state map for student sidebar links.
     $isStudentDashboardActive = request()->routeIs('student.dashboard');
     $isStudentCalendarActive = request()->routeIs('student.calendar');
+    $isStudentOnlineClassesActive = request()->routeIs('student.online-classes');
     $isStudentQuizzesActive = request()->routeIs('student.quizzes*');
     $isStudentProfileActive = request()->routeIs('student.profile');
 @endphp
@@ -25,6 +26,15 @@
                 <a href="{{ route('student.calendar') }}">
                     <div class="pull-left"><i class="fas fa-calendar-alt"></i><span
                             class="right-nav-text">{{ trans('main_trans.dashboard_calendar_title') }}</span></div>
+                    <div class="clearfix"></div>
+                </a>
+            </li>
+
+            {{-- Online classes link --}}
+            <li class="{{ $isStudentOnlineClassesActive ? 'active' : '' }}">
+                <a href="{{ route('student.online-classes') }}">
+                    <div class="pull-left"><i class="fas fa-video"></i><span
+                            class="right-nav-text">{{ trans('OnlineClasses_trans.student_title') }}</span></div>
                     <div class="clearfix"></div>
                 </a>
             </li>

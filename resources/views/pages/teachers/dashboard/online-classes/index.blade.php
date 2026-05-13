@@ -41,7 +41,7 @@
                                                 <th>{{ trans('OnlineClasses_trans.start_at') }}</th>
                                                 <th>{{ trans('OnlineClasses_trans.duration') }}</th>
                                                 <th>{{ trans('OnlineClasses_trans.passcode') }}</th>
-                                                <th>{{ trans('OnlineClasses_trans.join_link') }}</th>
+                                                <th>{{ trans('OnlineClasses_trans.start_link') }}</th>
                                                 <th>{{ trans('OnlineClasses_trans.operations') }}</th>
                                             </tr>
                                         </thead>
@@ -66,8 +66,8 @@
                                                             {{ trans('OnlineClasses_trans.show_passcode') }}
                                                         </button>
                                                     </td>
-                                                    <td class="text-danger"><a href="{{ $online_classe->join_url }}"
-                                                            target="_blank">{{ trans('OnlineClasses_trans.join_now') }}</a>
+                                                    <td class="text-danger"><a href="{{ $online_classe->start_url }}"
+                                                            target="_blank" rel="noopener noreferrer">{{ trans('OnlineClasses_trans.start_now') }}</a>
                                                     </td>
                                                     <td>
                                                         <button type="button" class="btn btn-danger btn-sm"

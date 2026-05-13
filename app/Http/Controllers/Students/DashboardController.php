@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Students;
 
 use App\Http\Controllers\Controller;
+use App\Models\onlineClass;
 use App\Models\Student;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -20,6 +21,26 @@ class DashboardController extends Controller
     public function calendar(): View
     {
         return view('pages.students.dashboard.calendar');
+    }
+
+    public function onlineClasses(): View
+    {
+        /** @var Student|null $student */
+        $student = auth()->guard('student')->user();
+        abort_unless($student instanceof Student, 403);
+
+        $onlineClasses = onlineClass::query()
+            ->with(['grade', 'classroom', 'section', 'teacherCreator', 'adminCreator'])
+            ->where('grade_id', $student->grade_id)
+            ->where('classroom_id', $student->classroom_id)
+            ->where('section_id', $student->section_id)
+            ->latest()
+            ->get();
+
+        return view('pages.students.dashboard.online-classes.index', [
+            'student' => $student,
+            'onlineClasses' => $onlineClasses,
+        ]);
     }
 
     public function profile(): View
